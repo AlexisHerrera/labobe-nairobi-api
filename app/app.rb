@@ -3,13 +3,13 @@ module WebTemplate
     register Padrino::Mailer
     register Padrino::Helpers
 
-    Padrino.configure :development, :test do
+    Padrino.configure :development, :test, :staging, :production do
       set :delivery_method, file: {
         location: "#{Padrino.root}/tmp/emails"
       }
     end
 
-    Padrino.configure :staging, :production do
+    Padrino.configure do
       set :delivery_method, smtp: {
         address: ENV['SMTP_ADDRESS'],
         port: ENV['SMTP_PORT'],
