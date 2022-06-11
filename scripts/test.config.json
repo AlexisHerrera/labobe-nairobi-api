@@ -1,0 +1,5 @@
+{
+"LOG_LEVEL":"debug",
+"LOG_STREAM":"stdout",
+"ENABLE_RESET": "true"
+}
