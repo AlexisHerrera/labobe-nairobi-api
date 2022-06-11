@@ -43,8 +43,8 @@ group :development, :test do
   gem 'rack-test', require: 'rack/test'
   gem 'rspec'
   gem 'rspec-core'
-  gem 'ruby-debug-ide'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
+  gem 'ruby-debug-ide'
   gem 'simplecov'
 end

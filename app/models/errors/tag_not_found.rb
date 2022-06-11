@@ -1,1 +1,0 @@
-class TagNotFound < StandardError; end

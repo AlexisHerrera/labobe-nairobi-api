@@ -5,8 +5,8 @@ require 'English'
 ENV['RACK_ENV'] ||= 'test'
 RACK_ENV = ENV['RACK_ENV'] ||= ENV['RACK_ENV'] ||= 'test' unless defined?(RACK_ENV)
 
-#PadrinoTasks.use(:database)
-#PadrinoTasks.init
+# PadrinoTasks.use(:database)
+# PadrinoTasks.init
 PadrinoTasks.use(:database)
 PadrinoTasks.use(:sequel)
 PadrinoTasks.init
@@ -25,7 +25,7 @@ end
 if %w[development test].include?(RACK_ENV)
 
   task :all do
-    ['rake spec', 'rake cucumber'].each do |cmd|
+    ['rubocop', 'rake spec', 'rake cucumber'].each do |cmd|
       puts "Starting to run #{cmd}..."
       system("export DISPLAY=:99.0 && bundle exec #{cmd}")
       raise "#{cmd} failed!" unless $CHILD_STATUS.exitstatus.zero?
