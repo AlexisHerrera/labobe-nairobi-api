@@ -40,6 +40,10 @@ def create_user_url
   "#{BASE_URL}/users"
 end
 
+def crear_usuario_url
+  "#{BASE_URL}/usuarios"
+end
+
 def create_task_url
   "#{BASE_URL}/tasks"
 end
