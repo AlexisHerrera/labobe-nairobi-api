@@ -1,14 +1,14 @@
 Sequel.migration do
   up do
-    create_table(:users) do
+    create_table(:tags) do
       primary_key :id
-      String :name
+      String :tag_name
       Date :created_on
       Date :updated_on
     end
   end
 
   down do
-    drop_table(:users)
+    drop_table(:tags)
   end
 end

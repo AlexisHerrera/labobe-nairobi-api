@@ -1,14 +1,16 @@
 Sequel.migration do
   up do
-    create_table(:users) do
+    create_table(:usuarios) do
       primary_key :id
-      String :name
+      String :nombre
+      String :telefono
+      String :direccion
       Date :created_on
       Date :updated_on
     end
   end
 
   down do
-    drop_table(:users)
+    drop_table(:usuarios)
   end
 end

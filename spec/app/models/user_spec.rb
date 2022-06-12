@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 describe User do
   context 'when is created' do
     it 'should be invalid when name is missing' do

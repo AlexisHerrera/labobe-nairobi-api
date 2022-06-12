@@ -9,7 +9,7 @@ describe Persistence::Repositories::UserRepository do
     expect(user_repo.all.count).to eq(1)
   end
 
-  xit 'el nuevo usuario deberia tener un telefono' do
+  it 'el nuevo usuario deberia tener un telefono' do
     new_user = user_repo.save(a_user)
     expect(new_user.telefono).to be_present
   end
@@ -20,7 +20,7 @@ describe Persistence::Repositories::UserRepository do
       @user_id = @new_user.telefono
     end
 
-    xit 'deberia borrar todos los usuarios' do
+    it 'deberia borrar todos los usuarios' do
       user_repo.delete_all
 
       expect(user_repo.all.count).to eq(0)
@@ -33,7 +33,7 @@ describe Persistence::Repositories::UserRepository do
     end
   end
 
-  xit 'deberia lanzar un error al buscar un usuario no existente' do
+  it 'deberia lanzar un error al buscar un usuario no existente' do
     expect do
       user_repo.find(99_999)
     end.to raise_error(ObjectNotFound)
