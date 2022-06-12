@@ -1,18 +1,20 @@
 module Persistence
   module Repositories
     class UserRepository < AbstractRepository
-      self.table_name = :users
-      self.model_class = 'User'
+      self.table_name = :usuarios
+      self.model_class = 'Usuario'
 
       protected
 
       def load_object(a_hash)
-        User.new(a_hash[:name], a_hash[:id])
+        Usuario.new(a_hash[:nombre], a_hash[:telefono], a_hash[:direccion])
       end
 
       def changeset(user)
         {
-          name: user.name
+          nombre: user.nombre,
+          telefono: user.telefono,
+          direccion: user.direccion
         }
       end
     end
