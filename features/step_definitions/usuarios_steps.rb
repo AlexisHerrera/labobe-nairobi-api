@@ -17,5 +17,5 @@ end
 Entonces('el usuario no queda registrado') do
   expect(@response.status).to eq(400)
   usuario = JSON.parse(@response.body)
-  expect(usuario).to eq({})
+  expect(usuario).to eq({'error' => 'UsuarioInvalido'})
 end
