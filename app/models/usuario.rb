@@ -3,10 +3,16 @@ class Usuario
   attr_accessor :id
 
   def initialize(nombre, telefono, direccion)
+    validar_telefono(telefono)
+
     @nombre = nombre
     @telefono = telefono
     @direccion = direccion
     @id = telefono
+  end
+
+  def validar_telefono(telefono)
+    raise UsuarioInvalido if telefono.size != 10
   end
 
   def ==(other)
