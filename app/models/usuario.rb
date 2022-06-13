@@ -12,7 +12,7 @@ class Usuario
   end
 
   def validar_telefono(telefono)
-    raise UsuarioInvalido if telefono.size != 10
+    raise UsuarioInvalido if telefono !~ /^\d{10}$/
   end
 
   def ==(other)

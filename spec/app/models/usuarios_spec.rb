@@ -16,6 +16,14 @@ describe Usuario do
 
       expect{Usuario.new(nombre, telefono, direccion).telefono}.to raise_error(UsuarioInvalido)
     end
+
+    it 'no deberia ser valido cuando se crea con nombre, numero con numerico y direccion' do
+      nombre = 'Juan'
+      telefono = 'Perez'
+      direccion = 'Av. Paseo Colón 850'
+
+      expect{Usuario.new(nombre, telefono, direccion).telefono}.to raise_error(UsuarioInvalido)
+    end
     
   end
 end
