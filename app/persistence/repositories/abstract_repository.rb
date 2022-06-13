@@ -25,6 +25,11 @@ module Persistence
         load_collection dataset.all
       end
 
+      def has(id)
+        found_record = dataset.first(pk_column => id)
+        !found_record.nil?
+      end
+
       def find(id)
         found_record = dataset.first(pk_column => id)
         raise ObjectNotFound.new(self.class.model_class, id) if found_record.nil?

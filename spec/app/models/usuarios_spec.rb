@@ -27,7 +27,7 @@ describe Usuario do
 
     it 'no deberia ser valido cuando se crea con nombre con caracteres especiales, numero y direccion' do
       nombre = '4N4 :)'
-      telefono = '1144449999'
+      telefono = '1144349999'
       direccion = 'Av. Paseo Colón 850'
 
       expect{Usuario.new(nombre, telefono, direccion).telefono}.to raise_error(UsuarioInvalido)
@@ -35,7 +35,7 @@ describe Usuario do
 
     it 'no deberia ser valido cuando se crea con nombre y numero' do
       nombre = '4N4 :)'
-      telefono = '1144449999'
+      telefono = '1144349999'
       direccion = ''
 
       expect{Usuario.new(nombre, telefono, direccion).telefono}.to raise_error(UsuarioInvalido)

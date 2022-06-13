@@ -6,6 +6,12 @@ Cuando('recibo un usuario con nombre {string}, teléfono {string} y dirección {
   @response = Faraday.post(crear_usuario_url, @request, header)
 end
 
+Cuando('recibo un usuario con numero de un usuario registrado') do
+  @request = {nombre: 'Juan', telefono: '0123456789', direccion: 'Paseo Colon 850'}.to_json
+  @response_first_user = Faraday.post(crear_usuario_url, @request, header)
+  @response = Faraday.post(crear_usuario_url, @request, header)
+end
+
 Entonces('el usuario queda registrado con teléfono {string}') do |telefono|
   expect(@response.status).to eq(201)
 
