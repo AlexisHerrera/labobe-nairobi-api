@@ -26,10 +26,10 @@ describe Persistence::Repositories::UserRepository do
       expect(user_repo.all.count).to eq(0)
     end
 
-    xit 'deberia encontrar el usuario por telefono' do
+    it 'deberia encontrar el usuario por telefono' do
       user = user_repo.find(@user_id)
 
-      expect(user.name).to eq(@new_user.name)
+      expect(user.nombre).to eq(@new_user.nombre)
     end
   end
 
