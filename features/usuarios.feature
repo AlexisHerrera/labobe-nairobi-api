@@ -24,3 +24,8 @@ Escenario: 04 - Registro sin exito, el número ingresado no es un valor númeric
    Dado que un usuario se quiere registrar
    Cuando recibo un usuario con nombre "Juan", teléfono "Perez" y dirección "Av. Paseo Colón 850"
    Entonces el usuario no queda registrado
+
+Escenario: 05 - Registro sin exito, el número ingresado es vacío
+   Dado que un usuario se quiere registrar
+   Cuando recibo un usuario con nombre "Juan", teléfono "" y dirección "Av. Paseo Colón 850"
+   Entonces el usuario no queda registrado
