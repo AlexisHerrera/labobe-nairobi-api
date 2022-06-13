@@ -16,5 +16,6 @@ describe Usuario do
 
       expect{Usuario.new(nombre, telefono, direccion).telefono}.to raise_error(UsuarioInvalido)
     end
+    
   end
 end
