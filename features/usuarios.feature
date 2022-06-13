@@ -20,7 +20,6 @@ Escenario: 03 - Registro sin exito, numero largo
    Cuando recibo un usuario con nombre "Juan", teléfono "11444499990000" y dirección "Av. Paseo Colón 850"
    Entonces el usuario no queda registrado
 
-@wip
 Escenario: 04 - Registro sin exito, el número ingresado no es un valor númerico
    Dado que un usuario se quiere registrar
    Cuando recibo un usuario con nombre "Juan", teléfono "Perez" y dirección "Av. Paseo Colón 850"
