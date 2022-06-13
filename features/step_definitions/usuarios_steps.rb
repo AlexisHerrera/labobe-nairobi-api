@@ -6,10 +6,10 @@ Cuando('recibo un usuario con nombre {string}, teléfono {string} y dirección {
   @response = Faraday.post(crear_usuario_url, @request, header)
 end
 
-Entonces('el usuario queda registrado con teléfono {string}') do |_telefono|
+Entonces('el usuario queda registrado con teléfono {string}') do |telefono|
   expect(@response.status).to eq(201)
 
-  # usuario = JSON.parse(@response.body)
-  # telefono_esperado = usuario['telefono']
-  # expect(telefono_esperado).to eq(telefono)
+  usuario = JSON.parse(@response.body)
+  telefono_esperado = usuario['telefono']
+  expect(telefono_esperado).to eq(telefono)
 end

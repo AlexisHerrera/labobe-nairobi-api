@@ -1,23 +1,11 @@
 module WebTemplate
   class App < Padrino::Application
-    register Padrino::Mailer
     register Padrino::Helpers
 
     Padrino.configure :development, :test, :staging, :production do
-      set :delivery_method, file: {
-        location: "#{Padrino.root}/tmp/emails"
-      }
     end
 
     Padrino.configure do
-      set :delivery_method, smtp: {
-        address: ENV['SMTP_ADDRESS'],
-        port: ENV['SMTP_PORT'],
-        user_name: ENV['SMTP_USER'],
-        password: ENV['SMTP_PASS'],
-        authentication: :plain,
-        enable_starttls_auto: true
-      }
     end
 
     get '/' do
@@ -26,7 +14,7 @@ module WebTemplate
 
     post '/reset', :provides => [:js] do
       if ENV['ENABLE_RESET'] == 'true'
-        # user_repo.delete_all
+        user_repo.delete_all
 
         status 200
         {message: 'reset ok'}.to_json
@@ -34,13 +22,6 @@ module WebTemplate
         status 403
         {message: 'reset not enabled'}.to_json
       end
-    end
-
-    def notify(_user)
-      email(:from => 'tony@reyes.com',
-            :to => 'john@smith.com',
-            :subject => 'Welcome!',
-            :body => 'Body')
     end
 
     get :docs, map: '/docs' do

@@ -8,4 +8,11 @@ class Usuario
     @direccion = direccion
     @id = telefono
   end
+
+  def ==(other)
+    @nombre == other.nombre &&
+      @telefono == other.telefono &&
+      @direccion == other.direccion &&
+      @id == other.id
+  end
 end

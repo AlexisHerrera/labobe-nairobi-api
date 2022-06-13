@@ -12,6 +12,7 @@ module Persistence
 
       def changeset(user)
         {
+          id: user.id,
           nombre: user.nombre,
           telefono: user.telefono,
           direccion: user.direccion

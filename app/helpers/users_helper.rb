@@ -23,7 +23,7 @@ module WebTemplate
       private
 
       def user_attributes(user)
-        {id: user.id, name: user.name}
+        {id: user.id, nombre: user.nombre, direcion: user.direccion, telefono: user.telefono}
       end
 
       def user_mapper
