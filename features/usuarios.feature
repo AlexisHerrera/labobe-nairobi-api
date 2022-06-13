@@ -29,3 +29,9 @@ Escenario: 05 - Registro sin exito, el número ingresado es vacío
    Dado que un usuario se quiere registrar
    Cuando recibo un usuario con nombre "Juan", teléfono "" y dirección "Av. Paseo Colón 850"
    Entonces el usuario no queda registrado
+
+@wip
+Escenario: 06 - Registro sin exito, el nombre ingresado tiene números o caracteres especiales
+   Dado que un usuario se quiere registrar
+   Cuando recibo un usuario con nombre "1J23", teléfono "1144449999" y dirección "Av. Paseo Colón 850"
+   Entonces el usuario no queda registrado

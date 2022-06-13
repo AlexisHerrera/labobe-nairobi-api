@@ -4,6 +4,7 @@ class Usuario
 
   def initialize(nombre, telefono, direccion)
     validar_telefono(telefono)
+    validar_nombre(nombre)
 
     @nombre = nombre
     @telefono = telefono
@@ -13,6 +14,10 @@ class Usuario
 
   def validar_telefono(telefono)
     raise UsuarioInvalido if telefono !~ /^\d{10}$/
+  end
+
+  def validar_nombre(nombre)
+    raise UsuarioInvalido if nombre !~ /^[a-zA-Z]{2,}$/
   end
 
   def ==(other)
