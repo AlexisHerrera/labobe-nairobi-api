@@ -13,3 +13,9 @@ Entonces('el usuario queda registrado con teléfono {string}') do |telefono|
   telefono_esperado = usuario['telefono']
   expect(telefono_esperado).to eq(telefono)
 end
+
+Entonces('el usuario no queda registrado') do
+  expect(@response.status).to eq(400)
+  usuario = JSON.parse(@response.body)
+  expect(usuario).to eq({})
+end

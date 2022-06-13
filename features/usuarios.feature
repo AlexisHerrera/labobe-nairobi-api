@@ -9,3 +9,9 @@ Escenario: 01 - Registro exitoso
    Dado que un usuario se quiere registrar
    Cuando recibo un usuario con nombre "Juan", teléfono "1144449999" y dirección "Av. Paseo Colón 850"
    Entonces el usuario queda registrado con teléfono "1144449999"
+
+@wip
+Escenario: 02 - Registro denegado por numero corto
+   Dado que un usuario se quiere registrar
+   Cuando recibo un usuario con nombre "Juan", teléfono "123" y dirección "Av. Paseo Colón 850"
+   Entonces el usuario no queda registrado
