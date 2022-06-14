@@ -67,3 +67,30 @@ Every time you want to start the server, you may repeat step 3 and 4.
 # Acceptance Test
 
 During development, when a developer works on his cucumber create an in-process instance of the application, so it is enough to run cucumber, nothing else is needed.
+
+# TP 2 - Nairobi
+
+### Para levantar la aplicación con docker-compose:
+
+1) Crear un archivo .env y reemplazar las siguientes variables con el valor correspondiente:
+
+    LOG_LEVEL=<trace|debug|info|warn|error|fatal>
+    
+    LOG_URL=<SUMOLOGIC_HTTPS_ENDPOINT>
+
+2) Correr `./start_dev_containers.sh`
+
+### Para ejecutar tests
+ 
+1) Ejecutar el comando `rake`
+
+### Para levantar la api de manera local
+ 
+1) Ejecutar el comando `bundle exec padrino start -h 0.0.0.0`
+
+Notar que esto expone el puerto 3000 para poder usar la API desde POSTMAN
+y también expone el puerto 3000 a localdev.
+
+Por lo que si ahora ejecutamos en el bot `curl http://webapp:3000`
+este devuelve `It's alive! version: <version_de_la_API>`
+
