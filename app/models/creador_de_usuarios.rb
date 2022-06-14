@@ -6,7 +6,7 @@ class CreadorDeUsuarios
   def crear_usuario(nombre, telefono, direccion)
     user = Usuario.new(nombre, telefono, direccion)
 
-    raise UsuarioInvalido if @repo.has(telefono)
+    raise UsuarioRepetido if @repo.has(telefono)
 
     @repo.save(user)
   end

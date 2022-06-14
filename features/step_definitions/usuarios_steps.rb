@@ -25,3 +25,9 @@ Entonces('el usuario no queda registrado') do
   usuario = JSON.parse(@response.body)
   expect(usuario).to eq({'error' => 'UsuarioInvalido'})
 end
+
+Entonces('el usuario no queda registrado porque esta repetido') do
+  expect(@response.status).to eq(409)
+  usuario = JSON.parse(@response.body)
+  expect(usuario).to eq({'error' => 'UsuarioInvalido'})
+end

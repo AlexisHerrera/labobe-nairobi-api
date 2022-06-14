@@ -40,7 +40,8 @@ Escenario: 07 - Registro sin exito, no se ingresa toda la información necesaria
    Cuando recibo un usuario con nombre "1J23", teléfono "1144449999" y dirección ""
    Entonces el usuario no queda registrado
 
+@wip
 Escenario: 08 - Registro sin exito, el numero ya está en uso
    Dado que un usuario se quiere registrar
    Cuando recibo un usuario con numero de un usuario registrado
-   Entonces el usuario no queda registrado
+   Entonces el usuario no queda registrado porque esta repetido

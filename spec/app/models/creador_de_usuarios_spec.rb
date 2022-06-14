@@ -21,7 +21,7 @@ describe 'CreadorDeUsuarios' do
 
     expect(repo).to receive(:has).with("1234567890").and_return(true)
 
-    expect{CreadorDeUsuarios.new(repo).crear_usuario('john', '1234567890', 'Paseo Colon 606')}.to raise_error(UsuarioInvalido)
+    expect{CreadorDeUsuarios.new(repo).crear_usuario('john', '1234567890', 'Paseo Colon 606')}.to raise_error(UsuarioRepetido)
 
   end
 end
