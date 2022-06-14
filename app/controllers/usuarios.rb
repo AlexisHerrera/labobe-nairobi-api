@@ -9,6 +9,10 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       status 201
       logger.logger.info "Usuario #{nuevo_usuario.telefono} creado exitosamente"
       user_to_json nuevo_usuario
+    rescue UsuarioRepetido => e
+      status 409
+      logger.logger.info 'Usuario repetido'
+      {error: e.message}.to_json
     rescue UsuarioInvalido => e
       status 400
       logger.logger.info 'Usuario invalido'
