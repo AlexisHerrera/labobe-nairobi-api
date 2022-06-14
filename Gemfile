@@ -46,5 +46,6 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
   gem 'ruby-debug-ide'
+  gem 'semantic_logger'
   gem 'simplecov'
 end

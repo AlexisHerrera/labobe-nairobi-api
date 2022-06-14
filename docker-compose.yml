@@ -28,6 +28,14 @@ services:
         RACK_ENV: "development"
         TEST_DB_URL: "postgres://postgres:example@test_db:5432/postgres"
         DEV_DB_URL: "postgres://postgres:example@dev_db:5432/postgres"
+        LOG_LEVEL: "${LOG_LEVEL}"
+        LOG_URL: "${LOG_URL}"
+
     depends_on:
       - test_db
       - dev_db
+
+networks:
+  default:
+    name: localdev
+    external: true

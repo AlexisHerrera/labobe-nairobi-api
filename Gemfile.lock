@@ -150,6 +150,8 @@ GEM
       rake (>= 0.8.1)
     ruby-progressbar (1.10.1)
     ruby2_keywords (0.0.5)
+    semantic_logger (4.7.4)
+      concurrent-ruby (~> 1.0)
     sequel (5.39.0)
     simplecov (0.20.0)
       docile (~> 1.1)
@@ -190,6 +192,7 @@ DEPENDENCIES
   rubocop
   rubocop-rspec
   ruby-debug-ide
+  semantic_logger
   sequel
   simplecov
 
