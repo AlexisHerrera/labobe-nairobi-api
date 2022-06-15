@@ -5,10 +5,8 @@ module Persistence
       self.model_class = 'Usuario'
 
       def has_telegram_id(id_telegram)
-        found_record = DB[:usuarios].where_single_value(id_telegram: id_telegram)
-        return false if found_record.nil?
-
-        !found_record.blank?
+        found_record = DB[:usuarios].first(Sequel[self.class.table_name][:id_telegram] => id_telegram)
+        !found_record.nil?
       end
 
       protected
