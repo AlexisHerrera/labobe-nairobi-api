@@ -31,11 +31,19 @@ describe Persistence::Repositories::UserRepository do
 
       expect(user.nombre).to eq(@new_user.nombre)
     end
+
+    it 'deberia saber si el usuario esta registrado por id_telegram' do
+      expect(user_repo.has_telegram_id('123')).to eq(true)
+    end
   end
 
   it 'deberia lanzar un error al buscar un usuario no existente' do
     expect do
       user_repo.find(99_999)
     end.to raise_error(ObjectNotFound)
+  end
+
+  it 'deberia devolver false si no encuentra ese telegram id' do
+    expect(user_repo.has_telegram_id('abc')).to eq(false)
   end
 end
