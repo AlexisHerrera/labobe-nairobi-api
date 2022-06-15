@@ -38,13 +38,22 @@ describe Usuario do
     end
 
     it 'no deberia ser valido cuando se crea con nombre y numero' do
-      nombre = '4N4 :)'
+      nombre = 'Juan'
       telefono = '1144349999'
       direccion = ''
       id_telegram = '123'
 
       expect{Usuario.new(nombre, telefono, direccion, id_telegram).telefono}.to raise_error(UsuarioInvalido)
     end
-    
+
+    it 'no deberia ser valido un usuario sin id_telegram asociado' do
+      nombre = 'Juan'
+      telefono = '1144349999'
+      direccion = 'Av. Paseo Colón 850'
+      id_telegram = ''
+
+      expect{Usuario.new(nombre, telefono, direccion, id_telegram).telefono}.to raise_error(UsuarioInvalido)
+    end
+
   end
 end

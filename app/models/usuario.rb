@@ -6,6 +6,7 @@ class Usuario
     validar_telefono(telefono)
     validar_nombre(nombre)
     validar_direccion(direccion)
+    validar_id_telegram(id_telegram)
 
     @nombre = nombre
     @telefono = telefono
@@ -24,6 +25,10 @@ class Usuario
 
   def validar_direccion(direccion)
     raise UsuarioInvalido if direccion.empty?
+  end
+
+  def validar_id_telegram(id_telegram)
+    raise UsuarioInvalido if id_telegram.empty?
   end
 
   def ==(other)
