@@ -11,7 +11,7 @@ class Menu
     @precio = precio
   end
 
-  def validar(_id, precio)
-    raise MenuInvalido if !precio.is_a?(Numeric) || precio.negative?
+  def validar(id, precio)
+    raise MenuInvalido if !id.is_a?(Integer) || !precio.is_a?(Numeric) || precio.negative?
   end
 end
