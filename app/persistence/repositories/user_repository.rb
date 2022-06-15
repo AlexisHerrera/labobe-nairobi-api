@@ -7,14 +7,15 @@ module Persistence
       protected
 
       def load_object(a_hash)
-        Usuario.new(a_hash[:nombre], a_hash[:telefono], a_hash[:direccion])
+        Usuario.new(a_hash[:nombre], a_hash[:telefono], a_hash[:direccion], a_hash[:id_telegram])
       end
 
       def changeset(user)
         {
-          id: user.id,
-          nombre: user.nombre,
+          id: user.telefono,
           telefono: user.telefono,
+          id_telegram: user.id_telegram,
+          nombre: user.nombre,
           direccion: user.direccion
         }
       end
