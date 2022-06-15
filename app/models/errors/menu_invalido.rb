@@ -1,0 +1,1 @@
+class MenuInvalido < StandardError; end
