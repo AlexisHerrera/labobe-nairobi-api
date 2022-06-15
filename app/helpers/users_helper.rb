@@ -25,10 +25,6 @@ module WebTemplate
       def user_attributes(user)
         {id: user.id, nombre: user.nombre, direcion: user.direccion, telefono: user.telefono}
       end
-
-      def user_mapper
-        Persistence::Mappers::UserMapper.new
-      end
     end
 
     helpers UserHelper
