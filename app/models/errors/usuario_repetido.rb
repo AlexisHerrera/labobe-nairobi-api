@@ -1,1 +1,0 @@
-class UsuarioRepetido < UsuarioInvalido; end

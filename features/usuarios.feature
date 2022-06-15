@@ -43,4 +43,4 @@ Escenario: 07 - Registro sin exito, no se ingresa toda la información necesaria
 Escenario: 08 - Registro sin exito, el numero ya está en uso
    Dado que un usuario se quiere registrar
    Cuando recibo un usuario con numero de un usuario registrado
-   Entonces el usuario no queda registrado porque esta repetido
+   Entonces el usuario no queda registrado porque esta utilizando un numero ya registrado

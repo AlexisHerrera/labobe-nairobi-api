@@ -4,6 +4,11 @@ module Persistence
       self.table_name = :usuarios
       self.model_class = 'Usuario'
 
+      def has_telegram_id(id_telegram)
+        found_record = DB[:usuarios].where_single_value(id_telegram: id_telegram)
+        !found_record.blank?
+      end
+
       protected
 
       def load_object(a_hash)

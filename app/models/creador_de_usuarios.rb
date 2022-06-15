@@ -4,10 +4,10 @@ class CreadorDeUsuarios
   end
 
   def crear_usuario(nombre, telefono, direccion, id_telegram)
-    user = Usuario.new(nombre, telefono, direccion, id_telegram)
+    usuario_a_crear = Usuario.new(nombre, telefono, direccion, id_telegram)
+    raise UsuarioRegistrado if @repo.has_telegram_id(id_telegram)
+    raise TelefonoUtilizado if @repo.has(telefono)
 
-    raise UsuarioRepetido if @repo.has(telefono)
-
-    @repo.save(user)
+    @repo.save(usuario_a_crear)
   end
 end

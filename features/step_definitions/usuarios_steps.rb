@@ -7,8 +7,10 @@ Cuando('recibo un usuario con nombre {string}, teléfono {string} y dirección {
 end
 
 Cuando('recibo un usuario con numero de un usuario registrado') do
-  @request = {nombre: 'Juan', telefono: '0123456789', direccion: 'Paseo Colon 850', id_telegram: '123'}.to_json
-  @response_first_user = Faraday.post(crear_usuario_url, @request, header)
+  @request_first_user = {nombre: 'Juan', telefono: '0123456789', direccion: 'Paseo Colon 850', id_telegram: '123'}.to_json
+  @response_first_user = Faraday.post(crear_usuario_url, @request_first_user, header)
+
+  @request = {nombre: 'Juan', telefono: '0123456789', direccion: 'Paseo Colon 850', id_telegram: '456'}.to_json
   @response = Faraday.post(crear_usuario_url, @request, header)
 end
 
@@ -26,8 +28,8 @@ Entonces('el usuario no queda registrado') do
   expect(usuario).to eq({'error' => 'UsuarioInvalido'})
 end
 
-Entonces('el usuario no queda registrado porque esta repetido') do
+Entonces('el usuario no queda registrado porque esta utilizando un numero ya registrado') do
   expect(@response.status).to eq(409)
   usuario = JSON.parse(@response.body)
-  expect(usuario).to eq({'error' => 'UsuarioRepetido'})
+  expect(usuario).to eq({'error' => 'TelefonoUtilizado'})
 end

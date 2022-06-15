@@ -1,0 +1,1 @@
+class UsuarioRegistrado < UsuarioInvalido; end

@@ -1,0 +1,1 @@
+class TelefonoUtilizado < UsuarioInvalido; end
