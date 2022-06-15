@@ -1,11 +1,10 @@
 #language: es
 
-Característica: Registración de usuarios
+Característica: Consulta de menu
   Como sistema
   Quiero informar el menu a los usuarios
   Para que conozcan las opciones disponibles
 
-@wip
 Escenario: 01 - Consulta de menu
   Dado que existe un menu
   Cuando un usuario consulta el menu

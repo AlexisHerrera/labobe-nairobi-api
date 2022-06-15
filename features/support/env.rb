@@ -24,6 +24,10 @@ def crear_usuario_url
   "#{BASE_URL}/usuarios"
 end
 
+def crear_menu_url
+  "#{BASE_URL}/menu"
+end
+
 def obtener_menu_url
   "#{BASE_URL}/menu"
 end

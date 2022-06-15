@@ -1,4 +1,4 @@
-class CreadorDeMeus
+class CreadorDeMenus
   def initialize(menu_repo)
     @repo = menu_repo
   end
