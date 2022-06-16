@@ -22,13 +22,13 @@ describe Persistence::Repositories::MenuRepository do
       @menu_id = @nuevo_menu.id
     end
 
-    it 'deberia borrar todos los usuarios' do
+    it 'deberia borrar todos los menus' do
       menu_repo.delete_all
 
       expect(menu_repo.all.count).to eq(0)
     end
 
-    it 'deberia encontrar el usuario por id' do
+    it 'deberia encontrar el menu por id' do
       menu = menu_repo.find(@menu_id)
 
       expect(menu.precio).to eq(@nuevo_menu.precio)

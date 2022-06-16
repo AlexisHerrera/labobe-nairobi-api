@@ -1,11 +1,11 @@
 class Pedido
   attr_reader :updated_on, :created_on
 
-  attr_accessor :id, :usuario, :menu
+  attr_accessor :id, :id_usuario, :id_menu
 
-  def initialize(id, usuario, menu)
+  def initialize(id, id_usuario, id_menu)
     @id = id
-    @usuario = usuario
-    @menu = menu
+    @id_usuario = id_usuario
+    @id_menu = id_menu
   end
 end
