@@ -1,5 +1,4 @@
 Dado('que existe un menu') do
-  # Lo hace la seed
 end
 
 Cuando('un usuario consulta el menu') do
@@ -11,18 +10,18 @@ Entonces('recibe el menu') do
   expect(@response.body).to eq([
     {
       'id' => 1,
-      'descripcion' => 'Menu Individual',
+      'descripcion' => 'Menu individual',
       'precio' => 1000.0
     },
     {
       'id' => 2,
-      'descripcion' => 'Menu Pareja',
+      'descripcion' => 'Menu parejas',
       'precio' => 1500.0
     },
     {
       'id' => 3,
-      'descripcion' => 'Menu Familiar',
-      'precio' => 2000.0
+      'descripcion' => 'Menu familiar',
+      'precio' => 2500.0
     }
   ].to_json)
 end
