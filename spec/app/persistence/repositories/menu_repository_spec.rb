@@ -1,10 +1,12 @@
 require 'integration_helper'
 
 describe Persistence::Repositories::MenuRepository do
+
   let(:menu_repo) { Persistence::Repositories::MenuRepository.new }
   let(:a_menu) { Menu.new(1, "Menu pareja", 1400) }
 
   it 'deberia guardar un nuevo menu' do
+    menu_repo.delete_all
     menu_repo.save(a_menu)
     expect(menu_repo.all.count).to eq(1)
   end

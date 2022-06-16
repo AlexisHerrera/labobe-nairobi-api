@@ -24,11 +24,4 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       {error: e.message}.to_json
     end
   end
-
-  get :create, :map => '/menu' do
-    status 201
-    menu_to_json menu_repo.dataset
-
-    Logger.new.logger.info "Menu: #{menu_repo.dataset}"
-  end
 end

@@ -1,7 +1,7 @@
 require_relative '../loggers/logger'
 
 WebTemplate::App.controllers :menus, :provides => [:json] do
-  get :create, :map => '/menu' do
+  get :create, :map => '/menus' do
     logger = Logger.new
     status 200
     logger.logger.info "Menu: #{menu_repo.all}"

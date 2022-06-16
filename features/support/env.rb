@@ -29,7 +29,7 @@ def crear_menu_url
 end
 
 def obtener_menu_url
-  "#{BASE_URL}/menu"
+  "#{BASE_URL}/menus"
 end
 
 def reset_url
