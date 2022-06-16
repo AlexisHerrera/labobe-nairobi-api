@@ -9,8 +9,7 @@ Dado('que existe un menu') do
 end
 
 Cuando('un usuario consulta el menu') do
-  @request = {}.to_json
-  @response = Faraday.get(obtener_menu_url, @request, header)
+  @response = Faraday.get(obtener_menu_url)
 end
 
 Entonces('recibe el menu') do

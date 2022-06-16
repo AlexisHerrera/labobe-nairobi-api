@@ -4,6 +4,7 @@ WORKDIR /temp
 ADD . /temp
 RUN gem install bundler
 RUN bundler install
+RUN rake sq:seed
 RUN mkdir /app
 WORKDIR /app
 EXPOSE 3000
