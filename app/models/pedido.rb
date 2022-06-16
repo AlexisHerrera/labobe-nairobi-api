@@ -4,10 +4,8 @@ class Pedido
   attr_accessor :id, :usuario, :menu
 
   def initialize(id, usuario, menu)
-
     @id = id
     @usuario = usuario
     @menu = menu
   end
-
 end
