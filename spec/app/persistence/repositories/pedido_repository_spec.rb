@@ -11,12 +11,6 @@ describe Persistence::Repositories::PedidoRepository do
     Persistence::Repositories::MenuRepository.new.save(menu)
   end
 
-  after :each do
-    # Necesario porque antes de eliminar la tabla usuario o menu, hay que borrar primero la de pedidos
-    # porque hace referencia a esas tablas (integridad referencial)
-    pedido_repo.delete_all
-  end
-
   it 'deberia guardar un nuevo pedido' do
     pedido_repo.delete_all
     pedido_repo.save(un_pedido)

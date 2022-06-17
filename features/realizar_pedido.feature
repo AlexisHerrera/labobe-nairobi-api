@@ -7,7 +7,7 @@ Característica: Registrar pedido de un cliente
 
   Antecedentes:
     Dado que el usuario ya esta registrado
-  @wip
+
   Escenario: Hacer un pedido en el menu
     Cuando recibo un pedido del menu 1 del cliente
     Entonces deberia aceptar su pedido

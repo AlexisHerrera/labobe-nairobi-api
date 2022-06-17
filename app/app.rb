@@ -14,9 +14,9 @@ module LaBobe
 
     post '/reset', :provides => [:js] do
       if ENV['ENABLE_RESET'] == 'true'
+        pedido_repo.delete_all
         user_repo.delete_all
-        # No elimino los menus porque no se cargan con post
-        # menu_repo.delete_all
+        menu_repo.delete_all
 
         status 200
         {message: 'reset ok'}.to_json
