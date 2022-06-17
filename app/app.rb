@@ -1,4 +1,4 @@
-module WebTemplate
+module LaBobe
   class App < Padrino::Application
     register Padrino::Helpers
 

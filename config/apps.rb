@@ -31,4 +31,4 @@ Padrino.configure_apps do
 end
 
 # Mounts the core application for this project
-Padrino.mount('WebTemplate::App', :app_file => Padrino.root('app/app.rb')).to('/')
+Padrino.mount('LaBobe::App', :app_file => Padrino.root('app/app.rb')).to('/')

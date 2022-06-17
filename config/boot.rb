@@ -21,6 +21,19 @@ Padrino::Logger::Config[current_env][:log_level]  = log_level.to_sym
 Padrino::Logger::Config[current_env][:stream] = log_stream.to_sym
 Padrino::Logger::Config[current_env][:log_path]  = log_file
 
+# Semantic logger configuration
+log_level = ENV['LOG_LEVEL'] || 'warn'
+log_url = ENV['LOG_URL'] || 'http://fake.url'
+
+SemanticLogger.default_level = log_level.to_sym
+SemanticLogger.add_appender(
+  io: $stdout
+)
+SemanticLogger.add_appender(
+  appender: :http,
+  url: log_url
+)
+
 #
 # ## Configure Ruby to allow requiring features from your lib folder
 #

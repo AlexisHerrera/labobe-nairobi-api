@@ -1,4 +1,4 @@
-WebTemplate::App.controllers :health, :provides => [:json] do
+LaBobe::App.controllers :health, :provides => [:json] do
   get :index do
     status 200
     logger.info 'status:ok'
