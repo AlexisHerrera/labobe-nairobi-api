@@ -13,7 +13,6 @@ Característica: Registrar pedido de un cliente
     Entonces deberia aceptar su pedido
     Y devolverle el codigo del pedido
 
-  @wip
   Escenario: Hacer un pedido que no esta en el menu
     Cuando recibo un pedido del menu 4 del cliente
     Entonces no deberia aceptar su pedido
