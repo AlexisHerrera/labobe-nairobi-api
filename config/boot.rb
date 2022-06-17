@@ -22,6 +22,7 @@ Padrino::Logger::Config[current_env][:stream] = log_stream.to_sym
 Padrino::Logger::Config[current_env][:log_path]  = log_file
 
 # Semantic logger configuration
+require 'semantic_logger'
 log_level = ENV['LOG_LEVEL'] || 'warn'
 log_url = ENV['LOG_URL'] || 'http://fake.url'
 
