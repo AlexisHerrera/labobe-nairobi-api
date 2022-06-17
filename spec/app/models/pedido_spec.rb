@@ -6,7 +6,7 @@ describe Pedido do
       id = 12367262
       usuario = "0123456789"
       menu = 1
-      expect(described_class.new(id, usuario, menu).id).to eq id
+      expect(described_class.new(usuario, menu, id).id).to eq id
     end
   end
 end

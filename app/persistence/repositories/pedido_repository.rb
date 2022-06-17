@@ -7,12 +7,11 @@ module Persistence
       protected
 
       def load_object(a_hash)
-        Pedido.new(a_hash[:id], a_hash[:id_usuario], a_hash[:id_menu])
+        Pedido.new(a_hash[:id_usuario], a_hash[:id_menu], a_hash[:id])
       end
 
       def changeset(pedido)
         {
-          id: pedido.id,
           id_usuario: pedido.id_usuario,
           id_menu: pedido.id_menu
         }

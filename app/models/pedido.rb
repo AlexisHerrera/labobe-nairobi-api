@@ -3,7 +3,7 @@ class Pedido
 
   attr_accessor :id, :id_usuario, :id_menu
 
-  def initialize(id, id_usuario, id_menu)
+  def initialize(id_usuario, id_menu, id = nil)
     @id = id
     @id_usuario = id_usuario
     @id_menu = id_menu
