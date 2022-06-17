@@ -1,6 +1,3 @@
-Dado('que existe un menu') do
-end
-
 Cuando('un usuario consulta el menu') do
   @response = Faraday.get(obtener_menu_url)
 end
