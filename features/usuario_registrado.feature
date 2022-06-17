@@ -6,6 +6,6 @@ Característica: Registración de usuarios
   Para que mas usuarios deban registrarse
 
 Escenario: 01 - Un usuario registrado no se puede registrar de nuevo
-  Dado el usuario ya esta registrado
+  Dado que el usuario ya esta registrado
   Cuando recibo un pedido de registracion del mismo usuario registrado
   Entonces le respondo que el usuario ya esta registrado

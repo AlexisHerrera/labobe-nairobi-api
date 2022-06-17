@@ -24,12 +24,12 @@ def crear_usuario_url
   "#{BASE_URL}/usuarios"
 end
 
-def crear_menu_url
-  "#{BASE_URL}/menu"
-end
-
 def obtener_menu_url
   "#{BASE_URL}/menus"
+end
+
+def crear_pedido_url
+  "#{BASE_URL}/pedidos"
 end
 
 def reset_url
