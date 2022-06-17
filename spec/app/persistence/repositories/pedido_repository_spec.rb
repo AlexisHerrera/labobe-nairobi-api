@@ -1,10 +1,19 @@
 require 'integration_helper'
 
 describe Persistence::Repositories::PedidoRepository do
-
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
-  let(:un_pedido) { Pedido.new(1, "01234567890", 123) }
-
+  let(:un_pedido) { Pedido.new(1, "0123456789", 1) }
+  before :each do
+    usuario = Usuario.new('Juan', '0123456789', 'paseo colon 850', '123')
+    Persistence::Repositories::UserRepository.new.save(usuario)
+    menu = Menu.new(1, 'Menu individual', 1000.0)
+    Persistence::Repositories::MenuRepository.new.save(menu)
+  end
+  after :each do
+    # Necesario porque antes de eliminar la tabla usuario o menu, hay que borrar primero la de pedidos
+    # porque hace referencia a esas tablas (integridad referencial)
+    pedido_repo.delete_all
+  end
   it 'deberia guardar un nuevo pedido' do
     pedido_repo.delete_all
     pedido_repo.save(un_pedido)
