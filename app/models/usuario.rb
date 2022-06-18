@@ -10,7 +10,7 @@ class Usuario
 
     @nombre = nombre
     @telefono = telefono
-    @id = telefono
+    @id = id_telegram
     @direccion = direccion
     @id_telegram = id_telegram
   end
