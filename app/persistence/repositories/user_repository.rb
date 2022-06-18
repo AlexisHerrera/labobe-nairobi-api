@@ -9,6 +9,13 @@ module Persistence
         !found_record.nil?
       end
 
+      def find_by_telegram_id(id_telegram)
+        found_record = dataset.first(Sequel[self.class.table_name][:id_telegram] => id_telegram)
+        raise ObjectNotFound.new(self.class.model_class, id_telegram) if found_record.nil?
+
+        load_object dataset.first(found_record)
+      end
+
       protected
 
       def load_object(a_hash)

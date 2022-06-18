@@ -35,6 +35,11 @@ describe Persistence::Repositories::UserRepository do
     it 'deberia saber si el usuario esta registrado por id_telegram' do
       expect(user_repo.has_telegram_id('123')).to eq(true)
     end
+
+    it 'deberia devolver un usuario segun su id de telegram' do
+      user = user_repo.find_by_telegram_id('123')
+      expect(user == @new_user).to eq true
+    end
   end
 
   it 'deberia lanzar un error al buscar un usuario no existente' do

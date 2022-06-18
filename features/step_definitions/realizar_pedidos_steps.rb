@@ -1,7 +1,7 @@
 Cuando('recibo un pedido del menu {int} del cliente') do |id_menu|
   # TODO: Necesitamos crear un factory de clientes, porque esta mal tener el id_usuario
   # (el cual esta haciendo referencia al step Dado que el usuario ya esta registrado)
-  @request = {id_usuario: '0123456789', id_menu: id_menu}.to_json
+  @request = {id_usuario: '123', id_menu: id_menu}.to_json
   @response = Faraday.post(crear_pedido_url, @request, header)
 end
 
@@ -15,7 +15,7 @@ Entonces('devolverle el codigo del pedido') do
 end
 
 Entonces('no deberia aceptar su pedido') do
-  expect(@response.status).to eq(500)
+  expect(@response.status).to eq(400)
 end
 
 Entonces('devolverle un error') do

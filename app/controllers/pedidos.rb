@@ -7,7 +7,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       logger.info "Nuevo pedido: Id pedido: #{nuevo_pedido.id}, Id_usuario: #{nuevo_pedido.id_usuario}, Id_menu: #{nuevo_pedido.id_menu}"
       pedido_to_json nuevo_pedido
     rescue ObjectNotFound
-      status 500
+      status 400
       logger.info 'No se pudo crear el pedido porque no se encontro al cliente o al menu solicitado'
       {error: 'pedido-001',
        message: 'No se pudo crear el pedido',
