@@ -8,5 +8,12 @@ describe Pedido do
       menu = 1
       expect(described_class.new(usuario, menu, id).id).to eq id
     end
+
+    xit 'tiene estado recibido' do
+      id = 12367262
+      usuario = '123'
+      menu = 1
+      expect(described_class.new(usuario, menu, id).estado).to eq estado
+    end
   end
 end
