@@ -2,18 +2,20 @@ require 'spec_helper'
 
 describe Pedido do
   context 'cuando es creado' do
-    it 'deberia ser valido cuando se crea con id, usuario y menu' do
+    it 'deberia ser valido cuando se crea con id, usuario, menu y estado' do
       id = 12367262
       usuario = '123'
       menu = 1
-      expect(described_class.new(usuario, menu, id).id).to eq id
+      id_estado = 0
+      expect(described_class.new(id, usuario, menu, id_estado).id).to eq id
     end
 
-    xit 'tiene estado recibido' do
+    it 'cuando se crea tiene estado recibido' do
       id = 12367262
       usuario = '123'
       menu = 1
-      expect(described_class.new(usuario, menu, id).estado).to eq estado
+      id_estado = 0
+      expect(described_class.new(id, usuario, menu, id_estado).id_estado).to eq id_estado
     end
   end
 end

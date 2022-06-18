@@ -2,7 +2,7 @@ require 'integration_helper'
 
 describe Persistence::Repositories::PedidoRepository do
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
-  let(:un_pedido) { Pedido.new("0123456789", 1) }
+  let(:un_pedido) { Pedido.new(nil, "0123456789", 1, 0) }
 
   before :each do
     usuario = Usuario.new('Juan', '0123456789', 'paseo colon 850', '123')
@@ -41,7 +41,7 @@ describe Persistence::Repositories::PedidoRepository do
 
     it 'deberia encontrar el pedido por id' do
       pedido = pedido_repo.find(@pedido_id)
-
+      
       expect(pedido.id).to eq(@nuevo_pedido.id)
     end
   end
