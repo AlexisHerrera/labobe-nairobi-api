@@ -9,11 +9,6 @@ module Persistence
         !found_record.nil?
       end
 
-      def has_telefono(telefono)
-        found_record = DB[:usuarios].first(Sequel[self.class.table_name][:telefono] => telefono)
-        !found_record.nil?
-      end
-
       protected
 
       def load_object(a_hash)
@@ -22,7 +17,7 @@ module Persistence
 
       def changeset(user)
         {
-          id: user.id,
+          id: user.telefono,
           telefono: user.telefono,
           id_telegram: user.id_telegram,
           nombre: user.nombre,

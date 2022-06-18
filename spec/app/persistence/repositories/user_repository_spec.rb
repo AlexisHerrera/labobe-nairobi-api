@@ -17,7 +17,7 @@ describe Persistence::Repositories::UserRepository do
   context 'cuando un usuario existe' do
     before :each do
       @new_user = user_repo.save(a_user)
-      @user_id = @new_user.id
+      @user_id = @new_user.telefono
     end
 
     it 'deberia borrar todos los usuarios' do
@@ -26,7 +26,7 @@ describe Persistence::Repositories::UserRepository do
       expect(user_repo.all.count).to eq(0)
     end
 
-    it 'deberia encontrar el usuario por el id' do
+    it 'deberia encontrar el usuario por telefono' do
       user = user_repo.find(@user_id)
 
       expect(user.nombre).to eq(@new_user.nombre)
