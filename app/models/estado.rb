@@ -1,9 +1,10 @@
 class Estado
   attr_reader :updated_on, :created_on
 
-  attr_accessor :estado
+  attr_accessor :id, :descripcion
 
-  def initialize(estado)
-    @estado = estado
+  def initialize(estado, descripcion)
+    @id = estado
+    @descripcion = descripcion
   end
 end
