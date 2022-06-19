@@ -19,7 +19,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     begin
       id = estado_params['id'].to_i
       pedido = pedido_repo.find(id)
-      estado = estado_repo.find(pedido.id_estado)
+      estado = estado_repo.find(pedido.estado.estado)
       status 200
       logger.info "Se informa el estado del pedido: #{pedido.id} con estado #{estado.descripcion}"
       estado_to_json estado
@@ -34,8 +34,8 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
 
   patch :show, :map => '/pedidos' do
     begin
-      id = estado_params['id'].to_i
       pedido = pedido_repo.find(id)
+      pedido.cambiar_estado
       status 200
       logger.info "Se informa el estado del pedido: #{pedido.id} con estado #{estado.descripcion}"
       estado_to_json estado

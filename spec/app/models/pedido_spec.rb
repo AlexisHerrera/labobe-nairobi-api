@@ -15,7 +15,17 @@ describe Pedido do
       usuario = '123'
       menu = 1
       id_estado = 0
-      expect(described_class.new(id, usuario, menu, id_estado).id_estado).to eq id_estado
+      expect(described_class.new(id, usuario, menu, id_estado).estado.estado).to eq id_estado
+    end
+
+    it 'cuando se modifica el estado de un pedido recien creado, el estado es 1' do
+      id = 12367262
+      usuario = '123'
+      menu = 1
+      id_estado = 0
+      pedido = described_class.new(id, usuario, menu, id_estado)
+      pedido.cambiar_estado
+      expect(pedido.estado.estado).to eq 1
     end
   end
 end

@@ -14,7 +14,7 @@ module Persistence
         {
           id_usuario: pedido.id_usuario,
           id_menu: pedido.id_menu,
-          id_estado: pedido.id_estado
+          id_estado: pedido.estado.estado
         }
       end
     end
