@@ -8,7 +8,6 @@ Característica: Estado de un pedido
 Antecedentes:
   Dado que el usuario ya esta registrado
 
-@wip
 Escenario: 7.0 - Estado de un pedido recien creado es recibido
   Cuando creo un pedido
   Entonces el pedido esta "Recibido"

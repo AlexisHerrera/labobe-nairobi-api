@@ -32,6 +32,10 @@ def crear_pedido_url
   "#{BASE_URL}/pedidos"
 end
 
+def consultar_estado_pedido_url
+  "#{BASE_URL}/estado"
+end
+
 def reset_url
   "#{BASE_URL}/reset"
 end
