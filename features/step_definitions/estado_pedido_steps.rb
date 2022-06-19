@@ -1,14 +1,24 @@
-Dado('que tengo un pedido Recibido') do
+Dado('que tengo un pedido') do
   request = {id_usuario: '123', id_menu: 1}.to_json
   response = Faraday.post(crear_pedido_url, request, header)
   @pedido = JSON.parse(response.body)
 end
 
-Dado('que tengo un pedido En preparacion') do
-  request = {id_usuario: '123', id_menu: 1}.to_json
-  response = Faraday.post(crear_pedido_url, request, header)
-  @pedido = JSON.parse(response.body)
+Y('esta En preparacion') do
   request = {id_pedido: @pedido['id_pedido']}
+  Faraday.patch(crear_pedido_url, request, header)
+end
+
+Y('esta En camino') do
+  request = {id_pedido: @pedido['id_pedido']}
+  Faraday.patch(crear_pedido_url, request, header)
+  Faraday.patch(crear_pedido_url, request, header)
+end
+
+Y('esta Entregado') do
+  request = {id_pedido: @pedido['id_pedido']}
+  Faraday.patch(crear_pedido_url, request, header)
+  Faraday.patch(crear_pedido_url, request, header)
   Faraday.patch(crear_pedido_url, request, header)
 end
 
