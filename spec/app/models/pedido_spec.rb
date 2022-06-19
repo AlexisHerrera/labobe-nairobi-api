@@ -27,5 +27,35 @@ describe Pedido do
       pedido.cambiar_estado
       expect(pedido.estado.estado).to eq 1
     end
+
+    it 'cuando se modifica el estado de un pedido con estado 1, el estado es 2' do
+      id = 12367262
+      usuario = '123'
+      menu = 1
+      id_estado = 1
+      pedido = described_class.new(id, usuario, menu, id_estado)
+      pedido.cambiar_estado
+      expect(pedido.estado.estado).to eq 2
+    end
+
+    it 'cuando se modifica el estado de un pedido con estado 2, el estado es 3' do
+      id = 12367262
+      usuario = '123'
+      menu = 1
+      id_estado = 2
+      pedido = described_class.new(id, usuario, menu, id_estado)
+      pedido.cambiar_estado
+      expect(pedido.estado.estado).to eq 3
+    end
+
+    it 'cuando se modifica el estado de un pedido con estado 3, el estado es 3' do
+      id = 12367262
+      usuario = '123'
+      menu = 1
+      id_estado = 3
+      pedido = described_class.new(id, usuario, menu, id_estado)
+      pedido.cambiar_estado
+      expect(pedido.estado.estado).to eq 3
+    end
   end
 end

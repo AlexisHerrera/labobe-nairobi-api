@@ -30,4 +30,12 @@ describe EstadoPedido do
     estado.cambiar_estado
     expect(estado.estado).to eq 3
   end
+
+  it 'al cambiar estado de un estadoPedido en 3 queda 3' do
+    # TODO: modelar codigos de estado como enum
+    id_estado = 3
+    estado = described_class.new(id_estado)
+    estado.cambiar_estado
+    expect(estado.estado).to eq 3
+  end
 end
