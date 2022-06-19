@@ -6,6 +6,10 @@ class EstadoPedido
   end
 
   def cambiar_estado
-    @estado = 1 if @estado.zero?
+    if @estado.zero?
+      @estado = 1
+    elsif @estado == 1
+      @estado = 2
+    end
   end
 end

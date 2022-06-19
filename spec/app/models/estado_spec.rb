@@ -7,4 +7,20 @@ describe EstadoPedido do
     estado = described_class.new(id_estado)
     expect(estado.estado).to eq id_estado
   end
+
+  it 'al cambiar estado de un estadoPedido recien creado este se pasa a 1' do
+    # TODO: modelar codigos de estado como enum
+    id_estado = 0
+    estado = described_class.new(id_estado)
+    estado.cambiar_estado
+    expect(estado.estado).to eq 1
+  end
+
+  it 'al cambiar estado de un estadoPedido en 1 creado este se pasa a 2' do
+    # TODO: modelar codigos de estado como enum
+    id_estado = 1
+    estado = described_class.new(id_estado)
+    estado.cambiar_estado
+    expect(estado.estado).to eq 2
+  end
 end
