@@ -12,5 +12,12 @@ Sequel.migration do
 
   down do
     drop_table(:pedidos)
+    create_table(:pedidos) do
+      primary_key :id
+      String :id_usuario
+      Int :id_menu
+      Date :created_on
+      Date :updated_on
+    end
   end
 end
