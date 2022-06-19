@@ -10,6 +10,8 @@ class EstadoPedido
       @estado = 1
     elsif @estado == 1
       @estado = 2
+    elsif @estado == 2
+      @estado = 3
     end
   end
 end
