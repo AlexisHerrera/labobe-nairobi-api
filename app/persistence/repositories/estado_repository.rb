@@ -2,12 +2,12 @@ module Persistence
   module Repositories
     class EstadoRepository < AbstractRepository
       self.table_name = :estados
-      self.model_class = 'Estado'
+      self.model_class = 'EstadoDTO'
 
       protected
 
       def load_object(a_hash)
-        Estado.new(a_hash[:id], a_hash[:descripcion])
+        EstadoDTO.new(a_hash[:id], a_hash[:descripcion])
       end
 
       def changeset(estado)

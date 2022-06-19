@@ -3,7 +3,7 @@ require 'integration_helper'
 describe Persistence::Repositories::EstadoRepository do
 
    let(:estado_repo) { Persistence::Repositories::EstadoRepository.new }
-   let(:un_estado) { Estado.new(0, 'Recibido') }
+   let(:un_estado) { EstadoDTO.new(0, 'Recibido') }
 
    context 'cuando un estado existe' do
      before :each do

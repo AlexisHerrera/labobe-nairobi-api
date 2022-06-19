@@ -13,7 +13,7 @@ menu_repository.save(Menu.new(3, 'Menu familiar', 2500))
 
 estados_repository = Persistence::Repositories::EstadoRepository.new
 
-estados_repository.save(Estado.new(0, 'Recibido'))
-estados_repository.save(Estado.new(1, 'En preparacion'))
-estados_repository.save(Estado.new(2, 'En camino'))
-estados_repository.save(Estado.new(3, 'Entregado'))
+estados_repository.save(EstadoDTO.new(0, 'Recibido'))
+estados_repository.save(EstadoDTO.new(1, 'En preparacion'))
+estados_repository.save(EstadoDTO.new(2, 'En camino'))
+estados_repository.save(EstadoDTO.new(3, 'Entregado'))
