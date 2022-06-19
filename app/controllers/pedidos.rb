@@ -15,9 +15,10 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     end
   end
 
-  get :show, :map => '/pedidos' do
+  get :show, :map => '/pedidos', :with => :id do
     begin
-      id = estado_params['id'].to_i
+      #debugger
+      id = params[:id]
       pedido = pedido_repo.find(id)
       estado = estado_repo.find(pedido.estado.estado)
       status 200
