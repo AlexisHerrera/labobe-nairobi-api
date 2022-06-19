@@ -1,3 +1,5 @@
+require_relative 'estado_pedido'
+
 class Pedido
   attr_reader :updated_on, :created_on
 

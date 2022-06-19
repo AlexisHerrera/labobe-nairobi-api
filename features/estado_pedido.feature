@@ -12,7 +12,6 @@ Escenario: 7.0 - Estado de un pedido recien creado es recibido
   Cuando creo un pedido
   Entonces el pedido esta "Recibido"
 
-@wip
 Escenario: 7.1 - Estado de un pedido de recibido a en preparacion
   Dado que tengo un pedido "Recibido"
   Cuando cambio el estado del pedido

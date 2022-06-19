@@ -21,6 +21,6 @@ Dado('que tengo un pedido {string}') do |_string|
 end
 
 Cuando('cambio el estado del pedido') do
-  request = {id_pedido: @pedido['id_pedido']}.to_json
+  request = {id_pedido: @pedido['id_pedido']}
   Faraday.patch(crear_pedido_url, request, header)
 end

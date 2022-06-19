@@ -34,11 +34,12 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
 
   patch :show, :map => '/pedidos' do
     begin
+      id = estado_params['id_pedido'].to_i
       pedido = pedido_repo.find(id)
       pedido.cambiar_estado
-      status 200
-      logger.info "Se informa el estado del pedido: #{pedido.id} con estado #{estado.descripcion}"
-      estado_to_json estado
+      pedido_repo.save(pedido)
+      status 204
+      logger.info "Se modifico el estado del pedido: #{pedido.id} "
     rescue ObjectNotFound
       status 404
       logger.info 'No se pudo encontar el pedido.'

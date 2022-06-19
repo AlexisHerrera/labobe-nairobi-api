@@ -16,7 +16,7 @@ module LaBobe
       if ENV['ENABLE_RESET'] == 'true'
         pedido_repo.delete_all
         user_repo.delete_all
-        estado_repo.delete_all
+        # estado_repo.delete_all
         # menu_repo.delete_all
 
         status 200
