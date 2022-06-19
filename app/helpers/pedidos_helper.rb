@@ -19,7 +19,7 @@ module LaBobe
       private
 
       def pedido_attributes(pedido)
-        {id_pedido: pedido.id, id_usuario: pedido.id_usuario, id_menu: pedido.id_menu}
+        {id_pedido: pedido.id, id_usuario: pedido.id_usuario, id_menu: pedido.id_menu, id_estado: pedido.estado}
       end
     end
 

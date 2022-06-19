@@ -17,7 +17,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
 
   get :show, :map => '/pedidos', :with => :id do
     begin
-      #debugger
+      # debugger
       id = params[:id]
       pedido = pedido_repo.find(id)
       estado = estado_repo.find(pedido.estado.estado)
