@@ -17,7 +17,6 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
 
   get :show, :map => '/pedidos', :with => :id do
     begin
-      # debugger
       id = params[:id]
       pedido = pedido_repo.find(id)
       estado = estado_repo.find(pedido.estado.estado)
@@ -35,7 +34,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
 
   patch :show, :map => '/pedidos' do
     begin
-      id = estado_params['id_pedido'].to_i
+      id = pedido_params[:id_pedido].to_i
       pedido = pedido_repo.find(id)
       pedido.cambiar_estado
       pedido_repo.save(pedido)

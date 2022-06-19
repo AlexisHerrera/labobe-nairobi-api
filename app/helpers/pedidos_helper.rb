@@ -19,7 +19,8 @@ module LaBobe
       private
 
       def pedido_attributes(pedido)
-        {id_pedido: pedido.id, id_usuario: pedido.id_usuario, id_menu: pedido.id_menu, id_estado: pedido.estado}
+        # Smell: acceder al id del estado con : pedido.estado.estado
+        {id_pedido: pedido.id, id_usuario: pedido.id_usuario, id_menu: pedido.id_menu, id_estado: pedido.estado.estado}
       end
     end
 

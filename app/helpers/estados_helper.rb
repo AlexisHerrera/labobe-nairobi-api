@@ -8,7 +8,8 @@ module LaBobe
       end
 
       def estado_params
-        params
+        @body ||= request.body.read
+        JSON.parse(@body).symbolize_keys
       end
 
       def estado_to_json(estado)
