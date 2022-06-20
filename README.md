@@ -72,13 +72,7 @@ During development, when a developer works on his cucumber create an in-process 
 
 ### Para levantar la aplicación con docker-compose:
 
-1) Crear un archivo .env y reemplazar las siguientes variables con el valor correspondiente:
-
-    LOG_LEVEL=<trace|debug|info|warn|error|fatal>
-    
-    LOG_URL=<SUMOLOGIC_HTTPS_ENDPOINT>
-
-2) Correr `./start_dev_containers.sh`
+1) Correr `./start_dev_containers.sh`
 
 ### Para ejecutar tests
  
@@ -94,3 +88,7 @@ y también expone el puerto 3000 a localdev.
 Por lo que si ahora ejecutamos en el bot `curl http://webapp:3000`
 este devuelve `It's alive! version: <version_de_la_API>`
 
+### FAQ
+- ¿Como loggea hacia SUMOLOGIC?  
+Al levantar Heroku, además de indicarle que use Postgres, también agregamos como seed al link de sumologic, por lo que no hace falta tenerlo como variable de entorno. Ver /scripts/configure_heroku.sh
+ 

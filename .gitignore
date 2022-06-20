@@ -14,7 +14,6 @@ imageid.txt
 reports
 .byebug_history
 VERSION.txt
-.env
 *.logs
 /bin/
 /.bundle/
