@@ -23,7 +23,7 @@ module LaBobe
       private
 
       def user_attributes(user)
-        {id: user.id, nombre: user.nombre, direcion: user.direccion, telefono: user.telefono}
+        {id: user.id, nombre: user.nombre, direccion: user.direccion, telefono: user.telefono}
       end
     end
 
