@@ -14,4 +14,10 @@ class Menu
   def validar(id, precio)
     raise MenuInvalido if !id.is_a?(Integer) || !precio.is_a?(Numeric) || precio.negative?
   end
+
+  def ==(other)
+    @id == other.id &&
+      @descripcion == other.descripcion &&
+      @precio == other.precio
+  end
 end

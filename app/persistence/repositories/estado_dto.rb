@@ -7,4 +7,9 @@ class EstadoDTO
     @id = estado
     @descripcion = descripcion
   end
+
+  def ==(other)
+    @id == other.id &&
+      @descripcion == other.descripcion
+  end
 end

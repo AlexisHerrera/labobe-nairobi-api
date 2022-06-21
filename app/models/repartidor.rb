@@ -8,4 +8,3 @@ class Repartidor
     @telefono = telefono
   end
 end
-

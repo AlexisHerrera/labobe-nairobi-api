@@ -1,4 +1,5 @@
 class CreadorDeMenus
+  # TODO: Es necesario tener una clase para crear menus? No es demasiado?
   def initialize(menu_repo)
     @repo = menu_repo
   end

@@ -7,7 +7,7 @@ describe 'CreadorDeMenu' do
 
     allow(repo).to receive(:save).with(menu).and_return(menu)
 
-    nuevo_menu = CreadorDeMenu.new(repo).crear_menu(11, 'Menu pareja', 1500)
-    expect(nuevo_menu).to eq(menu)
+    nuevo_menu = CreadorDeMenus.new(repo).crear_menu(11, 'Menu pareja', 1500)
+    expect(nuevo_menu==menu).to eq(true)
   end
 end
