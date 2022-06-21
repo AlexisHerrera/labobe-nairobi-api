@@ -34,3 +34,9 @@ Escenario: 7.4 - Estado de un pedido entregado
   Y esta Entregado
   Cuando cambio el estado del pedido
   Entonces el pedido esta "Entregado"
+
+
+Escenario: 6.2 - Consultar el estado de un pedido con un código inválido
+  Dado que tengo un pedido
+  Cuando consulto el estado de un pedido inexistente
+  Entonces recibo un codigo de error

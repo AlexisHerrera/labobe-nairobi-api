@@ -15,20 +15,18 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     end
   end
 
-  get :show, :map => '/pedidos', :with => :id do
+  get :show, :map => '/pedidos', :with => %i[id_pedido id_usuario] do
     begin
-      id = params[:id]
-      pedido = pedido_repo.find(id)
+      id_pedido = params[:id_pedido]
+      pedido = pedido_repo.find(id_pedido)
       estado = estado_repo.find(pedido.estado.estado)
       status 200
       logger.info "Se informa el estado del pedido: #{pedido.id} con estado #{estado.descripcion}"
       estado_to_json estado
     rescue ObjectNotFound
       status 404
-      logger.info 'No se pudo encontar el pedido.'
-      {error: 'estado pedido',
-       message: 'No se pudo encontrar el pedido.',
-       detail: 'Asegurarse de ingresar un numero de pedido valido.'}.to_json
+      logger.info "No se pudo encontar el pedido #{params[:id_pedido]}"
+      {error: 'No se pudo encontrar el pedido.'}.to_json
     end
   end
 
