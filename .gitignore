@@ -17,3 +17,5 @@ VERSION.txt
 *.logs
 /bin/
 /.bundle/
+# Ya no es necesario el .env pero por las dudas
+.env
