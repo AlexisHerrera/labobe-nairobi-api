@@ -37,7 +37,7 @@ def consultar_estado_pedido_url(id_pedido, id_usuario)
 end
 
 def registrar_repartidor_url
-  "#{BASE_URL}/repartidor"
+  "#{BASE_URL}/repartidores"
 end
 
 def reset_url
