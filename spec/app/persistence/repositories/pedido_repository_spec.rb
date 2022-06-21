@@ -6,7 +6,7 @@ describe Persistence::Repositories::PedidoRepository do
 
   before :each do
     usuario = Usuario.new('Juan', '0123456789', 'paseo colon 850', '123')
-    Persistence::Repositories::UserRepository.new.save(usuario)
+    Persistence::Repositories::UsuarioRepository.new.save(usuario)
     menu = Menu.new(1, 'Menu individual', 1000.0)
     Persistence::Repositories::MenuRepository.new.save(menu)
   end

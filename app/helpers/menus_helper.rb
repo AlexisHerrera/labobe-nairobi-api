@@ -2,16 +2,13 @@
 
 module LaBobe
   class App
-    module MenuHelper
+    module MenuRepoShorthand
       def menu_repo
         Persistence::Repositories::MenuRepository.new
       end
+    end
 
-      def menu_params
-        @body ||= request.body.read
-        JSON.parse(@body).symbolize_keys
-      end
-
+    module MenuSerializer
       def menu_to_json(menu)
         menu_attributes(menu).to_json
       end
@@ -27,6 +24,15 @@ module LaBobe
       end
     end
 
-    helpers MenuHelper
+    module MenuParser
+      def menu_params
+        @body ||= request.body.read
+        JSON.parse(@body).symbolize_keys
+      end
+    end
+
+    helpers MenuRepoShorthand
+    helpers MenuSerializer
+    helpers MenuParser
   end
 end

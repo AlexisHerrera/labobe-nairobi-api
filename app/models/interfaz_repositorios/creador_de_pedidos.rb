@@ -4,8 +4,7 @@ class CreadorDePedidos
   end
 
   def crear_pedido(id_usuario, id_menu)
-    # TODO: sacar nil
-    usuario = Persistence::Repositories::UserRepository.new.find_by_telegram_id(id_usuario.to_s)
+    usuario = Persistence::Repositories::UsuarioRepository.new.find_by_telegram_id(id_usuario.to_s)
     menu = Persistence::Repositories::MenuRepository.new.find(id_menu.to_i)
     pedido_a_crear = Pedido.new(nil, usuario.id, menu.id, 0)
     @repo.save(pedido_a_crear)

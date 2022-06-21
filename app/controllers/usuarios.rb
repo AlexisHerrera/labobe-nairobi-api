@@ -4,7 +4,7 @@ LaBobe::App.controllers :usuarios, :provides => [:json] do
       nuevo_usuario = CreadorDeUsuarios.new(user_repo).crear_usuario(usuario_params[:nombre], usuario_params[:telefono], usuario_params[:direccion], usuario_params[:id_telegram])
       status 201
       logger.info "Usuario #{nuevo_usuario.telefono} creado exitosamente"
-      usuario_a_json nuevo_usuario
+      usuario_to_json nuevo_usuario
     rescue TelefonoUtilizado
       status 409
       logger.info "Telefono ya esta en uso: #{usuario_params[:telefono]}"

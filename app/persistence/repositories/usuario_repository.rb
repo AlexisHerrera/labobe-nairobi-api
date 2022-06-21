@@ -1,6 +1,6 @@
 module Persistence
   module Repositories
-    class UserRepository < AbstractRepository
+    class UsuarioRepository < AbstractRepository
       self.table_name = :usuarios
       self.model_class = 'Usuario'
 

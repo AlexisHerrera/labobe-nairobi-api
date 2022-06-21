@@ -2,16 +2,14 @@
 
 module LaBobe
   class App
-    module EstadosHelper
+    # TODO: Ver si vale la pena el shorthand o no
+    module EstadoRepoShorthand
       def estado_repo
         Persistence::Repositories::EstadoRepository.new
       end
+    end
 
-      def estado_params
-        @body ||= request.body.read
-        JSON.parse(@body).symbolize_keys
-      end
-
+    module EstadoSerializer
       def estado_to_json(estado)
         estado_attributes(estado).to_json
       end
@@ -23,6 +21,14 @@ module LaBobe
       end
     end
 
-    helpers EstadosHelper
+    module EstadoParser
+      def estado_params
+        @body ||= request.body.read
+        JSON.parse(@body).symbolize_keys
+      end
+    end
+    helpers EstadoRepoShorthand
+    helpers EstadoParser
+    helpers EstadoSerializer
   end
 end

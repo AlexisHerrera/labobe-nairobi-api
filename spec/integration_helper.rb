@@ -6,6 +6,6 @@ RSpec.configure do |config|
   config.include UserFactory
   config.after :each do
     Persistence::Repositories::PedidoRepository.new.delete_all
-    Persistence::Repositories::UserRepository.new.delete_all
+    Persistence::Repositories::UsuarioRepository.new.delete_all
   end
 end

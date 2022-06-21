@@ -10,7 +10,7 @@ module LaBobe
     end
 
     module UsuarioSerializer
-      def usuario_a_json(user)
+      def usuario_to_json(user)
         user_attributes(user).to_json
       end
 
@@ -21,14 +21,13 @@ module LaBobe
       end
     end
 
-    module UserRepo
-      # Es una forma util de referenciar al repo (mas corta)
+    module UsuarioRepoShorthand
       def user_repo
-        Persistence::Repositories::UserRepository.new
+        Persistence::Repositories::UsuarioRepository.new
       end
     end
     helpers UsuarioParser
     helpers UsuarioSerializer
-    helpers UserRepo
+    helpers UsuarioRepoShorthand
   end
 end

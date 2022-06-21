@@ -1,6 +1,7 @@
 LaBobe::App.controllers :pedidos, :provides => [:json] do
   post :create, :map => '/pedidos' do
-    # TODO: Dividir en mas casos el tipo de error. ie : MenuInvalido, UsuarioNoRegistrado
+    # TODO: Ver si vale la pena diferenciar el tipo de error
+    # Se puede hacer catcheando desde el metodo de CreadorDe.. y raiseando el correcto
     begin
       nuevo_pedido = CreadorDePedidos.new(pedido_repo).crear_pedido(pedido_params[:id_usuario], pedido_params[:id_menu])
       status 201
@@ -18,14 +19,15 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       id_pedido = params[:id_pedido]
       pedido = pedido_repo.find(id_pedido)
       estado = estado_repo.find(pedido.estado.estado)
-      usuario = Persistence::Repositories::UserRepository.new.find_by_telegram_id(params[:id_usuario])
+      usuario = Persistence::Repositories::UsuarioRepository.new.find_by_telegram_id(params[:id_usuario])
       pedido.consultar(usuario.id)
       status 200
       logger.info "Se informa el estado del pedido: #{pedido.id} con estado #{estado.descripcion}"
       estado_to_json estado
     rescue ObjectNotFound
+      # Si se le indica un id_telegram inexistente, tambien cae aca
       status 404
-      logger.info "No se pudo encontar el pedido #{params[:id_pedido]}"
+      logger.info "No se pudo encontrar el pedido #{params[:id_pedido]}"
       {error: 'No se pudo encontrar el pedido.'}.to_json
     rescue UsuarioInvalido
       status 401

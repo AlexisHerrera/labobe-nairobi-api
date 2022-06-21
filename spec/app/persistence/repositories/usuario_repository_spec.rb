@@ -1,7 +1,7 @@
 require 'integration_helper'
 
-describe Persistence::Repositories::UserRepository do
-  let(:user_repo) { Persistence::Repositories::UserRepository.new }
+describe Persistence::Repositories::UsuarioRepository do
+  let(:user_repo) { Persistence::Repositories::UsuarioRepository.new }
   let(:a_user) { Usuario.new('Juan', '1144449999', 'Av. Paseo Colón 850', '123') }
 
   it 'deberia guardar un nuevo usuario' do
