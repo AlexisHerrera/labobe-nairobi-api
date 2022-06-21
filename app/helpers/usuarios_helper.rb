@@ -22,6 +22,7 @@ module LaBobe
     end
 
     module UserRepo
+      # Es una forma util de referenciar al repo (mas corta)
       def user_repo
         Persistence::Repositories::UserRepository.new
       end

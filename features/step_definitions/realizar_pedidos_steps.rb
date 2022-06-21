@@ -20,5 +20,5 @@ end
 
 Entonces('devolverle un error') do
   error = JSON.parse(@response.body)
-  expect(error['error']).to eq('pedido-001')
+  expect(error['error'].nil?).to eq(false)
 end

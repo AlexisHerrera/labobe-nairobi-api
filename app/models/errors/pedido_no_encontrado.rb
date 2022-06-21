@@ -1,0 +1,1 @@
+class PedidoNoEncontrado < ObjectNotFound; end
