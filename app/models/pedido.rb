@@ -12,6 +12,10 @@ class Pedido
     @estado = EstadoPedido.new(id_estado)
   end
 
+  def consultar(id)
+    raise UsuarioInvalido if id != @id_usuario
+  end
+
   def cambiar_estado
     estado.cambiar_estado
   end

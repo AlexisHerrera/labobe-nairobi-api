@@ -57,5 +57,15 @@ describe Pedido do
       pedido.cambiar_estado
       expect(pedido.estado.estado).to eq 3
     end
+
+    it 'cuando se consulta el estado de un pedido con un id_usuario diferente lanza excepcion' do
+      id = 12367262
+      usuario = '123'
+      menu = 1
+      id_estado = 3
+      pedido = described_class.new(id, usuario, menu, id_estado)
+      id_usuario_diferente = '9999'
+      expect { pedido.consultar(id_usuario_diferente) }.to raise_error(UsuarioInvalido)
+    end
   end
 end
