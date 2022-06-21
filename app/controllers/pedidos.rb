@@ -8,10 +8,8 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       pedido_to_json nuevo_pedido
     rescue ObjectNotFound
       status 400
-      logger.info 'No se pudo crear el pedido porque no se encontro al cliente o al menu solicitado'
-      {error: 'pedido-001',
-       message: 'No se pudo crear el pedido',
-       detail: 'Asegurarse de estar registrado o solicitar un menu valido'}.to_json
+      logger.info "No se pudo crear el pedido : #{pedido_params}"
+      {error: 'crear pedido'}.to_json
     end
   end
 
@@ -25,10 +23,8 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       estado_to_json estado
     rescue ObjectNotFound
       status 404
-      logger.info 'No se pudo encontar el pedido.'
-      {error: 'estado pedido',
-       message: 'No se pudo encontrar el pedido.',
-       detail: 'Asegurarse de ingresar un numero de pedido valido.'}.to_json
+      logger.info "No se pudo encontar el pedido: #{pedido_params}"
+      {error: 'estado pedido'}.to_json
     end
   end
 
@@ -43,9 +39,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     rescue ObjectNotFound
       status 404
       logger.info 'No se pudo encontar el pedido.'
-      {error: 'estado pedido',
-       message: 'No se pudo encontrar el pedido.',
-       detail: 'Asegurarse de ingresar un numero de pedido valido.'}.to_json
+      {error: 'estado pedido'}.to_json
     end
   end
 end

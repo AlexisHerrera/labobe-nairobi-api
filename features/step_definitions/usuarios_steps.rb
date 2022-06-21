@@ -25,11 +25,11 @@ end
 Entonces('el usuario no queda registrado') do
   expect(@response.status).to eq(400)
   usuario = JSON.parse(@response.body)
-  expect(usuario).to eq({'error' => 'UsuarioInvalido'})
+  expect(usuario['error'].nil?).to eq(false)
 end
 
 Entonces('el usuario no queda registrado porque esta utilizando un numero ya registrado') do
   expect(@response.status).to eq(409)
   usuario = JSON.parse(@response.body)
-  expect(usuario).to eq({'error' => 'TelefonoUtilizado'})
+  expect(usuario['error'].nil?).to eq(false)
 end

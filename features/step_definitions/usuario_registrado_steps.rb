@@ -12,5 +12,5 @@ end
 Entonces('le respondo que el usuario ya esta registrado') do
   expect(@response.status).to eq(200)
   usuario = JSON.parse(@response.body)
-  expect(usuario).to eq({'error' => 'UsuarioRegistrado'})
+  expect(usuario['error'].nil?).to eq(false)
 end
