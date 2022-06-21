@@ -13,7 +13,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     end
   end
 
-  get :show, :map => '/pedidos', :with => %i[id_pedido id_usuario] do
+  get :show, :map => '/pedidos' do
     begin
       id_pedido = params[:id_pedido]
       pedido = pedido_repo.find(id_pedido)

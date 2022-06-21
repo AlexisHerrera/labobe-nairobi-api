@@ -41,13 +41,13 @@ Cuando('cambio el estado del pedido') do
 end
 
 Cuando('consulto el estado de un pedido inexistente') do
-  id_pedido = 9999
-  @response = Faraday.get(consultar_estado_pedido_url(id_pedido, '123'))
+  params = { 'id_pedido' => 9999, 'id_usuario' => 123 }
+  @response = Faraday.get(crear_pedido_url, params, header)
 end
 
 Entonces('el pedido esta {string}') do |estado|
-  id_pedido = @pedido['id_pedido'].to_i
-  response = Faraday.get(consultar_estado_pedido_url(id_pedido, '123'))
+  params = { 'id_pedido' => @pedido['id_pedido'].to_i, 'id_usuario' => 123 }
+  response = Faraday.get(crear_pedido_url, params, header)
   expect(response.status).to eq(200)
   params = JSON.parse(response.body)
   expect(params['estado']).to eq estado
@@ -58,8 +58,8 @@ Entonces('recibo un codigo de error') do
 end
 
 Cuando('consulto el estado de ese pedido con otro usuario') do
-  id_pedido = @pedido['id_pedido'].to_i
-  @respuesta = Faraday.get(consultar_estado_pedido_url(id_pedido, 234))
+  params = { 'id_pedido' => @pedido['id_pedido'].to_i, 'id_usuario' => 234 }
+  @respuesta = Faraday.get(crear_pedido_url, params, header)
 end
 
 Entonces('recibo un mensaje con un error de pedido que no me pertenece') do
