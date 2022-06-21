@@ -51,3 +51,12 @@ end
 Entonces('recibo un codigo de error') do
   expect(@response.status).to eq(404)
 end
+
+Cuando('consulto el estado de ese pedido con otro usuario') do
+  id_pedido = @pedido['id_pedido'].to_i
+  @response = Faraday.get(consultar_estado_pedido_url(id_pedido, 12_345))
+end
+
+Entonces('recibo un mensaje con un error de pedido que no me pertenece') do
+  expect(@response.status).to eq(401)
+end
