@@ -3,6 +3,7 @@ class Repartidor
   attr_accessor :id
 
   def initialize(id, nombre, dni, telefono)
+    validar_nombre(nombre)
     @id = id
     @nombre = nombre
     @dni = dni
@@ -14,5 +15,10 @@ class Repartidor
       @nombre == other.nombre &&
       @telefono == other.telefono &&
       @dni == other.dni
+  end
+
+  def validar_nombre(nombre)
+    largo_nombre = nombre.delete(' ').length
+    raise RepartidorInvalido if largo_nombre < 5
   end
 end

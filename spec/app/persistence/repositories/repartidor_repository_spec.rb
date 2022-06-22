@@ -2,7 +2,7 @@ require 'integration_helper'
 
 describe Persistence::Repositories::RepartidorRepository do
   let(:repartidor_repo) { Persistence::Repositories::RepartidorRepository.new }
-  let(:repartidor) { Repartidor.new(nil, 'Juan', '41199980', '1144449999') }
+  let(:repartidor) { Repartidor.new(nil, 'Ying Hu', '41199980', '1144449999') }
 
   it 'deberia guardar un nuevo repartidor' do
     repartidor_repo.save(repartidor)

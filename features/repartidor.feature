@@ -10,7 +10,6 @@ Característica: Registración de repartidor
     Cuando intento registrar a "Ying Hu" con dni "41199980" y numero de telefono "1144449999"
     Entonces el repartidor esta registrado
 
-  @wip
   Escenario: US8.2 - Registro de repartidor invalido por nombre corto
     Dado que quiero registrar un repartidor
     Cuando intento registrar a "Yi Hu" con dni "41199980" y numero de telefono "1144449999"
