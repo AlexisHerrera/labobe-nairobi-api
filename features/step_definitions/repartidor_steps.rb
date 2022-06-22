@@ -27,6 +27,16 @@ Entonces('el repartidor no se registra') do
   expect(repartidor['telefono'].nil?).to eq(true)
 end
 
+Entonces('el repartidor no se registra por tener dni repetido') do
+  expect(@response.status).to eq(409)
+
+  repartidor = JSON.parse(@response.body)
+  expect(repartidor['id'].nil?).to eq(true)
+  expect(repartidor['nombre'].nil?).to eq(true)
+  expect(repartidor['dni'].nil?).to eq(true)
+  expect(repartidor['telefono'].nil?).to eq(true)
+end
+
 Entonces('recibo el mensaje de error') do
   error = JSON.parse(@response.body)['error']
   expect(error.nil?).to eq false

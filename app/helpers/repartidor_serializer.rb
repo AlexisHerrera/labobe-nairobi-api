@@ -5,6 +5,10 @@ module LaBobe
         repartidor_attributes(repartidor).to_json
       end
 
+      def repartidor_to_hash(repartidor)
+        repartidor_attributes(repartidor)
+      end
+
       private
 
       def repartidor_attributes(repartidor)

@@ -26,5 +26,5 @@ Característica: Registración de repartidor
     Dado que quiero registrar un repartidor
     Y hay un repartidor con dni "41199980" registrado
     Cuando intento registrar a "Ying Hu" con dni "41199980" y numero de telefono "1144449999"
-    Entonces el repartidor no se registra
+    Entonces el repartidor no se registra por tener dni repetido
     Y recibo el mensaje de error
