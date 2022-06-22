@@ -25,6 +25,7 @@ module Persistence
         load_collection dataset.all
       end
 
+      # TODO: Agregar un has_by(id, column_name) y reemplazar en usuarios, repartidor, etc.
       def has(id)
         found_record = dataset.first(pk_column => id)
         !found_record.nil?

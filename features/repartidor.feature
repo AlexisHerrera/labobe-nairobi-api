@@ -22,7 +22,6 @@ Característica: Registración de repartidor
     Entonces el repartidor no se registra
     Y recibo el mensaje de error
 
-  @wip
   Escenario: US8.4 - Registro de repartidor invalido por DNI repetido
     Dado que quiero registrar un repartidor
     Y hay un repartidor con dni "41199980" registrado

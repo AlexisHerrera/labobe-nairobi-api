@@ -4,6 +4,11 @@ module Persistence
       self.table_name = :repartidores
       self.model_class = 'Repartidor'
 
+      def has_dni(dni)
+        found_record = DB[:repartidores].first(Sequel[self.class.table_name][:dni] => dni)
+        !found_record.nil?
+      end
+
       protected
 
       # De la DB al objeto Repartidor

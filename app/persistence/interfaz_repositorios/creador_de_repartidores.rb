@@ -7,6 +7,8 @@ class CreadorDeRepartidores
   def crear_repartidor(nombre, dni, telefono)
     repartidor_a_crear = Repartidor.new(nil, nombre, dni, telefono)
 
+    raise DniEnUso if @repo.has_dni(dni)
+
     @repo.save(repartidor_a_crear)
   end
 end

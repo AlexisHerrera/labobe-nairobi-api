@@ -33,6 +33,8 @@ Entonces('recibo el mensaje de error') do
 end
 
 Dado('hay un repartidor con dni {string} registrado') do |dni|
-  @request = {nombre: 'Juan', dni: dni, telefono: '1122334455'}.to_json
-  Faraday.post(registrar_repartidor_url, @request, header)
+  @request = {nombre: 'Bruce Lee', dni: dni, telefono: '1122334455'}.to_json
+  last_response = Faraday.post(registrar_repartidor_url, @request, header)
+  # TODO: consultar si esta mal tener expect en un Dado (justif: es muy util!)
+  expect(last_response.status).to eq(201)
 end
