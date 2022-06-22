@@ -7,5 +7,6 @@ RSpec.configure do |config|
   config.after :each do
     Persistence::Repositories::PedidoRepository.new.delete_all
     Persistence::Repositories::UsuarioRepository.new.delete_all
+    Persistence::Repositories::RepartidorRepository.new.delete_all
   end
 end

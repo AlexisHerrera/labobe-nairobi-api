@@ -6,6 +6,7 @@ describe Repartidor do
     nombre = 'Ying Hu'
     dni = '41199980'
     telefono = '1144449999'
-    expect(described_class.new(nombre, dni, telefono).nombre).to eq 'Ying Hu'
+    id = 1
+    expect(described_class.new(id, nombre, dni, telefono).nombre).to eq 'Ying Hu'
   end
 end
