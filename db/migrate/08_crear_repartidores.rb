@@ -7,6 +7,8 @@ Sequel.migration do
       String :telefono
       Date :created_on
       Date :updated_on
+      # No solo se verifica en el modelo, sino tambien en la BD :)
+      index :telefono, unique: true
     end
   end
 

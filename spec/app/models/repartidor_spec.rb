@@ -25,4 +25,20 @@ describe Repartidor do
     telefono = '1144449999'
     expect{described_class.new(id, nombre, dni, telefono)}.to raise_error(RepartidorInvalido)
   end
+
+  it 'No deberia ser valido cuando el numero no es numerico' do
+    id = 1
+    nombre = 'Ying Hu'
+    dni = '41199980'
+    telefono = '123456789A'
+    expect{described_class.new(id, nombre, dni, telefono)}.to raise_error(RepartidorInvalido)
+  end
+
+  it 'No deberia ser valido cuando el numero no tiene 10 digitos' do
+    id = 1
+    nombre = 'Ying Hu'
+    dni = '41199980'
+    telefono = '12345678901'
+    expect{described_class.new(id, nombre, dni, telefono)}.to raise_error(RepartidorInvalido)
+  end
 end
