@@ -1,4 +1,5 @@
 class CreadorDeRepartidores
+  # Es necesario pasarle un repo? Como es de un repartidor, siempre voy a usar RepartidorRepository.
   def initialize(repartidor_repo)
     @repo = repartidor_repo
   end

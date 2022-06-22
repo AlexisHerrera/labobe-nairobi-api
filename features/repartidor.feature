@@ -5,7 +5,6 @@ Característica: Registración de repartidor
   Quiero poder registrar repartidores
   Para que puedan empezar a entregar pedidos
 
-  @wip
   Escenario: US8.1 - Registro de repartidor exitoso
     Dado que quiero registrar un repartidor
     Cuando intento registrar a "Ying Hu" con dni "41199980" y numero de telefono "1144449999"
