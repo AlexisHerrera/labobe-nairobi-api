@@ -2,13 +2,6 @@
 
 module LaBobe
   class App
-    module UsuarioParser
-      def usuario_params
-        @body ||= request.body.read
-        JSON.parse(@body).symbolize_keys
-      end
-    end
-
     module UsuarioSerializer
       def usuario_to_json(user)
         user_attributes(user).to_json
@@ -21,13 +14,6 @@ module LaBobe
       end
     end
 
-    module UsuarioRepoShorthand
-      def user_repo
-        Persistence::Repositories::UsuarioRepository.new
-      end
-    end
-    helpers UsuarioParser
     helpers UsuarioSerializer
-    helpers UsuarioRepoShorthand
   end
 end

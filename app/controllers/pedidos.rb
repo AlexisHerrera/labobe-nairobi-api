@@ -3,22 +3,24 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     # TODO: Ver si vale la pena diferenciar el tipo de error
     # Se puede hacer catcheando desde el metodo de CreadorDe.. y raiseando el correcto
     begin
-      nuevo_pedido = CreadorDePedidos.new(pedido_repo).crear_pedido(pedido_params[:id_usuario], pedido_params[:id_menu])
+      pedido_repo = Persistence::Repositories::PedidoRepository.new
+      nuevo_pedido = CreadorDePedidos.new(pedido_repo).crear_pedido(body_params[:id_usuario], body_params[:id_menu])
       status 201
       logger.info "Nuevo pedido: Id pedido: #{nuevo_pedido.id}, Id_usuario: #{nuevo_pedido.id_usuario}, Id_menu: #{nuevo_pedido.id_menu}"
       pedido_to_json nuevo_pedido
     rescue ObjectNotFound
       status 400
-      logger.info "No se pudo crear el pedido : #{pedido_params}"
+      logger.info "No se pudo crear el pedido : #{body_params}"
       {error: 'crear pedido'}.to_json
     end
   end
 
   get :show, :map => '/pedidos' do
     begin
+      # Todo esto se puede meter en un una interfaz del repositorio (similar al creador_de), hay muchos repositorys
       id_pedido = params[:id_pedido]
-      pedido = pedido_repo.find(id_pedido)
-      estado = estado_repo.find(pedido.estado.estado)
+      pedido = Persistence::Repositories::PedidoRepository.new.find(id_pedido)
+      estado = Persistence::Repositories::EstadoRepository.new.find(pedido.estado.estado)
       usuario = Persistence::Repositories::UsuarioRepository.new.find_by_telegram_id(params[:id_usuario])
       pedido.consultar(usuario.id)
       status 200
@@ -38,7 +40,8 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
 
   patch :show, :map => '/pedidos' do
     begin
-      id = pedido_params[:id_pedido].to_i
+      pedido_repo = Persistence::Repositories::PedidoRepository.new
+      id = body_params[:id_pedido].to_i
       pedido = pedido_repo.find(id)
       pedido.cambiar_estado
       pedido_repo.save(pedido)

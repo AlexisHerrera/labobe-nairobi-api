@@ -2,12 +2,6 @@
 
 module LaBobe
   class App
-    module PedidoRepoShorthand
-      def pedido_repo
-        Persistence::Repositories::PedidoRepository.new
-      end
-    end
-
     module PedidoSerializer
       def pedido_to_json(pedido)
         pedido_attributes(pedido).to_json
@@ -21,15 +15,6 @@ module LaBobe
       end
     end
 
-    module PedidoParser
-      def pedido_params
-        @body ||= request.body.read
-        JSON.parse(@body).symbolize_keys
-      end
-    end
-
-    helpers PedidoRepoShorthand
     helpers PedidoSerializer
-    helpers PedidoParser
   end
 end
