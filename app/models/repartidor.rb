@@ -8,4 +8,11 @@ class Repartidor
     @dni = dni
     @telefono = telefono
   end
+
+  def ==(other)
+    @id == other.id &&
+      @nombre == other.nombre &&
+      @telefono == other.telefono &&
+      @dni == other.dni
+  end
 end

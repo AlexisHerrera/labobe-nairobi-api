@@ -2,10 +2,10 @@ require 'integration_helper'
 
 describe Persistence::Repositories::PedidoRepository do
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
-  let(:un_pedido) { Pedido.new(nil, "0123456789", 1, 0) }
+  let(:un_pedido) { Pedido.new(nil, "1144449999", 1, 0) }
 
   before :each do
-    usuario = Usuario.new('Juan', '0123456789', 'paseo colon 850', '123')
+    usuario = Usuario.new('Juan', '1144449999', 'paseo colon 850', '123')
     Persistence::Repositories::UsuarioRepository.new.save(usuario)
     menu = Menu.new(1, 'Menu individual', 1000.0)
     Persistence::Repositories::MenuRepository.new.save(menu)

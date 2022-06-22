@@ -7,10 +7,10 @@ Cuando('recibo un usuario con nombre {string}, teléfono {string} y dirección {
 end
 
 Cuando('recibo un usuario con numero de un usuario registrado') do
-  @request_first_user = {nombre: 'Juan', telefono: '0123456789', direccion: 'Paseo Colon 850', id_telegram: '123'}.to_json
+  @request_first_user = {nombre: 'Juan', telefono: '1144449999', direccion: 'Paseo Colon 850', id_telegram: '123'}.to_json
   @response_first_user = Faraday.post(crear_usuario_url, @request_first_user, header)
 
-  @request = {nombre: 'Juan', telefono: '0123456789', direccion: 'Paseo Colon 850', id_telegram: '456'}.to_json
+  @request = {nombre: 'Juan', telefono: '1144449999', direccion: 'Paseo Colon 850', id_telegram: '456'}.to_json
   @response = Faraday.post(crear_usuario_url, @request, header)
 end
 
