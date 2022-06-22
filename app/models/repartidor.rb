@@ -19,6 +19,6 @@ class Repartidor
 
   def validar_nombre(nombre)
     largo_nombre = nombre.delete(' ').length
-    raise RepartidorInvalido if largo_nombre < 5
+    raise RepartidorInvalido if largo_nombre < 5 || largo_nombre > 20
   end
 end

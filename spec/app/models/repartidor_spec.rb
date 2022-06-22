@@ -17,4 +17,12 @@ describe Repartidor do
     telefono = '1144449999'
     expect{described_class.new(id, nombre, dni, telefono)}.to raise_error(RepartidorInvalido)
   end
+
+  it 'No deberia ser valido cuando tiene un nombre mayor a 20 caracteres' do
+    id = 1
+    nombre = 'Ying HuHaHeHeHeHUHAHUHAHHAHAHAHAHAHHAHA'
+    dni = '41199980'
+    telefono = '1144449999'
+    expect{described_class.new(id, nombre, dni, telefono)}.to raise_error(RepartidorInvalido)
+  end
 end

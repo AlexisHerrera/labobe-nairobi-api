@@ -16,8 +16,6 @@ Característica: Registración de repartidor
     Entonces el repartidor no se registra
     Y recibo el mensaje de error
 
-
-  @wip
   Escenario: US8.3 - Registro de repartidor invalido por nombre largo
     Dado que quiero registrar un repartidor
     Cuando intento registrar a "Ying HuHaHeHeHeHUHAHUHAHHAHAHAHAHAHHAHA" con dni "41199980" y numero de telefono "1144449999"
