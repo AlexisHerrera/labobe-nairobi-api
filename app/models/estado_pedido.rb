@@ -9,7 +9,7 @@ class EstadoPedido
     @estado += 1 if @estado < 3
   end
 
-  def esta_en_camino?
-    @estado == 2
+  def esta_en_preparacion?
+    @estado == 1
   end
 end

@@ -20,7 +20,7 @@ class Pedido
     estado.cambiar_estado
   end
 
-  def esta_en_camino?
-    estado.esta_en_camino?
+  def esta_en_preparacion?
+    estado.esta_en_preparacion?
   end
 end

@@ -39,10 +39,9 @@ describe EstadoPedido do
     expect(estado.estado).to eq 3
   end
 
-  it 'cuando se consulta si el estado es "en camino" y es "en camino" devuelve true' do
-    # TODO: modelar codigos de estado como enum
-    id_estado = 2
+  it 'cuando se consulta si el estado es "en preparacion" y es "en preparacion" devuelve true' do
+    id_estado = 1
     estado = described_class.new(id_estado)
-    expect(estado.esta_en_camino?).to eq true
+    expect(estado.esta_en_preparacion?).to eq true
   end
 end
