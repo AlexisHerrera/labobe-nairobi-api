@@ -8,4 +8,8 @@ class EstadoPedido
   def cambiar_estado
     @estado += 1 if @estado < 3
   end
+
+  def esta_en_camino?
+    @estado == 2
+  end
 end

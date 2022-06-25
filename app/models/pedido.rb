@@ -19,4 +19,8 @@ class Pedido
   def cambiar_estado
     estado.cambiar_estado
   end
+
+  def esta_en_camino?
+    estado.esta_en_camino?
+  end
 end

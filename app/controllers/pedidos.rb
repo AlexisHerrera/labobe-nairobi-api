@@ -44,6 +44,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       id = body_params[:id_pedido].to_i
       pedido = pedido_repo.find(id)
       pedido.cambiar_estado
+      # aca iria el asignador de repartidores? cambiar esto porque es un espanto
       pedido_repo.save(pedido)
       status 204
       logger.info "Se modifico el estado del pedido: #{pedido.id} "
