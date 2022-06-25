@@ -40,6 +40,10 @@ def registrar_repartidor_url
   "#{BASE_URL}/repartidores"
 end
 
+def entregas_url
+  "#{BASE_URL}/entregas"
+end
+
 def reset_url
   "#{BASE_URL}/reset"
 end

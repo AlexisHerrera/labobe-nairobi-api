@@ -14,6 +14,6 @@ describe Entrega do
     telefono = '1144449999'
     repartidor = Repartidor.new(id, nombre, dni, telefono)
 
-    expect(described_class.new(pedido, repartidor).pedido).to eq pedido
+    expect(described_class.new(nil, pedido, repartidor).pedido).to eq pedido
   end
 end
