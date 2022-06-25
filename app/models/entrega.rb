@@ -7,4 +7,11 @@ class Entrega
     @pedido = pedido
     @repartidor = repartidor
   end
+
+  def ==(other)
+    # TODO: hacerlo como la gente
+    @id == other.id &&
+      @pedido.id == other.pedido.id &&
+      @repartidor.id == other.repartidor.id
+  end
 end

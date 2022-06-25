@@ -22,5 +22,12 @@ describe Persistence::Repositories::EntregaRepository do
     entrega_repo.save(entrega)
     expect(entrega_repo.all.count).to eq(1)
   end
-  # Faltan los otros test, pero no es redundante? Como lo hace el abstract repository, no van a fallar.
+
+  it 'deberia devolver una entrega segun su id de pedido' do
+    entrega_repo.save(entrega)
+    id_pedido = pedido.id
+    entrega_encontrada = entrega_repo.find_by_id_pedido(id_pedido)
+
+    expect(entrega_encontrada == entrega).to eq true
+  end
 end
