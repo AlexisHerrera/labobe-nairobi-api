@@ -27,7 +27,7 @@ Cuando('el pedido pasa del estado {string} a {string}') do |_string, _string2|
 end
 
 Entonces('se le asigna ese repartidor') do
-  params = {'id_pedido' => @id_pedido}.to_json
+  params = {'id_pedido' => @id_pedido}
   response = Faraday.get(entregas_url, params, header)
 
   expect(response.status).to eq 200

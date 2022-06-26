@@ -8,7 +8,6 @@ Característica: Asignación de pedidos a repartidores
 Antecedentes:
   Dado que el usuario ya esta registrado
 
-@wip 
 Escenario: US9.1 - Asignar repartidor sin pedidos un pedido con menu individual
     Dado que hay un repartidor
     Y no tiene pedidos asignados
