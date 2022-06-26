@@ -8,7 +8,9 @@ describe Mochila do
     telefono = '1144449999'
     repartidor = Repartidor.new(id, nombre, dni, telefono)
 
-    expect(described_class.new(repartidor).nil?).to eq false
+    pedidos = Array.new
+
+    expect(described_class.new(repartidor, pedidos).nil?).to eq false
   end
 
   it 'deberia no estar llena una mochila recien creada' do
@@ -18,7 +20,9 @@ describe Mochila do
     telefono = '1144449999'
     repartidor = Repartidor.new(id, nombre, dni, telefono)
 
-    mochila = described_class.new(repartidor)
+    pedidos = Array.new
+
+    mochila = described_class.new(repartidor, pedidos)
 
     expect(mochila.esta_vacia?).to eq true
     expect(mochila.esta_llena?).to eq false

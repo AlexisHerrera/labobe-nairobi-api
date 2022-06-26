@@ -1,9 +1,9 @@
 class Mochila
   attr_reader :pedidos, :repartidor, :updated_on, :created_on
 
-  def initialize(repartidor)
+  def initialize(repartidor, pedidos)
     @repartidor = repartidor
-    @pedidos = []
+    @pedidos = pedidos
     @capacidad = 3
   end
 
@@ -16,7 +16,7 @@ class Mochila
   end
 
   def ==(other)
-    @repartidor.id == other.id
+    @repartidor.id == other.repartidor.id
   end
 
   protected

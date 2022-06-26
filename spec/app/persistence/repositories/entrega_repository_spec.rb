@@ -30,4 +30,14 @@ describe Persistence::Repositories::EntregaRepository do
 
     expect(entrega_encontrada == entrega).to eq true
   end
+
+  it 'deberia devolver entregas segun el id de un repartidor' do
+    entrega_repo.save(entrega)
+    entregas_encontrada = entrega_repo.find_by_repartidor(entrega.repartidor.id)
+
+    entregas = Array.new
+    entregas.push(entrega)
+
+    expect(entregas_encontrada == entregas).to eq true
+  end
 end

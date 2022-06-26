@@ -11,6 +11,17 @@ module Persistence
         load_object dataset.first(found_record)
       end
 
+      def find_by_repartidor(id_repartidor)
+        found_record = dataset.where(Sequel[self.class.table_name][:id_repartidor] => id_repartidor)
+        raise ObjectNotFound.new(self.class.model_class, id_repartidor) if found_record.nil?
+
+        entregas = []
+        found_record.each do |record|
+          entregas.push(load_object(record))
+        end
+        entregas
+      end
+
       protected
 
       # De la DB al objeto entrega
