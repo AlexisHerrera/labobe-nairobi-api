@@ -1,7 +1,7 @@
 class Menu
   attr_reader :updated_on, :created_on
 
-  attr_accessor :id, :descripcion, :precio
+  attr_accessor :id, :descripcion, :precio, :peso
 
   def initialize(id, descripcion, precio)
     validar(id, precio)
@@ -9,6 +9,7 @@ class Menu
     @id = id
     @descripcion = descripcion
     @precio = precio
+    @peso = 1
   end
 
   def validar(id, precio)
