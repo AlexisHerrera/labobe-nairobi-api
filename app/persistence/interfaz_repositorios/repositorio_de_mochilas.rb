@@ -1,4 +1,4 @@
-class CreadorDeMochilas
+class RepositorioDeMochilas
   def initialize(entregas_repo, pedidos_repo, repartidores_repo)
     @entregas_repo = entregas_repo
     @pedidos_repo = pedidos_repo
@@ -17,4 +17,17 @@ class CreadorDeMochilas
 
     Mochila.new(repartidor, pedidos)
   end
+
+  def obtener_mochilas
+    repartidores = @repartidores_repo.all
+
+    mochilas = []
+
+    repartidores.each do |repartidor|
+      mochilas.push(crear_mochila(repartidor.id))
+    end
+    mochilas
+  end
+
+  # def actualiar_mochila(mochila): To Do: insert...
 end

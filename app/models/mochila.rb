@@ -15,6 +15,10 @@ class Mochila
     capacidad_ocupada == @capacidad
   end
 
+  def puede_agregar(pedido)
+    capacidad_ocupada + pedido.menu.peso <= @capacidad
+  end
+
   def ==(other)
     @repartidor.id == other.repartidor.id
   end
