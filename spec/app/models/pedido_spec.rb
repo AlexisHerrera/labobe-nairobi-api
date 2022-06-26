@@ -6,64 +6,56 @@ describe Pedido do
       id = 12367262
       usuario = '123'
       menu = 1
-      id_estado = 0
-      expect(described_class.new(id, usuario, menu, id_estado).id).to eq id
-    end
-
-    it 'cuando se crea tiene estado recibido' do
-      id = 12367262
-      usuario = '123'
-      menu = 1
-      id_estado = 0
-      expect(described_class.new(id, usuario, menu, id_estado).estado.estado).to eq id_estado
+      estado = EstadosPosibles::ACEPTADO
+      expect(described_class.new(id, usuario, menu, estado).id).to eq id
     end
 
     it 'cuando se modifica el estado de un pedido recien creado, el estado es 1' do
       id = 12367262
       usuario = '123'
       menu = 1
-      id_estado = 0
-      pedido = described_class.new(id, usuario, menu, id_estado)
-      pedido.cambiar_estado
-      expect(pedido.estado.estado).to eq 1
+      estado = EstadosPosibles::ACEPTADO
+      pedido = described_class.new(id, usuario, menu, estado)
+      pedido.siguiente_estado
+      expect(pedido.estado).to eq EstadoEnPreparacion.new
     end
 
     it 'cuando se modifica el estado de un pedido con estado 1, el estado es 2' do
       id = 12367262
       usuario = '123'
       menu = 1
-      id_estado = 1
-      pedido = described_class.new(id, usuario, menu, id_estado)
-      pedido.cambiar_estado
-      expect(pedido.estado.estado).to eq 2
+      estado = EstadosPosibles::PREPARACION
+      pedido = described_class.new(id, usuario, menu, estado)
+      pedido.siguiente_estado
+      expect(pedido.estado).to eq EstadoEnCamino.new
     end
 
     it 'cuando se modifica el estado de un pedido con estado 2, el estado es 3' do
       id = 12367262
       usuario = '123'
       menu = 1
-      id_estado = 2
-      pedido = described_class.new(id, usuario, menu, id_estado)
-      pedido.cambiar_estado
-      expect(pedido.estado.estado).to eq 3
+      estado = EstadosPosibles::CAMINO
+      pedido = described_class.new(id, usuario, menu, estado)
+      pedido.siguiente_estado
+      expect(pedido.estado).to eq EstadoEntregado.new
     end
 
     it 'cuando se modifica el estado de un pedido con estado 3, el estado es 3' do
       id = 12367262
       usuario = '123'
       menu = 1
-      id_estado = 3
-      pedido = described_class.new(id, usuario, menu, id_estado)
-      pedido.cambiar_estado
-      expect(pedido.estado.estado).to eq 3
+      estado = EstadosPosibles::ENTREGADO
+      pedido = described_class.new(id, usuario, menu, estado)
+      pedido.siguiente_estado
+      expect(pedido.estado).to eq EstadoEntregado.new
     end
 
     it 'cuando se consulta el estado de un pedido con un id_usuario diferente lanza excepcion' do
       id = 12367262
       usuario = '123'
       menu = 1
-      id_estado = 3
-      pedido = described_class.new(id, usuario, menu, id_estado)
+      estado = EstadosPosibles::ENTREGADO
+      pedido = described_class.new(id, usuario, menu, estado)
       id_usuario_diferente = '9999'
       expect { pedido.consultar(id_usuario_diferente) }.to raise_error(UsuarioInvalido)
     end
@@ -72,8 +64,8 @@ describe Pedido do
       id = 12367262
       usuario = '123'
       menu = 1
-      id_estado = 1
-      pedido = described_class.new(id, usuario, menu, id_estado)
+      estado = EstadosPosibles::PREPARACION
+      pedido = described_class.new(id, usuario, menu, estado)
       expect(pedido.esta_en_preparacion?).to eq true
     end
   end

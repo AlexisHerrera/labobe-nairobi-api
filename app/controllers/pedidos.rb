@@ -20,12 +20,11 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       # Todo esto se puede meter en un una interfaz del repositorio (similar al creador_de), hay muchos repositorys
       id_pedido = params[:id_pedido]
       pedido = Persistence::Repositories::PedidoRepository.new.find(id_pedido)
-      estado = Persistence::Repositories::EstadoRepository.new.find(pedido.estado.estado)
       usuario = Persistence::Repositories::UsuarioRepository.new.find_by_telegram_id(params[:id_usuario])
       pedido.consultar(usuario.id)
       status 200
-      logger.info "Se informa el estado del pedido: #{pedido.id} con estado #{estado.descripcion}"
-      estado_to_json estado
+      logger.info "Se informa el estado del pedido: #{pedido.id}"
+      pedido_to_json pedido
     rescue ObjectNotFound
       # Si se le indica un id_telegram inexistente, tambien cae aca
       status 404
@@ -45,7 +44,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       pedido = pedido_repo.find(id)
       # aca iria el asignador de repartidores? cambiar esto porque es un espanto
       AsignadorDePedidos.new.asignar(pedido) if pedido.esta_en_preparacion?
-      pedido.cambiar_estado
+      pedido.siguiente_estado
       pedido_repo.save(pedido)
       status 204
       logger.info "Se modifico el estado del pedido: #{pedido.id} "

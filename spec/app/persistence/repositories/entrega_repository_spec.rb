@@ -2,7 +2,7 @@ require 'integration_helper'
 
 describe Persistence::Repositories::EntregaRepository do
   let(:entrega_repo) { Persistence::Repositories::EntregaRepository.new }
-  let(:pedido) { Pedido.new(12367262, '1144449999', 1, 0) }
+  let(:pedido) { Pedido.new(12367262, '1144449999', 1, EstadosPosibles::ACEPTADO) }
   let(:repartidor) { Repartidor.new(1, 'Ying Hu', '41199980', '1144449999') }
 
   before :each do

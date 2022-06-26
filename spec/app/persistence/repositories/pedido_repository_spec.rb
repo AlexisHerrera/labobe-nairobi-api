@@ -2,7 +2,7 @@ require 'integration_helper'
 
 describe Persistence::Repositories::PedidoRepository do
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
-  let(:un_pedido) { Pedido.new(nil, "1144449999", 1, 0) }
+  let(:un_pedido) { Pedido.new(nil, "1144449999", 1, EstadosPosibles::ACEPTADO) }
 
   before :each do
     usuario = Usuario.new('Juan', '1144449999', 'paseo colon 850', '123')

@@ -5,8 +5,8 @@ describe Entrega do
     id = 12367262
     usuario = '123'
     menu = 1
-    id_estado = 0
-    pedido = Pedido.new(id, usuario, menu, id_estado)
+    estado = :Aceptado
+    pedido = Pedido.new(id, usuario, menu, estado)
 
     id = 1
     nombre = 'Ying Hu'

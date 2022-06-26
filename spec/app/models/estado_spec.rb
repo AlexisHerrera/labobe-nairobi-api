@@ -1,47 +1,32 @@
 require 'spec_helper'
 
 describe EstadoPedido do
-  it 'estado se crea con un codigo' do
-    # TODO: modelar codigos de estado como enum
-    id_estado = 0
-    estado = described_class.new(id_estado)
-    expect(estado.estado).to eq id_estado
+
+  it 'al cambiar estado de un estadoAceptado se pasa a estadoEnPreparacion' do
+    estado = EstadoAceptado.new
+    estado = estado.siguiente_estado
+    expect(estado).to eq EstadoEnPreparacion.new
   end
 
-  it 'al cambiar estado de un estadoPedido recien creado este se pasa a 1' do
-    # TODO: modelar codigos de estado como enum
-    id_estado = 0
-    estado = described_class.new(id_estado)
-    estado.cambiar_estado
-    expect(estado.estado).to eq 1
+  it 'al cambiar estado de un estadoEnPreparacion se pasa a estadoEnCamino' do
+    estado = EstadoEnPreparacion.new
+    estado = estado.siguiente_estado
+    expect(estado).to eq EstadoEnCamino.new
+  end
+  it 'al cambiar estado de un estadoEnCamino se pasa a estadoEntregado' do
+    estado = EstadoEnCamino.new
+    estado = estado.siguiente_estado
+    expect(estado).to eq EstadoEntregado.new
   end
 
-  it 'al cambiar estado de un estadoPedido en 1 creado este se pasa a 2' do
-    # TODO: modelar codigos de estado como enum
-    id_estado = 1
-    estado = described_class.new(id_estado)
-    estado.cambiar_estado
-    expect(estado.estado).to eq 2
-  end
-  it 'al cambiar estado de un estadoPedido en 2 creado este se pasa a 3' do
-    # TODO: modelar codigos de estado como enum
-    id_estado = 2
-    estado = described_class.new(id_estado)
-    estado.cambiar_estado
-    expect(estado.estado).to eq 3
-  end
-
-  it 'al cambiar estado de un estadoPedido en 3 queda 3' do
-    # TODO: modelar codigos de estado como enum
-    id_estado = 3
-    estado = described_class.new(id_estado)
-    estado.cambiar_estado
-    expect(estado.estado).to eq 3
+  it 'al cambiar estado de un estadoEntregado queda estadoEntregado' do
+    estado = EstadoEntregado.new
+    estado = estado.siguiente_estado
+    expect(estado).to eq EstadoEntregado.new
   end
 
   it 'cuando se consulta si el estado es "en preparacion" y es "en preparacion" devuelve true' do
-    id_estado = 1
-    estado = described_class.new(id_estado)
+    estado = EstadoEnPreparacion.new
     expect(estado.esta_en_preparacion?).to eq true
   end
 end

@@ -18,8 +18,6 @@ module LaBobe
         Persistence::Repositories::RepartidorRepository.new.delete_all
         Persistence::Repositories::PedidoRepository.new.delete_all
         Persistence::Repositories::UsuarioRepository.new.delete_all
-        # estado_repo.delete_all
-        # menu_repo.delete_all
 
         status 200
         {message: 'reset ok'}.to_json

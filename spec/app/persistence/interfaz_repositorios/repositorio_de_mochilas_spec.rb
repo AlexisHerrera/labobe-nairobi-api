@@ -1,5 +1,5 @@
 describe 'RepositorioDeMochilas' do
-  let(:pedido) { Pedido.new(12_367_262, '1144449999', 1, 0) }
+  let(:pedido) { Pedido.new(12_367_262, '1144449999', 1, EstadosPosibles::ACEPTADO) }
   let(:repartidor) { Repartidor.new(1, 'Ying Hu', '41199980', '1144449999') }
   let(:entrega) { Entrega.new(nil, pedido, repartidor) }
 

@@ -5,22 +5,22 @@ class Pedido
 
   attr_accessor :id, :id_usuario, :id_menu, :estado
 
-  def initialize(id, id_usuario, id_menu, id_estado)
+  def initialize(id, id_usuario, id_menu, estado)
     @id = id # = numero de pedido
     @id_usuario = id_usuario
     @id_menu = id_menu
-    @estado = EstadoPedido.new(id_estado)
+    @estado = EstadosFactory.new.crear_estado(estado)
   end
 
   def consultar(id)
     raise UsuarioInvalido if id != @id_usuario
   end
 
-  def cambiar_estado
-    estado.cambiar_estado
+  def siguiente_estado
+    @estado = @estado.siguiente_estado
   end
 
   def esta_en_preparacion?
-    estado.esta_en_preparacion?
+    @estado.esta_en_preparacion?
   end
 end

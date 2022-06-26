@@ -14,6 +14,7 @@ Escenario: US9.1 - Asignar repartidor sin pedidos un pedido con menu individual
     Y hay un pedido con menu individual sin asignar
     Cuando el pedido pasa del estado "En prepracion" a "En camino"
     Entonces se le asigna ese repartidor
+    Y el repartidor no sale
 
 Escenario: US9.2 - Asignar repartidor sin pedidos un pedido con menu pareja
     Dado que hay un repartidor
@@ -79,3 +80,12 @@ Escenario: US9.10 - No hay repartidores
     Y hay un pedido con menu individual sin asignar
     Cuando el pedido pasa del estado "En prepracion" a "En camino"
     Entonces no se le asigna repartidor
+
+@wip
+Escenario: US9.11 - Dado 1 repartidor disponible, puede repartir 2 menus familiares secuencialmente
+    Dado que hay un repartidor
+    Y tiene un pedido con menu familiar asignado
+    Y hay un pedido con menu familiar sin asignar
+    Cuando el pedido pasa del estado "En prepracion" a "En camino"
+    Entonces se le asigna ese repartidor
+    Y el repartidor sale

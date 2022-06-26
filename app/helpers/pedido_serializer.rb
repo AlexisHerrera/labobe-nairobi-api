@@ -11,7 +11,22 @@ module LaBobe
 
       def pedido_attributes(pedido)
         # Smell: acceder al id del estado con : pedido.estado.estado
-        {id_pedido: pedido.id, id_usuario: pedido.id_usuario, id_menu: pedido.id_menu, id_estado: pedido.estado.estado}
+        {id_pedido: pedido.id, id_usuario: pedido.id_usuario, id_menu: pedido.id_menu, estado: detectar_estado(pedido.estado)}
+      end
+
+      def detectar_estado(estado)
+        case estado
+        when EstadoAceptado.new
+          'Recibido'
+        when EstadoEnPreparacion.new
+          'En preparacion'
+        when EstadoEnCamino.new
+          'En camino'
+        when EstadoEntregado.new
+          'Entregado'
+        else
+          raise ''
+        end
       end
     end
 
