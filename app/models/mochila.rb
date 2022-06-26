@@ -15,8 +15,8 @@ class Mochila
     capacidad_ocupada == @capacidad
   end
 
-  def puede_agregar(pedido)
-    capacidad_ocupada + pedido.menu.peso <= @capacidad
+  def puede_agregar(_pedido)
+    capacidad_ocupada + 1 <= @capacidad
   end
 
   def ==(other)
@@ -29,8 +29,9 @@ class Mochila
 
   def capacidad_ocupada
     total = 0
-    @pedidos.each do |pedido|
-      total += pedido.menu.peso
+    @pedidos.each do |_pedido|
+      total += 1
     end
+    total
   end
 end

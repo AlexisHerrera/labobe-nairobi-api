@@ -2,8 +2,10 @@ Dado('que hay un repartidor') do
   nombre = 'Ying Hu'
   dni = '44455666'
   telefono = '1234567887'
+
   @request = {nombre: nombre, dni: dni, telefono: telefono}.to_json
   @response = Faraday.post(registrar_repartidor_url, @request, header)
+  expect(@response.status).to eq(201)
 end
 
 Dado('no tiene pedidos asignados') do
@@ -13,17 +15,19 @@ end
 Dado('hay un pedido con menu individual sin asignar') do
   id_menu = 1
   @request = {id_usuario: '123', id_menu: id_menu}.to_json
-  @pedido = Faraday.post(crear_pedido_url, @request, header)
+  @response_pedido = Faraday.post(crear_pedido_url, @request, header)
 end
 
 Cuando('el pedido pasa del estado {string} a {string}') do |_string, _string2|
-  request = {'id_pedido' => @pedido['id_pedido']}.to_json
+  @id_pedido = JSON.parse(@response_pedido.body)['id_pedido']
+  request = {'id_pedido' => @id_pedido}.to_json
+
   Faraday.patch(crear_pedido_url, request, header)
   Faraday.patch(crear_pedido_url, request, header)
 end
 
 Entonces('se le asigna ese repartidor') do
-  params = {'id_pedido' => @pedido['id_pedido']}.to_json
+  params = {'id_pedido' => @id_pedido}.to_json
   response = Faraday.get(entregas_url, params, header)
 
   expect(response.status).to eq 200

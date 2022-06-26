@@ -5,7 +5,10 @@ Característica: Asignación de pedidos a repartidores
   Quiero que el sistema asigne un repartidor al pedido
   Para que el pedido llegue al domicilio del cliente
 
-@wip
+Antecedentes:
+  Dado que el usuario ya esta registrado
+
+@wip 
 Escenario: US9.1 - Asignar repartidor sin pedidos un pedido con menu individual
     Dado que hay un repartidor
     Y no tiene pedidos asignados
