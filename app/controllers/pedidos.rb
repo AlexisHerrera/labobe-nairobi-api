@@ -6,7 +6,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       pedido_repo = Persistence::Repositories::PedidoRepository.new
       nuevo_pedido = CreadorDePedidos.new(pedido_repo).crear(body_params[:id_usuario], body_params[:id_menu])
       status 201
-      logger.info "Nuevo pedido: Id pedido: #{nuevo_pedido.id}, Id_usuario: #{nuevo_pedido.id_usuario}, Id_menu: #{nuevo_pedido.menu.id}"
+      logger.info "Nuevo pedido: Id pedido: #{nuevo_pedido.id}, Id_usuario: #{nuevo_pedido.usuario.id}, Id_menu: #{nuevo_pedido.menu.id}"
       pedido_to_json nuevo_pedido
     rescue ObjectNotFound
       status 400
@@ -21,7 +21,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       id_pedido = params[:id_pedido]
       pedido = Persistence::Repositories::PedidoRepository.new.find(id_pedido)
       usuario = Persistence::Repositories::UsuarioRepository.new.find_by_telegram_id(params[:id_usuario])
-      pedido.consultar(usuario.id)
+      pedido.consultar(usuario.id_telegram)
       status 200
       logger.info "Se informa el estado del pedido: #{pedido.id}"
       pedido_to_json pedido

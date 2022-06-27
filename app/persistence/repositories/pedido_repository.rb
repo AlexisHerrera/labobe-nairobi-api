@@ -8,13 +8,14 @@ module Persistence
 
       def load_object(a_hash)
         menu = Persistence::Repositories::MenuRepository.new.find(a_hash[:id_menu].to_i)
+        usuario = Persistence::Repositories::UsuarioRepository.new.find(a_hash[:id_usuario].to_s)
 
-        Pedido.new(a_hash[:id], a_hash[:id_usuario].to_s, menu, a_hash[:estado].to_sym)
+        Pedido.new(a_hash[:id], usuario, menu, a_hash[:estado].to_sym)
       end
 
       def changeset(pedido)
         {
-          id_usuario: pedido.id_usuario,
+          id_usuario: pedido.usuario.id,
           id_menu: pedido.menu.id,
           estado: detectar_estado(pedido.estado)
         }

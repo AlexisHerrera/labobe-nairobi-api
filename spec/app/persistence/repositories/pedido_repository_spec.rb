@@ -3,12 +3,11 @@ require 'integration_helper'
 describe Persistence::Repositories::PedidoRepository do
   let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
-  let(:un_pedido) { Pedido.new(nil, "1144449999", menu, EstadosPosibles::ACEPTADO) }
+  let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
+  let(:un_pedido) { Pedido.new(nil, usuario, menu, EstadosPosibles::ACEPTADO) }
 
   before :each do
-    usuario = Usuario.new('Juan', '1144449999', 'paseo colon 850', '123')
     Persistence::Repositories::UsuarioRepository.new.save(usuario)
-    menu = MenuFactory.new.crear(1, 'Menu individual', 1000.0, MenusPosibles::CHICO)
     Persistence::Repositories::MenuRepository.new.save(menu)
   end
 
@@ -19,8 +18,8 @@ describe Persistence::Repositories::PedidoRepository do
   end
 
   it 'el nuevo pedido deberia tener un id de usuario' do
-    new_user = pedido_repo.save(un_pedido)
-    expect(new_user.id_usuario).to be_present
+    pedido = pedido_repo.save(un_pedido)
+    expect(pedido.usuario).to be_present
   end
 
   it 'el nuevo pedido deberia tener un id de menu' do

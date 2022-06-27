@@ -3,18 +3,15 @@ require 'integration_helper'
 describe Persistence::Repositories::EntregaRepository do
   let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
   let(:entrega_repo) { Persistence::Repositories::EntregaRepository.new }
-  let(:pedido) { Pedido.new(12367262, '1144449999', menu, EstadosPosibles::ACEPTADO) }
+  let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
+  let(:pedido) { Pedido.new(12367262, usuario, menu, EstadosPosibles::ACEPTADO) }
   let(:repartidor) { Repartidor.new(1, 'Ying Hu', '41199980', '1144449999') }
 
   before :each do
-    usuario = Usuario.new('Juan', '1144449999', 'paseo colon 850', '123')
     Persistence::Repositories::UsuarioRepository.new.save(usuario)
-    menu = MenuFactory.new.crear(1, 'Menu individual', 1000.0, MenusPosibles::CHICO)
     Persistence::Repositories::MenuRepository.new.save(menu)
-    pedido_repo = Persistence::Repositories::PedidoRepository.new
-    pedido_repo.save(pedido)
-    repartidor_repo = Persistence::Repositories::RepartidorRepository.new
-    repartidor_repo.save(repartidor)
+    Persistence::Repositories::PedidoRepository.new.save(pedido)
+    Persistence::Repositories::RepartidorRepository.new.save(repartidor)
   end
 
   let(:entrega) { Entrega.new(nil, pedido, repartidor) }
