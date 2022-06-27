@@ -31,7 +31,8 @@ describe EstadoPedido do
   end
 
   it 'el estado conoce a que pedido pertenece' do
-    pedido = Pedido.new(nil, "1144449999", 1, EstadosPosibles::ACEPTADO)
+    menu = MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)
+    pedido = Pedido.new(nil, "1144449999", menu, EstadosPosibles::ACEPTADO)
     estado = EstadoAceptado.new(pedido)
     expect(estado.pedido).to eq pedido
   end

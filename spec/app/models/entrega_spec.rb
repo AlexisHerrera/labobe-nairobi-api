@@ -4,7 +4,7 @@ describe Entrega do
   it 'deberia ser valido cuando se crea con un pedido y un repartidor' do
     id = 12367262
     usuario = '123'
-    menu = 1
+    menu = MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)
     estado = :Aceptado
     pedido = Pedido.new(id, usuario, menu, estado)
 

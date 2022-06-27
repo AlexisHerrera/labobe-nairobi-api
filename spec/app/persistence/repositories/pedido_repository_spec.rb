@@ -1,8 +1,9 @@
 require 'integration_helper'
 
 describe Persistence::Repositories::PedidoRepository do
+  let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
-  let(:un_pedido) { Pedido.new(nil, "1144449999", 1, EstadosPosibles::ACEPTADO) }
+  let(:un_pedido) { Pedido.new(nil, "1144449999", menu, EstadosPosibles::ACEPTADO) }
 
   before :each do
     usuario = Usuario.new('Juan', '1144449999', 'paseo colon 850', '123')
@@ -23,8 +24,8 @@ describe Persistence::Repositories::PedidoRepository do
   end
 
   it 'el nuevo pedido deberia tener un id de menu' do
-    new_user = pedido_repo.save(un_pedido)
-    expect(new_user.id_menu).to be_present
+    pedido = pedido_repo.save(un_pedido)
+    expect(pedido.menu).to be_present
   end
 
   context 'cuando un pedido existe' do

@@ -16,7 +16,7 @@ class Mochila
   end
 
   # Aca hay que obtener el peso del pedido y sacar el + 1
-  # MenuRepository.find(pedido.id_menu).peso es una posibilidad
+  # MenuRepository.find(pedido.menu.id).peso es una posibilidad
   def puede_agregar(_pedido)
     capacidad_ocupada + 1 <= @capacidad
   end

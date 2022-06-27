@@ -4,9 +4,9 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     # Se puede hacer catcheando desde el metodo de CreadorDe.. y raiseando el correcto
     begin
       pedido_repo = Persistence::Repositories::PedidoRepository.new
-      nuevo_pedido = CreadorDePedidos.new(pedido_repo).crear_pedido(body_params[:id_usuario], body_params[:id_menu])
+      nuevo_pedido = CreadorDePedidos.new(pedido_repo).crear(body_params[:id_usuario], body_params[:id_menu])
       status 201
-      logger.info "Nuevo pedido: Id pedido: #{nuevo_pedido.id}, Id_usuario: #{nuevo_pedido.id_usuario}, Id_menu: #{nuevo_pedido.id_menu}"
+      logger.info "Nuevo pedido: Id pedido: #{nuevo_pedido.id}, Id_usuario: #{nuevo_pedido.id_usuario}, Id_menu: #{nuevo_pedido.menu.id}"
       pedido_to_json nuevo_pedido
     rescue ObjectNotFound
       status 400

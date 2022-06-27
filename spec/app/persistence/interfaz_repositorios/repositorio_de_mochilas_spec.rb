@@ -1,5 +1,6 @@
 describe 'RepositorioDeMochilas' do
-  let(:pedido) { Pedido.new(12_367_262, '1144449999', 1, EstadosPosibles::ACEPTADO) }
+  let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
+  let(:pedido) { Pedido.new(12_367_262, '1144449999', menu, EstadosPosibles::ACEPTADO) }
   let(:repartidor) { Repartidor.new(1, 'Ying Hu', '41199980', '1144449999') }
   let(:entrega) { Entrega.new(nil, pedido, repartidor) }
 

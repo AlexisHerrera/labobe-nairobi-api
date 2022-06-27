@@ -8,11 +8,11 @@ Característica: Estado de un pedido
 Antecedentes:
   Dado que el usuario ya esta registrado
 
-Escenario: 7.0 - Estado de un pedido recien creado es recibido
+Escenario: 7.0 - Estado de un pedido recien creado es Aceptado
   Cuando creo un pedido
-  Entonces el pedido esta "Recibido"
+  Entonces el pedido esta "Aceptado"
 
-Escenario: 7.1 - Estado de un pedido de recibido a en preparacion
+Escenario: 7.1 - Estado de un pedido de Aceptado a en preparacion
   Dado que tengo un pedido
   Cuando cambio el estado del pedido
   Entonces el pedido esta "En preparacion"

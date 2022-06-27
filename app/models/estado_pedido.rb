@@ -26,7 +26,7 @@ class EstadoPedido
 end
 
 class EstadosFactory
-  def crear_estado(estado, pedido)
+  def crear(estado, pedido)
     case estado
     when EstadosPosibles::ACEPTADO
       EstadoAceptado.new(pedido)

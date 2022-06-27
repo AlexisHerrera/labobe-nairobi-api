@@ -1,8 +1,9 @@
 require 'integration_helper'
 
 describe Persistence::Repositories::EntregaRepository do
+  let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
   let(:entrega_repo) { Persistence::Repositories::EntregaRepository.new }
-  let(:pedido) { Pedido.new(12367262, '1144449999', 1, EstadosPosibles::ACEPTADO) }
+  let(:pedido) { Pedido.new(12367262, '1144449999', menu, EstadosPosibles::ACEPTADO) }
   let(:repartidor) { Repartidor.new(1, 'Ying Hu', '41199980', '1144449999') }
 
   before :each do
