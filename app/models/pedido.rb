@@ -9,7 +9,7 @@ class Pedido
     @id = id # = numero de pedido
     @id_usuario = id_usuario
     @id_menu = id_menu
-    @estado = EstadosFactory.new.crear_estado(estado)
+    @estado = EstadosFactory.new.crear_estado(estado, self)
   end
 
   def consultar(id)
@@ -23,4 +23,7 @@ class Pedido
   def esta_en_preparacion?
     @estado.esta_en_preparacion?
   end
+end
+
+class PedidoInexistente < Pedido
 end

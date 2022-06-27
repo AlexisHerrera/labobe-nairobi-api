@@ -6,6 +6,8 @@ class EstadosPosibles
 end
 
 class EstadoPedido
+  attr_reader :pedido
+
   def siguiente_estado
     raise ''
   end
@@ -17,19 +19,23 @@ class EstadoPedido
   def esta_en_preparacion?
     false
   end
+
+  def initialize(pedido = PedidoInexistente)
+    @pedido = pedido
+  end
 end
 
 class EstadosFactory
-  def crear_estado(estado)
+  def crear_estado(estado, pedido)
     case estado
     when EstadosPosibles::ACEPTADO
-      EstadoAceptado.new
+      EstadoAceptado.new(pedido)
     when EstadosPosibles::PREPARACION
-      EstadoEnPreparacion.new
+      EstadoEnPreparacion.new(pedido)
     when EstadosPosibles::CAMINO
-      EstadoEnCamino.new
+      EstadoEnCamino.new(pedido)
     when EstadosPosibles::ENTREGADO
-      EstadoEntregado.new
+      EstadoEntregado.new(pedido)
     else
       raise ''
     end
@@ -44,7 +50,7 @@ end
 
 class EstadoEnPreparacion < EstadoPedido
   def siguiente_estado
-    # logica
+    AsignadorDePedidos.new.asignar(@pedido)
     EstadoEnCamino.new
   end
 
