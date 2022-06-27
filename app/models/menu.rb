@@ -15,6 +15,10 @@ class Menu
     raise MenuInvalido if !id.is_a?(Integer) || !precio.is_a?(Numeric) || precio.negative?
   end
 
+  def tamanio
+    MenusPosibles::INDEFINIDO
+  end
+
   def ==(other)
     @id == other.id &&
       @descripcion == other.descripcion &&
@@ -26,6 +30,7 @@ class MenusPosibles
   GRANDE = :grande
   MEDIANO = :mediano
   CHICO = :chico
+  INDEFINIDO = :indefinido
 end
 
 class MenuFactory
@@ -48,6 +53,10 @@ class MenuGrande < Menu
     @peso = 1
     super(id, descripcion, precio)
   end
+
+  def tamanio
+    MenusPosibles::GRANDE
+  end
 end
 
 class MenuMediano < Menu
@@ -55,11 +64,19 @@ class MenuMediano < Menu
     @peso = 2
     super(id, descripcion, precio)
   end
+
+  def tamanio
+    MenusPosibles::MEDIANO
+  end
 end
 
 class MenuChico < Menu
   def initialize(id, descripcion, precio)
     @peso = 3
     super(id, descripcion, precio)
+  end
+
+  def tamanio
+    MenusPosibles::CHICO
   end
 end

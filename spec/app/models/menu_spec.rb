@@ -37,7 +37,7 @@ describe MenuFactory do
       precio = 1500
 
       menu = MenuFactory.new.crear(id, descripcion, precio, MenusPosibles::CHICO)
-      expect(menu.class).to eq MenuChico
+      expect(menu.tamanio).to eq MenusPosibles::CHICO
     end
 
     it 'deberia ser valido cuando se crea con id, descripcion y precio' do
@@ -46,7 +46,7 @@ describe MenuFactory do
       precio = 1500
 
       menu = MenuFactory.new.crear(id, descripcion, precio, MenusPosibles::MEDIANO)
-      expect(menu.class).to eq MenuMediano
+      expect(menu.tamanio).to eq MenusPosibles::MEDIANO
     end
 
     it 'deberia ser valido cuando se crea con id, descripcion y precio' do
@@ -55,7 +55,7 @@ describe MenuFactory do
       precio = 1500
 
       menu = MenuFactory.new.crear(id, descripcion, precio, MenusPosibles::GRANDE)
-      expect(menu.class).to eq MenuGrande
+      expect(menu.tamanio).to eq MenusPosibles::GRANDE
     end
 
   end

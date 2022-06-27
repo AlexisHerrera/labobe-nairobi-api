@@ -8,7 +8,7 @@ describe Persistence::Repositories::EntregaRepository do
   before :each do
     usuario = Usuario.new('Juan', '1144449999', 'paseo colon 850', '123')
     Persistence::Repositories::UsuarioRepository.new.save(usuario)
-    menu = Menu.new(1, 'Menu individual', 1000.0)
+    menu = MenuFactory.new.crear(1, 'Menu individual', 1000.0, MenusPosibles::CHICO)
     Persistence::Repositories::MenuRepository.new.save(menu)
     pedido_repo = Persistence::Repositories::PedidoRepository.new
     pedido_repo.save(pedido)

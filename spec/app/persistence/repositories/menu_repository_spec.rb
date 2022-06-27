@@ -3,7 +3,8 @@ require 'integration_helper'
 describe Persistence::Repositories::MenuRepository do
 
   let(:menu_repo) { Persistence::Repositories::MenuRepository.new }
-  let(:a_menu) { Menu.new(1, "Menu pareja", 1400) }
+  let(:a_menu) {MenuFactory.new.crear(1, 'Menu pareja', 1500.0, MenusPosibles::MEDIANO)}
+
 
   it 'deberia guardar un nuevo menu' do
     menu_repo.delete_all

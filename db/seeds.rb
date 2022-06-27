@@ -5,6 +5,8 @@ require_relative '../app/persistence/repositories/menu_repository'
 
 menu_repository = Persistence::Repositories::MenuRepository.new
 
-menu_repository.save(Menu.new(1, 'Menu individual', 1000))
-menu_repository.save(Menu.new(2, 'Menu parejas', 1500))
-menu_repository.save(Menu.new(3, 'Menu familiar', 2500))
+menu_factory = MenuFactory.new
+
+menu_repository.save(menu_factory.crear(1, 'Menu individual', 1000, MenusPosibles::CHICO))
+menu_repository.save(menu_factory.crear(2, 'Menu parejas', 1500, MenusPosibles::MEDIANO))
+menu_repository.save(menu_factory.crear(3, 'Menu familiar', 2500, MenusPosibles::GRANDE))

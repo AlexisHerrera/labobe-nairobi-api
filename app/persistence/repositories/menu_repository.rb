@@ -7,14 +7,15 @@ module Persistence
       protected
 
       def load_object(a_hash)
-        Menu.new(a_hash[:id], a_hash[:descripcion], a_hash[:precio])
+        MenuFactory.new.crear(a_hash[:id], a_hash[:descripcion], a_hash[:precio], a_hash[:tamanio].to_sym)
       end
 
       def changeset(menu)
         {
           id: menu.id,
           descripcion: menu.descripcion,
-          precio: menu.precio
+          precio: menu.precio,
+          tamanio: menu.tamanio.to_s
         }
       end
     end
