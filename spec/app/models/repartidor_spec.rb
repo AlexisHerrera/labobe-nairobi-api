@@ -51,6 +51,7 @@ describe Repartidor do
     let(:entrega_repo) { Persistence::Repositories::EntregaRepository.new }
     let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
     let(:pedido) { Pedido.new(12367262, usuario, menu, EstadosPosibles::ACEPTADO) }
+    let(:pedido_en_preparacion) { Pedido.new(12367262, usuario, menu, EstadosPosibles::PREPARACION) }
     
     it 'si un repartidor no tiene ningun pedido, esta vacia' do
       id = 1
@@ -68,6 +69,20 @@ describe Repartidor do
       repartidor = described_class.new(id, nombre, dni, telefono)
       repartidor.asignar(pedido)
       expect(repartidor.mochila_llena?).to eq true
+    end
+
+    it 'al salir, los pedidos que tenga en la mochila pasan a estado En Camino' do
+      id = 1
+      nombre = 'Ying Hu'
+      dni = '41199980'
+      telefono = '1144449999'
+      repartidor = described_class.new(id, nombre, dni, telefono)
+      repartidor.asignar(pedido_en_preparacion)
+      repartidor.salir
+      pedidos = repartidor.pedidos
+      pedidos.each do |pedido|
+        expect(pedido.estado).to eq EstadosFactory.new.crear(EstadosPosibles::CAMINO)
+      end
     end
     
   end

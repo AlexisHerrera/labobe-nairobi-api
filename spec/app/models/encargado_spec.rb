@@ -31,7 +31,7 @@ describe Encargado do
 
     xit 'Deberia actualizar estado de repartidor con mochila llena' do
       described_class.new(pedido_repo, repartidor_repo).asignar_pedido(pedido_familiar)
-      expect(pedido_familiar.estado).to eq EstadosPosibles::ENTREGADO
+      expect(pedido_familiar.estado).to eq EstadosPosibles::CAMINO
     end
   end
 end

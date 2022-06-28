@@ -48,6 +48,10 @@ class Repartidor
     peso == 3
   end
 
+  def salir
+    pedidos.each(&:siguiente_estado)
+  end
+
   # Ver ejercicio 4 - clase Aula (entrega de la catedra)
   class << self
     attr_reader :no_repartidor # rubocop:disable: Style/TrivialAccessors:
