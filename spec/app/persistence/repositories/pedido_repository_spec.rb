@@ -64,4 +64,22 @@ describe Persistence::Repositories::PedidoRepository do
     expect(pedido_encontrado).to eq(pedido)
     expect(pedido_encontrado.repartidor_asignado).to eq(repartidor)
   end
+
+  it 'deberia guardar un pedido con su repartidor si es que tiene uno asignado' do
+    pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::PREPARACION)
+
+
+    repartidor = Repartidor.new(nil, 'Ying Hu', '41199980', '1144449999')
+    repartidor_nuevo = repartidor_repo.save(repartidor)
+
+    pedido.asignar_repartidor(repartidor)
+    repartidor.asignar(pedido)
+
+    pedido_repo.save(pedido)
+
+    pedidos_encontrado = pedido_repo.find_by_id_repartidor(repartidor_nuevo.id)
+
+    expect(pedidos_encontrado[0]).to eq(pedido)
+    expect(pedidos_encontrado.size).to eq(1)
+  end
 end

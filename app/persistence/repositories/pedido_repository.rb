@@ -4,6 +4,13 @@ module Persistence
       self.table_name = :pedidos
       self.model_class = 'Pedido'
 
+      def find_by_id_repartidor(id_repartidor)
+        pedidos = dataset.where(Sequel[self.class.table_name][:id_repartidor] => id_repartidor)
+        return [] if pedidos.nil?
+
+        load_collection pedidos.all
+      end
+
       protected
 
       def load_object(a_hash)

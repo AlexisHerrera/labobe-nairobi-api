@@ -28,4 +28,5 @@ describe Mochila do
     expect(mochila.esta_llena?).to eq false
   end
 
+
 end
