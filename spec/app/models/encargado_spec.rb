@@ -29,9 +29,9 @@ describe Encargado do
       expect(pedido_individual.repartidor_asignado).to eq repartidor
     end
 
-    xit 'Deberia actualizar estado de repartidor con mochila llena' do
+    it 'Deberia actualizar estado de repartidor con mochila llena' do
       described_class.new(pedido_repo, repartidor_repo).asignar_pedido(pedido_familiar)
-      expect(pedido_familiar.estado).to eq EstadosPosibles::CAMINO
+      expect(pedido_familiar.estado).to eq EstadosFactory.new.crear(EstadosPosibles::CAMINO)
     end
   end
 end

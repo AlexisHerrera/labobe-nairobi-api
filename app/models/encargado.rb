@@ -5,10 +5,16 @@ class Encargado
   end
 
   def enviar(repartidor)
-    pedidos_repartidor = @pedido_repo.find_by_id_repartidor(repartidor.id)
+    # pedidos_repartidor = @pedido_repo.find_by_id_repartidor(repartidor.id)
 
-    pedidos_repartidor[0].siguiente_estado
-    @pedido_repo.save(pedidos_repartidor[0])
+    repartidor.salir
+    pedidos = repartidor.pedidos
+    pedidos.each do |pedido|
+      @pedido_repo.save(pedido)
+    end
+
+    # pedidos_repartidor[0].siguiente_estado
+    # @pedido_repo.save(pedidos_repartidor[0])
   end
 
   def asignar_pedido(pedido)
