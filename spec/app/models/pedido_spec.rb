@@ -1,19 +1,17 @@
 require 'spec_helper'
 
 describe Pedido do
+  let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
+  let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
+  let(:id) { 12367262 }
+  # Todo: sacar id pedido (ponerlo ultimo con nil opcional o hacerle un setter)
   context 'cuando es creado' do
     it 'deberia ser valido cuando se crea con id, usuario, menu y estado' do
-      id = 12367262
-      usuario = Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')
-      menu = MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)
       estado = EstadosPosibles::ACEPTADO
       expect(described_class.new(id, usuario, menu, estado).id).to eq id
     end
 
     it 'cuando se modifica el estado de un pedido recien creado, el estado es 1' do
-      id = 12367262
-      usuario = Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')
-      menu = MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)
       estado = EstadosPosibles::ACEPTADO
       pedido = described_class.new(id, usuario, menu, estado)
       pedido.siguiente_estado
@@ -21,9 +19,6 @@ describe Pedido do
     end
 
     it 'cuando se modifica el estado de un pedido con estado 1, el estado es 2' do
-      id = 12367262
-      usuario = Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')
-      menu = MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)
       estado = EstadosPosibles::PREPARACION
       pedido = described_class.new(id, usuario, menu, estado)
       pedido.siguiente_estado
@@ -31,9 +26,6 @@ describe Pedido do
     end
 
     it 'cuando se modifica el estado de un pedido con estado 2, el estado es 3' do
-      id = 12367262
-      usuario = Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')
-      menu = MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)
       estado = EstadosPosibles::CAMINO
       pedido = described_class.new(id, usuario, menu, estado)
       pedido.siguiente_estado
@@ -41,9 +33,6 @@ describe Pedido do
     end
 
     it 'cuando se modifica el estado de un pedido con estado 3, el estado es 3' do
-      id = 12367262
-      usuario = Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')
-      menu = MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)
       estado = EstadosPosibles::ENTREGADO
       pedido = described_class.new(id, usuario, menu, estado)
       pedido.siguiente_estado
@@ -51,9 +40,6 @@ describe Pedido do
     end
 
     it 'cuando se consulta el estado de un pedido con un id_usuario diferente lanza excepcion' do
-      id = 12367262
-      usuario = Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')
-      menu = MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)
       estado = EstadosPosibles::ENTREGADO
       pedido = described_class.new(id, usuario, menu, estado)
       id_usuario_diferente = '9999'
@@ -61,12 +47,24 @@ describe Pedido do
     end
 
     it 'cuando se consulta si el estado es "en preparacion" y es "en preparacion" devuelve true' do
-      id = 12367262
-      usuario = Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')
-      menu = MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)
       estado = EstadosPosibles::PREPARACION
       pedido = described_class.new(id, usuario, menu, estado)
       expect(pedido.esta_en_preparacion?).to eq true
+    end
+  end
+
+  context 'repartidor asignado' do
+    it 'no tiene repartidor si no le fue asignado uno' do
+      estado = EstadosPosibles::ACEPTADO
+      expect(described_class.new(id, usuario, menu, estado).repartidor_asignado).to eq RepartidorInexistente
+    end
+
+    it 'tiene un repartidor si se le asigna uno' do
+      estado = EstadosPosibles::PREPARACION
+      pedido = described_class.new(id, usuario, menu, estado)
+      repartidor = Repartidor.new(nil, 'Ying Hu', '41199980', '1144449999')
+      pedido.asignar_repartidor(repartidor)
+      expect(pedido.repartidor_asignado).to eq repartidor
     end
   end
 end

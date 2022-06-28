@@ -2,6 +2,7 @@ class Repartidor
   attr_reader :nombre, :dni, :telefono, :updated_on, :created_on
   attr_accessor :id
 
+  # TODO: SACAR nil como id, pasarlo a ultimo parametro como opcional o setter
   def initialize(id, nombre, dni, telefono)
     validar_nombre(nombre)
     validar_telefono(telefono)
@@ -29,4 +30,7 @@ class Repartidor
 
     raise RepartidorInvalido if telefono.length != 10
   end
+end
+
+class RepartidorInexistente < Repartidor
 end
