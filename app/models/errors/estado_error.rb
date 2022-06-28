@@ -1,0 +1,1 @@
+class EstadoInvalido < StandardError; end

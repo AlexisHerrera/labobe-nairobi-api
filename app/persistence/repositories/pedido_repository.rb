@@ -32,7 +32,7 @@ module Persistence
         when EstadoEntregado.new
           EstadosPosibles::ENTREGADO.to_s
         else
-          raise ''
+          raise EstadoInvalido
         end
       end
     end

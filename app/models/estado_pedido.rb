@@ -9,7 +9,7 @@ class EstadoPedido
   attr_reader :pedido
 
   def siguiente_estado
-    raise ''
+    raise EstadoInvalido
   end
 
   def ==(other)
@@ -37,7 +37,7 @@ class EstadosFactory
     when EstadosPosibles::ENTREGADO
       EstadoEntregado.new(pedido)
     else
-      raise ''
+      raise EstadoInvalido
     end
   end
 end

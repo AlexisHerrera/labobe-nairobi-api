@@ -25,7 +25,7 @@ module LaBobe
         when EstadoEntregado.new
           'Entregado'
         else
-          raise ''
+          raise EstadoInvalido
         end
       end
     end
