@@ -19,23 +19,19 @@ class EstadoPedido
   def esta_en_preparacion?
     false
   end
-
-  def initialize(pedido = PedidoInexistente)
-    @pedido = pedido
-  end
 end
 
 class EstadosFactory
-  def crear(estado, pedido)
+  def crear(estado)
     case estado
     when EstadosPosibles::ACEPTADO
-      EstadoAceptado.new(pedido)
+      EstadoAceptado.new
     when EstadosPosibles::PREPARACION
-      EstadoEnPreparacion.new(pedido)
+      EstadoEnPreparacion.new
     when EstadosPosibles::CAMINO
-      EstadoEnCamino.new(pedido)
+      EstadoEnCamino.new
     when EstadosPosibles::ENTREGADO
-      EstadoEntregado.new(pedido)
+      EstadoEntregado.new
     else
       raise EstadoInvalido
     end
@@ -50,7 +46,6 @@ end
 
 class EstadoEnPreparacion < EstadoPedido
   def siguiente_estado
-    AsignadorDePedidos.new.asignar(@pedido)
     EstadoEnCamino.new
   end
 

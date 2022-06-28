@@ -56,7 +56,7 @@ describe Pedido do
   context 'repartidor asignado' do
     it 'no tiene repartidor si no le fue asignado uno' do
       estado = EstadosPosibles::ACEPTADO
-      expect(described_class.new(id, usuario, menu, estado).repartidor_asignado).to eq RepartidorInexistente
+      expect(described_class.new(id, usuario, menu, estado).repartidor_asignado).to eq Repartidor.no_repartidor
     end
 
     it 'tiene un repartidor si se le asigna uno' do

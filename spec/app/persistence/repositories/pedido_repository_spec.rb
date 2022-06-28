@@ -5,7 +5,7 @@ describe Persistence::Repositories::PedidoRepository do
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
   let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
   let(:un_pedido) { Pedido.new(nil, usuario, menu, EstadosPosibles::ACEPTADO) }
-
+  let(:repartidor_repo) { Persistence::Repositories::RepartidorRepository.new }
   before :each do
     Persistence::Repositories::UsuarioRepository.new.save(usuario)
     Persistence::Repositories::MenuRepository.new.save(menu)
@@ -50,5 +50,18 @@ describe Persistence::Repositories::PedidoRepository do
     expect do
       pedido_repo.find(99_999)
     end.to raise_error(ObjectNotFound)
+  end
+
+  it 'deberia guardar un pedido con su repartidor si es que tiene uno asignado' do
+    pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::PREPARACION)
+    repartidor = Repartidor.new(nil, 'Ying Hu', '41199980', '1144449999')
+    repartidor_repo.save(repartidor)
+
+    pedido.asignar_repartidor(repartidor)
+    pedido_guardado = pedido_repo.save(pedido)
+
+    pedido_encontrado = pedido_repo.find(pedido_guardado.id)
+    expect(pedido_encontrado).to eq(pedido)
+    expect(pedido_encontrado.repartidor_asignado).to eq(repartidor)
   end
 end

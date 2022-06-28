@@ -30,7 +30,11 @@ class Repartidor
 
     raise RepartidorInvalido if telefono.length != 10
   end
-end
 
-class RepartidorInexistente < Repartidor
+  # Ver ejercicio 4 - clase Aula (entrega de la catedra)
+  class << self
+    attr_reader :no_repartidor # rubocop:disable: Style/TrivialAccessors:
+  end
+
+  @no_repartidor = new(nil, 'No name', '10000000', '1123456789')
 end

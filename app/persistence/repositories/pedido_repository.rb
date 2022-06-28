@@ -10,14 +10,22 @@ module Persistence
         menu = Persistence::Repositories::MenuRepository.new.find(a_hash[:id_menu].to_i)
         usuario = Persistence::Repositories::UsuarioRepository.new.find(a_hash[:id_usuario].to_s)
 
-        Pedido.new(a_hash[:id], usuario, menu, a_hash[:estado].to_sym)
+        pedido = Pedido.new(a_hash[:id], usuario, menu, a_hash[:estado].to_sym)
+        begin
+          repartidor = Persistence::Repositories::RepartidorRepository.new.find(a_hash[:id_repartidor])
+        rescue ObjectNotFound # TODO: Esto esta mega feo, buscar refactor
+          return pedido
+        end
+        pedido.asignar_repartidor(repartidor)
+        pedido
       end
 
       def changeset(pedido)
         {
           id_usuario: pedido.usuario.id,
           id_menu: pedido.menu.id,
-          estado: detectar_estado(pedido.estado)
+          estado: detectar_estado(pedido.estado),
+          id_repartidor: serializar_repartidor(pedido.repartidor_asignado)
         }
       end
 
@@ -34,6 +42,12 @@ module Persistence
         else
           raise EstadoInvalido
         end
+      end
+
+      def serializar_repartidor(repartidor)
+        return nil if repartidor == Repartidor.no_repartidor
+
+        repartidor.id
       end
     end
   end

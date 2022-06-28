@@ -2,9 +2,9 @@ Dado('que hay un repartidor') do
   nombre = 'Ying Hu'
   dni = '44455666'
   telefono = '1234567887'
-
   @request = {nombre: nombre, dni: dni, telefono: telefono}.to_json
   @response = Faraday.post(registrar_repartidor_url, @request, header)
+  @id_repartidor = JSON.parse(@response.body)['id']
   expect(@response.status).to eq(201)
 end
 
@@ -53,10 +53,8 @@ Entonces('el repartidor no sale') do
 end
 
 Entonces('se le asigna ese repartidor') do
-  params = {'id_pedido' => @id_pedido}
-  response = Faraday.get(entregas_url, params, header)
-
-  expect(response.status).to eq 200
-  cuerpo = JSON.parse(response.body)
-  expect(cuerpo['id_repartidor'].nil?).to eq(false)
+  # Puedo hacer un get a la BDD directamente para ver si guardo el repartidor
+  pedido = Persistence::Repositories::PedidoRepository.new.find(@id_pedido)
+  repartidor = Persistence::Repositories::RepartidorRepository.new.find(@id_repartidor)
+  expect(pedido.repartidor_asignado).to eq(repartidor)
 end

@@ -42,6 +42,12 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       pedido_repo = Persistence::Repositories::PedidoRepository.new
       id = body_params[:id_pedido].to_i
       pedido = pedido_repo.find(id)
+
+      # Esto deberia ir a algun otro lado
+      pedido_repo = Persistence::Repositories::PedidoRepository.new
+      repartidor_repo = Persistence::Repositories::RepartidorRepository.new
+      Encargado.new(pedido_repo, repartidor_repo).asignar_pedido(pedido) if pedido.esta_en_preparacion?
+
       pedido.siguiente_estado
       pedido_repo.save(pedido)
       status 204

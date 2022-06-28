@@ -10,8 +10,8 @@ class Pedido
     @id = id # = numero de pedido
     @usuario = usuario
     @menu = menu
-    @estado = EstadosFactory.new.crear(estado, self)
-    @repartidor_asignado = RepartidorInexistente
+    @estado = EstadosFactory.new.crear(estado)
+    @repartidor_asignado = Repartidor.no_repartidor
   end
 
   def consultar(id_telegram)
@@ -28,6 +28,14 @@ class Pedido
 
   def asignar_repartidor(repartidor)
     @repartidor_asignado = repartidor
+  end
+
+  def ==(other)
+    @id == other.id &&
+      @usuario == other.usuario &&
+      @menu == other.menu &&
+      @estado == other.estado &&
+      @repartidor_asignado == other.repartidor_asignado
   end
 end
 

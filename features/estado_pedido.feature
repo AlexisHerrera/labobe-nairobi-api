@@ -7,6 +7,7 @@ Característica: Estado de un pedido
 
 Antecedentes:
   Dado que el usuario ya esta registrado
+  Dado que hay un repartidor
 
 Escenario: 7.0 - Estado de un pedido recien creado es Aceptado
   Cuando creo un pedido
