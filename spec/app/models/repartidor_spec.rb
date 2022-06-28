@@ -47,7 +47,7 @@ describe Repartidor do
 
   context 'Consultar mochila' do
 
-    let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
+    let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::GRANDE)}
     let(:entrega_repo) { Persistence::Repositories::EntregaRepository.new }
     let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
     let(:pedido) { Pedido.new(12367262, usuario, menu, EstadosPosibles::ACEPTADO) }
@@ -60,7 +60,7 @@ describe Repartidor do
       expect(described_class.new(id, nombre, dni, telefono).tiene_pedidos?).to eq true
     end
 
-    it 'si un repartidor no tiene un pedido con menu familiar, la mochila esta llena' do
+    it 'si un repartidor tiene un pedido con menu familiar, la mochila esta llena' do
       id = 1
       nombre = 'Ying Hu'
       dni = '41199980'

@@ -50,7 +50,7 @@ end
 
 class MenuGrande < Menu
   def initialize(id, descripcion, precio)
-    @peso = 1
+    @peso = 3
     super(id, descripcion, precio)
   end
 
@@ -72,7 +72,7 @@ end
 
 class MenuChico < Menu
   def initialize(id, descripcion, precio)
-    @peso = 3
+    @peso = 1
     super(id, descripcion, precio)
   end
 
