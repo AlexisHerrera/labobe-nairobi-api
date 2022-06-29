@@ -27,19 +27,19 @@ Entonces('no la calificacion queda registrada') do
 end
 
 Cuando('quiero calificar un pedido con un valor que excede el rango') do
-  request = {'id_pedido' => '321', 'id_usuario' => @id_telegram_usuario, :calificacion => 10}.to_json
+  request = {'id_pedido' => @id_pedido, 'id_usuario' => @id_telegram_usuario, :calificacion => 10}.to_json
 
   @response = Faraday.patch(calificar_url, request, header)
 end
 
 Cuando('quiero calificar un pedido con un valor que es inferior al rango') do
-  request = {'id_pedido' => '321', 'id_usuario' => @id_telegram_usuario, :calificacion => 0}.to_json
+  request = {'id_pedido' => @id_pedido, 'id_usuario' => @id_telegram_usuario, :calificacion => 0}.to_json
 
   @response = Faraday.patch(calificar_url, request, header)
 end
 
 Cuando('quiero calificar un pedido con un valor no numerico') do
-  request = {'id_pedido' => '321', 'id_usuario' => @id_telegram_usuario, :calificacion => 'Mala'}.to_json
+  request = {'id_pedido' => @id_pedido, 'id_usuario' => @id_telegram_usuario, :calificacion => 'Mala'}.to_json
 
   @response = Faraday.patch(calificar_url, request, header)
 end
@@ -59,4 +59,8 @@ Cuando('quiero calificar un pedido que no es del cliente como excelente') do
   request = {'id_pedido' => @id_pedido, 'id_usuario' => id_telegram_otro_usuario, :calificacion => 1}.to_json
 
   @response = Faraday.patch(calificar_url, request, header)
+end
+
+Entonces('la calificacion no queda registrada') do
+  expect(@response.status).to eq(400)
 end

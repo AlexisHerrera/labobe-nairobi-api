@@ -66,12 +66,16 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       id = body_params[:id_pedido].to_i
       pedido = pedido_repo.find(id)
 
-      calificacion = Calificacion.new(body_params[:calificacion].to_i)
+      calificacion = CalificacionFactory.new.crear(body_params[:calificacion])
       pedido.calificar(calificacion)
 
       pedido_repo.save(pedido)
       status 200
       logger.info "Se califico con #{pedido.calificacion.descripcion} el pedido: #{pedido.id}"
+    rescue CalificacionInvalida
+      status 400
+      logger.info "Calificacion invalida. La calificacion del pedido: #{pedido.id} es #{pedido.calificacion.descripcion}"
+      {error: 'calificacion pedido'}.to_json
     rescue ObjectNotFound
       status 404
       logger.info 'No se pudo encontar el pedido.'
