@@ -52,6 +52,10 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       pedido_repo.save(pedido)
       status 204
       logger.info "Se modifico el estado del pedido: #{pedido.id} "
+    rescue NoHayRepartidores
+      status 400
+      logger.info 'No se pudo encontar repartidores.'
+      {error: 'no hay repartidores'}.to_json
     rescue ObjectNotFound
       status 404
       logger.info 'No se pudo encontar el pedido.'

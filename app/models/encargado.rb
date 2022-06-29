@@ -41,6 +41,8 @@ class Encargado
 
   def obtener_repartidores
     repartidores = @repartidor_repo.all
+    raise NoHayRepartidores if repartidores.length.zero?
+
     repartidores.each do |repartidor|
       repartidor.pedidos = @pedido_repo.find_by_id_repartidor(repartidor.id)
     end

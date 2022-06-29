@@ -76,12 +76,12 @@ Escenario: US9.9 - No asignar repartidor con un pedido con menu individual un pe
     Entonces se le asigna al segundo repartidor
     Y el repartidor sale
 
-@wip
 Escenario: US9.10 - No hay repartidores
     Dado que no hay un repartidores
     Y hay un pedido con menu individual sin asignar
     Cuando el pedido pasa del estado "En prepracion" a "En camino"
     Entonces no se le asigna repartidor
+    Y el pedido no sale
 
 @wip
 Escenario: US9.11 - Dado 1 repartidor disponible, puede repartir 2 menus familiares secuencialmente

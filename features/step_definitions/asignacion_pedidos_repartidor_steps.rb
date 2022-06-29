@@ -108,6 +108,13 @@ Entonces('el repartidor no sale') do
   expect(estado).to eq('En camino')
 end
 
+Entonces('el pedido no sale') do
+  params = { 'id_pedido' => @id_pedido, 'id_usuario' => 123 }
+  @response = Faraday.get(crear_pedido_url, params, header)
+  estado = JSON.parse(@response.body)['estado']
+  expect(estado).to eq('En preparacion')
+end
+
 Entonces('se le asigna ese repartidor') do
   # Puedo hacer un get a la BDD directamente para ver si guardo el repartidor
   pedido = Persistence::Repositories::PedidoRepository.new.find(@id_pedido)
@@ -122,5 +129,6 @@ Entonces('se le asigna al segundo repartidor') do
 end
 
 Entonces('no se le asigna repartidor') do
-  pending # Write code here that turns the phrase above into concrete actions
+  pedido = Persistence::Repositories::PedidoRepository.new.find(@id_pedido)
+  expect(pedido.repartidor_asignado).to eq(Repartidor.no_repartidor)
 end
