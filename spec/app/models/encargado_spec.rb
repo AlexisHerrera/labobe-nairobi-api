@@ -10,6 +10,7 @@ describe Encargado do
   let(:pedido_familiar) { Pedido.new(12367262, usuario, menu_familiar, EstadosPosibles::PREPARACION) }
 
   let(:repartidor) { Repartidor.new(nil, 'Ying Hu', '41199980', '1144449999') }
+  let(:otro_repartidor) { Repartidor.new(nil, 'Carlos Solari', '14367888', '1234567999') }
 
   before :each do
     Persistence::Repositories::UsuarioRepository.new.save(usuario)
@@ -21,6 +22,7 @@ describe Encargado do
     Persistence::Repositories::PedidoRepository.new.save(pedido_familiar)
 
     Persistence::Repositories::RepartidorRepository.new.save(repartidor)
+    Persistence::Repositories::RepartidorRepository.new.save(otro_repartidor)
   end
 
   context 'Asignar pedido' do
@@ -32,6 +34,14 @@ describe Encargado do
     it 'Deberia actualizar estado de repartidor con mochila llena' do
       described_class.new(pedido_repo, repartidor_repo).asignar_pedido(pedido_familiar)
       expect(pedido_familiar.estado).to eq EstadosFactory.new.crear(EstadosPosibles::CAMINO)
+    end
+
+    it 'Deberia asignar pedidos al repartidor con la mochila mas vacía' do
+      encargado = described_class.new(pedido_repo, repartidor_repo)
+      encargado.asignar_pedido(pedido_individual)
+      encargado.asignar_pedido(pedido_familiar)
+      expect(pedido_individual.repartidor_asignado).to eq repartidor
+      expect(pedido_familiar.repartidor_asignado).to eq otro_repartidor
     end
   end
 end

@@ -51,25 +51,28 @@ Escenario: US9.6 - Asignar repartidor con un pedido con menu individual un pedid
 Escenario: US9.7 - No asignar repartidor con un pedido con menu individual un pedido con menu familiar
     Dado que hay un repartidor
     Y tiene un pedido con menu individual asignado
+    Y hay otro repartidor
     Y hay un pedido con menu familiar sin asignar
     Cuando el pedido pasa del estado "En prepracion" a "En camino"
-    Entonces no se le asigna ese repartidor
+    Entonces se le asigna al segundo repartidor
 
 @wip
 Escenario: US9.8 - No asignar repartidor con un pedido con menu pareja un pedido con menu familiar
     Dado que hay un repartidor
     Y tiene un pedido con menu pareja asignado
+    Y hay otro repartidor
     Y hay un pedido con menu familiar sin asignar
     Cuando el pedido pasa del estado "En prepracion" a "En camino"
-    Entonces no se le asigna ese repartidor
+    Entonces se le asigna al segundo repartidor
 
 @wip
 Escenario: US9.9 - No asignar repartidor con un pedido con menu individual un pedido con menu familiar
     Dado que hay un repartidor
     Y tiene un pedido con menu individual asignado
+    Y hay otro repartidor
     Y hay un pedido con menu familiar sin asignar
     Cuando el pedido pasa del estado "En prepracion" a "En camino"
-    Entonces no se le asigna ese repartidor
+    Entonces se le asigna al segundo repartidor
 
 @wip
 Escenario: US9.10 - No hay repartidores

@@ -89,3 +89,18 @@ Entonces('se le asigna ese repartidor') do
   repartidor = Persistence::Repositories::RepartidorRepository.new.find(@id_repartidor)
   expect(pedido.repartidor_asignado).to eq(repartidor)
 end
+
+Dado('hay otro repartidor') do
+  nombre = 'Carlos Solari'
+  dni = '14367888'
+  telefono = '1234567999'
+  request = {nombre: nombre, dni: dni, telefono: telefono}.to_json
+  response = Faraday.post(registrar_repartidor_url, request, header)
+  @id_otro_repartidor = JSON.parse(response.body)['id']
+end
+
+Entonces('se le asigna al segundo repartidor') do
+  pedido = Persistence::Repositories::PedidoRepository.new.find(@id_pedido)
+  repartidor = Persistence::Repositories::RepartidorRepository.new.find(@id_otro_repartidor)
+  expect(pedido.repartidor_asignado).to eq(repartidor)
+end
