@@ -8,9 +8,10 @@ Característica: Usuario califica pedido
 Antecedentes:
   Dado que el usuario ya esta registrado
   Dado que hay un repartidor
-  Dado tiene un pedido con menu individual asignado
+  Dado tiene un pedido con menu familiar asignado
 
 Escenario: US10.1 - Calificacion exitosa
+   Dado tiene un pedido con menu familiar asignado
    Dado que un pedido del cliente esta entregado
    Cuando quiero calificar un pedido como excelente
    Entonces la calificacion queda registrada
@@ -39,7 +40,7 @@ Escenario: US10.5 - Calificacion de un pedido con un valor no numerico
 Escenario: US10.6 - Calificacion de un pedido que no esta entregado
    Dado que un pedido del cliente esta en preparacion
    Cuando quiero calificar un pedido como excelente
-   Entonces la calificacion no queda registrada
+   Entonces la calificacion no queda registrada porque el estado no es entregado
 
 Escenario: US10.7 - Calificacion de un pedido que no es del cliente que lo pidio
    Dado que un pedido que no es del cliente esta entregado

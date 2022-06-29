@@ -21,6 +21,7 @@ class Pedido
 
   def calificar(usuario, calificacion)
     raise UsuarioInvalido if usuario != @usuario
+    raise EstadoInvalido if (estado != EstadoEntregado.new) && (calificacion != CalificacionInexistente.new)
 
     @calificacion = calificacion
   end

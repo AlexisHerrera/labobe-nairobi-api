@@ -92,6 +92,7 @@ Dado('tiene un pedido con menu familiar asignado') do
   response_pedido = Faraday.post(crear_pedido_url, request, header)
 
   id_pedido = JSON.parse(response_pedido.body)['id_pedido']
+  @id_pedido_primer_menu_familiar = id_pedido
   request = {'id_pedido' => id_pedido}.to_json
 
   Faraday.patch(crear_pedido_url, request, header)

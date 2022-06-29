@@ -70,12 +70,12 @@ describe Pedido do
 
   context 'repartidor calificado' do
     it 'no tiene calificaion si no le fue asignado uno' do
-      estado = EstadosPosibles::ACEPTADO
+      estado = EstadosPosibles::ENTREGADO
       expect(described_class.new(id, usuario, menu, estado).calificacion).to eq CalificacionInexistente.new
     end
 
     it 'tiene calificacion si se califica pedido' do
-      estado = EstadosPosibles::ACEPTADO
+      estado = EstadosPosibles::ENTREGADO
       pedido = described_class.new(id, usuario, menu, estado)
       pedido.calificar(usuario, Calificacion.new(5))
       expect(pedido.calificacion).to eq Calificacion.new(5)
@@ -83,7 +83,7 @@ describe Pedido do
 
     it 'no deberia guardar calificacion si se le pasa un usuario que no hizo el pedido' do
       otro_usuario = Usuario.new('maria', '1234511190', 'Paseo Colon 606', '345')
-      pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::PREPARACION)
+      pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::ENTREGADO)
   
       expect{pedido.calificar(otro_usuario, Calificacion.new(5))}.to raise_error(UsuarioInvalido)
   

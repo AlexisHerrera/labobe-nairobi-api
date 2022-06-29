@@ -60,6 +60,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     end
   end
 
+  # rubocop: disable Metrics/BlockLength
   patch :show, :map => '/pedidosCalificados' do
     begin
       pedido_repo = Persistence::Repositories::PedidoRepository.new
@@ -71,7 +72,6 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       calificacion = CalificacionFactory.new.crear(body_params[:calificacion])
 
       pedido.calificar(usuario, calificacion)
-
       pedido_repo.save(pedido)
 
       status 200
@@ -84,10 +84,15 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       status 400
       logger.info "Calificacion invalida. La calificacion del pedido: #{pedido.id} es #{pedido.calificacion.descripcion}"
       {error: 'calificacion pedido'}.to_json
+    rescue EstadoInvalido
+      status 403
+      logger.info "Estado de pedido invalido, no puede calificar el pedido. La calificacion del pedido: #{pedido.id} es #{pedido.calificacion.descripcion}"
+      {error: 'calificacion pedido'}.to_json
     rescue ObjectNotFound
       status 404
       logger.info 'No se pudo encontar el pedido o el usuario.'
       {error: 'calificacion pedido'}.to_json
     end
   end
+  # rubocop: enable Metrics/BlockLength
 end
