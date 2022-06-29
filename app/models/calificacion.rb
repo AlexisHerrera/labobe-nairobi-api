@@ -20,6 +20,7 @@ class Calificacion
 
   def validar_puntaje(puntaje)
     raise CalificacionInvalida if puntaje > 5 || puntaje < 1
+    raise CalificacionInvalida unless puntaje.is_a?(Integer)
   end
 end
 

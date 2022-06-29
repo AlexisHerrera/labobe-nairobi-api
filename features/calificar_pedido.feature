@@ -29,7 +29,6 @@ Escenario: US10.4 - Calificacion de un pedido con un valor que es inferior al ra
    Cuando quiero calificar un pedido con un valor que es inferior al rango
    Entonces la calificacion no queda registrada
 
-@wip
 Escenario: US10.5 - Calificacion de un pedido con un valor no numerico
    Dado que un pedido del cliente esta entregado
    Cuando quiero calificar un pedido con un valor no numerico
