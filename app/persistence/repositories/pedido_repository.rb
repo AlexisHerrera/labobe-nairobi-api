@@ -19,7 +19,7 @@ module Persistence
 
         pedido = Pedido.new(a_hash[:id], usuario, menu, a_hash[:estado].to_sym)
         calificacion = CalificacionFactory.new.crear(a_hash[:calificacion])
-        pedido.calificar(calificacion)
+        pedido.calificar(usuario, calificacion)
 
         begin
           repartidor = Persistence::Repositories::RepartidorRepository.new.find(a_hash[:id_repartidor])

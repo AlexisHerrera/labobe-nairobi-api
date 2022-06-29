@@ -19,7 +19,9 @@ class Pedido
     raise UsuarioInvalido if id_telegram != @usuario.id_telegram
   end
 
-  def calificar(calificacion)
+  def calificar(usuario, calificacion)
+    raise UsuarioInvalido if usuario != @usuario
+
     @calificacion = calificacion
   end
 

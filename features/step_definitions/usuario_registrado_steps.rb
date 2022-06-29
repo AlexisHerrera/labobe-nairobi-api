@@ -1,6 +1,7 @@
 Dado('que el usuario ya esta registrado') do
   @request_first_user = {nombre: 'Juan', telefono: '1123456789', direccion: 'Paseo Colon 850', id_telegram: '123'}.to_json
   @response_first_user = Faraday.post(crear_usuario_url, @request_first_user, header)
+  @id_telegram_usuario = '123'
   expect(@response_first_user.status).to eq(201)
 end
 

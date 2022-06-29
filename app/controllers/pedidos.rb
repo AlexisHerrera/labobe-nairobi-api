@@ -63,22 +63,30 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
   patch :show, :map => '/pedidosCalificados' do
     begin
       pedido_repo = Persistence::Repositories::PedidoRepository.new
-      id = body_params[:id_pedido].to_i
-      pedido = pedido_repo.find(id)
+      pedido = pedido_repo.find(body_params[:id_pedido].to_i)
+
+      usuario_repo = Persistence::Repositories::UsuarioRepository.new
+      usuario = usuario_repo.find_by_telegram_id(body_params[:id_usuario])
 
       calificacion = CalificacionFactory.new.crear(body_params[:calificacion])
-      pedido.calificar(calificacion)
+
+      pedido.calificar(usuario, calificacion)
 
       pedido_repo.save(pedido)
+
       status 200
       logger.info "Se califico con #{pedido.calificacion.descripcion} el pedido: #{pedido.id}"
+    rescue UsuarioInvalido
+      status 409
+      logger.info "Usuario no puede calificar el pedido. La calificacion del pedido: #{pedido.id} es #{pedido.calificacion.descripcion}"
+      {error: 'calificacion pedido'}.to_json
     rescue CalificacionInvalida
       status 400
       logger.info "Calificacion invalida. La calificacion del pedido: #{pedido.id} es #{pedido.calificacion.descripcion}"
       {error: 'calificacion pedido'}.to_json
     rescue ObjectNotFound
       status 404
-      logger.info 'No se pudo encontar el pedido.'
+      logger.info 'No se pudo encontar el pedido o el usuario.'
       {error: 'calificacion pedido'}.to_json
     end
   end
