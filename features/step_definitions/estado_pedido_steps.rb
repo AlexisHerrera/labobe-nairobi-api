@@ -1,5 +1,11 @@
-Dado('que tengo un pedido') do
-  request = {'id_usuario' => '123', 'id_menu' => 1}.to_json
+Dado('que tengo un pedido con menu grande') do
+  request = {'id_usuario' => '123', 'id_menu' => 3}.to_json
+  response = Faraday.post(crear_pedido_url, request, header)
+  @pedido = JSON.parse(response.body)
+end
+
+Dado('que tengo un pedido con menu mediano') do
+  request = {'id_usuario' => '123', 'id_menu' => 2}.to_json
   response = Faraday.post(crear_pedido_url, request, header)
   @pedido = JSON.parse(response.body)
 end

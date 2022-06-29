@@ -71,7 +71,7 @@ describe Repartidor do
       expect(repartidor.mochila_llena?).to eq true
     end
 
-    it 'al salir, los pedidos que tenga en la mochila pasan a estado En Camino' do
+    it 'al salir, los pedidos que tenga en la mochila pasan a estado Entregados' do
       id = 1
       nombre = 'Ying Hu'
       dni = '41199980'
@@ -81,7 +81,7 @@ describe Repartidor do
       repartidor.salir
       pedidos = repartidor.pedidos
       pedidos.each do |pedido|
-        expect(pedido.estado).to eq EstadosFactory.new.crear(EstadosPosibles::CAMINO)
+        expect(pedido.estado).to eq EstadosFactory.new.crear(EstadosPosibles::ENTREGADO)
       end
     end
     

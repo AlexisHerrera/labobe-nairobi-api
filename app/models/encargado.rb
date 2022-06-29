@@ -18,17 +18,19 @@ class Encargado
   end
 
   def asignar_pedido(pedido)
-    # obtengo repartidor
-    repartidores = obtener_repartidores
-    repartidor = self.class.elegir_repartidor(repartidores, pedido)
-    # asigno repartidor
-    pedido.asignar_repartidor(repartidor)
-    repartidor.asignar(pedido)
+    if pedido.esta_en_preparacion?
+      # obtengo repartidor
+      repartidores = obtener_repartidores
+      repartidor = self.class.elegir_repartidor(repartidores, pedido)
+      # asigno repartidor
+      repartidor.asignar(pedido)
+      enviar(repartidor) if repartidor.mochila_llena?
+    end
+    pedido.siguiente_estado if pedido.estado == EstadosFactory.new.crear(EstadosPosibles::ACEPTADO)
     # actualizo pedido
     @pedido_repo.save(pedido)
 
     # actualizo estado si mochila llena
-    enviar(repartidor) if repartidor.mochila_llena?
   end
 
   # Si bien puede ser un metodo privado, este debe ser testeado porque tiene logica de negocio

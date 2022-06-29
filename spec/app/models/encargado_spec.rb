@@ -33,7 +33,7 @@ describe Encargado do
 
     it 'Deberia actualizar estado de repartidor con mochila llena' do
       described_class.new(pedido_repo, repartidor_repo).asignar_pedido(pedido_familiar)
-      expect(pedido_familiar.estado).to eq EstadosFactory.new.crear(EstadosPosibles::CAMINO)
+      expect(pedido_familiar.estado).to eq EstadosFactory.new.crear(EstadosPosibles::ENTREGADO)
     end
 
     xit 'Deberia asignar pedidos al repartidor con la mochila mas vacía' do

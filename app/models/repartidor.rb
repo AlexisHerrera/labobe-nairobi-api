@@ -33,6 +33,8 @@ class Repartidor
   end
 
   def asignar(pedido)
+    pedido.asignar_repartidor(self)
+    pedido.siguiente_estado
     @pedidos.push(pedido)
   end
 
