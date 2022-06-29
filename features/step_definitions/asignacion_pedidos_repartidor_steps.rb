@@ -164,3 +164,9 @@ Entonces('ambos pedidos estan entregados') do
   estado = JSON.parse(response.body)['estado']
   expect(estado).to eq('Entregado')
 end
+
+Entonces('se le asigna al repartidor sin entregas realizadas') do
+  pedido = Persistence::Repositories::PedidoRepository.new.find(@id_pedido)
+  repartidor = Persistence::Repositories::RepartidorRepository.new.find(@id_repartidor)
+  expect(pedido.repartidor_asignado).to eq(repartidor)
+end

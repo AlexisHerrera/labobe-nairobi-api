@@ -1,6 +1,6 @@
 class Repartidor
   attr_reader :nombre, :dni, :telefono, :updated_on, :created_on
-  attr_accessor :id, :pedidos
+  attr_accessor :id, :pedidos, :pedidos_realizados
 
   ESPACIO_TOTAL = 3
 
@@ -12,6 +12,7 @@ class Repartidor
     @nombre = nombre
     @dni = dni
     @telefono = telefono
+    @pedidos_realizados = 0
     @pedidos = []
   end
 
@@ -23,8 +24,11 @@ class Repartidor
   end
 
   def <=>(other)
-    return @nombre <=> other.nombre if espacio_restante == other.espacio_restante
+    if espacio_restante == other.espacio_restante
+      return @nombre <=> other.nombre if pedidos_realizados == other.pedidos_realizados
 
+      return pedidos_realizados <=> other.pedidos_realizados
+    end
     espacio_restante <=> other.espacio_restante
   end
 

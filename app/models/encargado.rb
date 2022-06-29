@@ -47,9 +47,12 @@ class Encargado
     raise NoHayRepartidores if repartidores.length.zero?
 
     repartidores.each do |repartidor|
-      pedidos_asignados = @pedido_repo.find_by_id_repartidor(repartidor.id)
-      pedidos_asignados = pedidos_asignados.select { |pedido| pedido.estado == EstadosFactory.new.crear(EstadosPosibles::CAMINO) }
-      repartidor.pedidos = pedidos_asignados
+      pedidos_repartidor = @pedido_repo.find_by_id_repartidor(repartidor.id)
+
+      pedidos_actuales = pedidos_repartidor.select { |pedido| pedido.estado == EstadosFactory.new.crear(EstadosPosibles::CAMINO) }
+      repartidor.pedidos = pedidos_actuales
+      pedidos_realizados = pedidos_repartidor.select { |pedido| pedido.estado == EstadosFactory.new.crear(EstadosPosibles::ENTREGADO) }
+      repartidor.pedidos_realizados = pedidos_realizados.size
     end
     repartidores
   end
