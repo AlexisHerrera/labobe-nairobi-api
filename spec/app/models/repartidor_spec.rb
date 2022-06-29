@@ -97,9 +97,32 @@ describe Repartidor do
     let(:pedido_grande) { Pedido.new(12367262, usuario, menu_grande, EstadosPosibles::CAMINO) }
     let(:repartidor) {described_class.new(1, "nombre", "41199980", "1144449999")}
 
-    it 'repartidor con pedido chico tiene lugar para pedido pareja' do
+    it 'repartidor con pedido chico tiene espacio para menu mediano' do
       repartidor.asignar(pedido_chico)
       expect(repartidor.espacio_restante).to eq(2)
     end
+
+    it 'repartidor con pedido mediano tiene lugar para pedido individual' do
+      repartidor.asignar(pedido_mediano)
+      expect(repartidor.espacio_restante).to eq(1)
+    end
+
+    it 'repartidor con 2 pedidos individuales tiene lugar para pedido individual' do
+      repartidor.asignar(pedido_chico)
+      repartidor.asignar(pedido_chico)
+      expect(repartidor.espacio_restante).to eq(1)
+    end
+
+    it 'repartidor con pedido mediano y chico no tiene lugar' do
+      repartidor.asignar(pedido_mediano)
+      repartidor.asignar(pedido_chico)
+      expect(repartidor.espacio_restante).to eq(0)
+    end
+
+    it 'repartidor con pedido grande no tiene lugar' do
+      repartidor.asignar(pedido_grande)
+      expect(repartidor.espacio_restante).to eq(0)
+    end
+
   end
 end
