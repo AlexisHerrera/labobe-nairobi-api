@@ -27,19 +27,19 @@ describe Encargado do
 
   context 'Asignar pedido' do
     it 'Deberia asignar un pedido que esta en preparacion al repartidor por orden alfabetico' do
-      described_class.new(pedido_repo, repartidor_repo).asignar_pedido(pedido_individual)
+      described_class.new(pedido_repo, repartidor_repo).procesar_pedido(pedido_individual)
       expect(pedido_individual.repartidor_asignado).to eq otro_repartidor
     end
 
     it 'Deberia actualizar estado de repartidor con mochila llena' do
-      described_class.new(pedido_repo, repartidor_repo).asignar_pedido(pedido_familiar)
+      described_class.new(pedido_repo, repartidor_repo).procesar_pedido(pedido_familiar)
       expect(pedido_familiar.estado).to eq EstadosFactory.new.crear(EstadosPosibles::ENTREGADO)
     end
 
     it 'Deberia asignar pedidos al repartidor con la mochila mas vacía' do
       encargado = described_class.new(pedido_repo, repartidor_repo)
-      encargado.asignar_pedido(pedido_individual)
-      encargado.asignar_pedido(pedido_familiar)
+      encargado.procesar_pedido(pedido_individual)
+      encargado.procesar_pedido(pedido_familiar)
       expect(pedido_individual.repartidor_asignado).to eq otro_repartidor
       expect(pedido_familiar.repartidor_asignado).to eq repartidor
     end
