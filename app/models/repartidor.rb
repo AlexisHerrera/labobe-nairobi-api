@@ -22,6 +22,12 @@ class Repartidor
       @dni == other.dni
   end
 
+  def <=>(other)
+    return @nombre <=> other.nombre if espacio_restante == other.espacio_restante
+
+    espacio_restante <=> other.espacio_restante
+  end
+
   def validar_nombre(nombre)
     largo_nombre = nombre.delete(' ').length
     raise RepartidorInvalido if largo_nombre < 5 || largo_nombre > 20
@@ -46,6 +52,10 @@ class Repartidor
 
   def mochila_llena?
     espacio_restante.zero?
+  end
+
+  def entra_pedido?(pedido)
+    pedido.menu.peso <= espacio_restante
   end
 
   def espacio_restante

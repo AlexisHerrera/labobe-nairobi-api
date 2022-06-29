@@ -99,30 +99,29 @@ describe Repartidor do
 
     it 'repartidor con pedido chico tiene espacio para menu mediano' do
       repartidor.asignar(pedido_chico)
-      expect(repartidor.espacio_restante).to eq(2)
+      expect(repartidor.entra_pedido?(pedido_mediano)).to eq(true)
     end
 
     it 'repartidor con pedido mediano tiene lugar para pedido individual' do
       repartidor.asignar(pedido_mediano)
-      expect(repartidor.espacio_restante).to eq(1)
+      expect(repartidor.entra_pedido?(pedido_chico)).to eq(true)
     end
 
     it 'repartidor con 2 pedidos individuales tiene lugar para pedido individual' do
       repartidor.asignar(pedido_chico)
       repartidor.asignar(pedido_chico)
-      expect(repartidor.espacio_restante).to eq(1)
+      expect(repartidor.entra_pedido?(pedido_chico)).to eq(true)
     end
 
     it 'repartidor con pedido mediano y chico no tiene lugar' do
       repartidor.asignar(pedido_mediano)
       repartidor.asignar(pedido_chico)
-      expect(repartidor.espacio_restante).to eq(0)
+      expect(repartidor.entra_pedido?(pedido_chico)).to eq(false)
     end
 
     it 'repartidor con pedido grande no tiene lugar' do
       repartidor.asignar(pedido_grande)
-      expect(repartidor.espacio_restante).to eq(0)
+      expect(repartidor.entra_pedido?(pedido_chico)).to eq(false)
     end
-
   end
 end
