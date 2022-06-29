@@ -22,8 +22,12 @@ Cuando('califico un pedido inexistente') do
   @response = Faraday.patch(calificar_url, request, header)
 end
 
-Entonces('no la calificacion queda registrada') do
+Entonces('la calificacion no queda registrada porque no existe el cliente') do
   expect(@response.status).to eq(404)
+end
+
+Entonces('la calificacion no queda registrada porque no es su pedido') do
+  expect(@response.status).to eq(409)
 end
 
 Cuando('quiero calificar un pedido con un valor que excede el rango') do
