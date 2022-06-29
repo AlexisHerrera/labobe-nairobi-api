@@ -18,6 +18,10 @@ module Persistence
         usuario = Persistence::Repositories::UsuarioRepository.new.find(a_hash[:id_usuario].to_s)
 
         pedido = Pedido.new(a_hash[:id], usuario, menu, a_hash[:estado].to_sym)
+
+        calificacion = Calificacion.new(a_hash[:calificacion].to_i)
+        pedido.calificar(calificacion)
+
         begin
           repartidor = Persistence::Repositories::RepartidorRepository.new.find(a_hash[:id_repartidor])
         rescue ObjectNotFound # TODO: Esto esta mega feo, buscar refactor
@@ -32,7 +36,8 @@ module Persistence
           id_usuario: pedido.usuario.id,
           id_menu: pedido.menu.id,
           estado: detectar_estado(pedido.estado),
-          id_repartidor: serializar_repartidor(pedido.repartidor_asignado)
+          id_repartidor: serializar_repartidor(pedido.repartidor_asignado),
+          calificacion: pedido.calificacion.descripcion
         }
       end
 
@@ -56,6 +61,7 @@ module Persistence
 
         repartidor.id
       end
+      
     end
   end
 end

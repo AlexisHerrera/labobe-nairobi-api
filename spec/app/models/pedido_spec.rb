@@ -67,4 +67,20 @@ describe Pedido do
       expect(pedido.repartidor_asignado).to eq repartidor
     end
   end
+
+  context 'repartidor calificado' do
+    it 'no tiene calificaion si no le fue asignado uno' do
+      estado = EstadosPosibles::ACEPTADO
+      expect(described_class.new(id, usuario, menu, estado).calificacion).to eq CalificacionInexistente.new
+    end
+
+    it 'tiene calificacion si se califica pedido' do
+      estado = EstadosPosibles::ACEPTADO
+      pedido = described_class.new(id, usuario, menu, estado)
+      pedido.calificar(Calificacion.new(5))
+      expect(pedido.calificacion).to eq Calificacion.new(5)
+    end
+
+  end
+
 end
