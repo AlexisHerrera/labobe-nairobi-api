@@ -49,6 +49,18 @@ Dado('tiene dos pedidos con menu individual asignados') do
   Faraday.patch(crear_pedido_url, request, header)
 end
 
+Dado('tiene un pedido con menu individual asignado') do
+  id_menu = 1
+  request = {id_usuario: '123', id_menu: id_menu}.to_json
+  response_pedido = Faraday.post(crear_pedido_url, request, header)
+
+  id_pedido = JSON.parse(response_pedido.body)['id_pedido']
+  request = {'id_pedido' => id_pedido}.to_json
+
+  Faraday.patch(crear_pedido_url, request, header)
+  Faraday.patch(crear_pedido_url, request, header)
+end
+
 Cuando('el pedido pasa del estado {string} a {string}') do |_string, _string2|
   @id_pedido = JSON.parse(@response_pedido.body)['id_pedido']
   request = {'id_pedido' => @id_pedido}.to_json

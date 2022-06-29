@@ -39,7 +39,6 @@ Escenario: US9.4 - Asignar repartidor con dos pedidos con menu individual un ped
     Entonces se le asigna ese repartidor
     Y el repartidor sale
 
-@wip
 Escenario: US9.6 - Asignar repartidor con un pedido con menu individual un pedido con menu pareja
     Dado que hay un repartidor
     Y tiene un pedido con menu individual asignado
