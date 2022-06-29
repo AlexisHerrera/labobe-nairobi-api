@@ -11,7 +11,6 @@ Antecedentes:
   Dado tiene un pedido con menu familiar asignado
 
 Escenario: US10.1 - Calificacion exitosa
-   Dado tiene un pedido con menu familiar asignado
    Dado que un pedido del cliente esta entregado
    Cuando quiero calificar un pedido como excelente
    Entonces la calificacion queda registrada
@@ -36,8 +35,8 @@ Escenario: US10.5 - Calificacion de un pedido con un valor no numerico
    Cuando quiero calificar un pedido con un valor no numerico
    Entonces la calificacion no queda registrada
 
-@wip
-Escenario: US10.6 - Calificacion de un pedido que no esta entregado
+Escenario: US10.6 - Calificacion de un pedido que no esta entregado  
+   Dado tiene un pedido con menu individual asignado
    Dado que un pedido del cliente esta en preparacion
    Cuando quiero calificar un pedido como excelente
    Entonces la calificacion no queda registrada porque el estado no es entregado

@@ -8,7 +8,8 @@ class Calificacion
   end
 
   def ==(other)
-    @puntaje == other.puntaje
+    self.class == other.class &&
+      @puntaje == other.puntaje
   end
 
   def descripcion
@@ -33,9 +34,9 @@ class CalificacionFactory
   end
 end
 
-class CalificacionInexistente
-  def ==(other)
-    self.class == other.class
+class CalificacionInexistente < Calificacion
+  def initialize(_puntaje = -1)
+    super(5)
   end
 
   def descripcion
