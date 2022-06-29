@@ -81,3 +81,5 @@ Style/RedundantArgument: # (new in 1.4)
   Enabled: true
 Style/SwapValues: # (new in 1.1)
   Enabled: true
+Metrics/AbcSize:
+  Enabled: false
