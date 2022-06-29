@@ -83,7 +83,6 @@ Escenario: US9.10 - No hay repartidores
     Entonces no se le asigna repartidor
     Y el pedido no sale
 
-@wip
 Escenario: US9.11 - Dado 1 repartidor disponible, puede repartir 2 menus familiares secuencialmente
     Dado que hay un repartidor
     Y tiene un pedido con menu familiar asignado
