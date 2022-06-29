@@ -48,7 +48,6 @@ describe Repartidor do
   context 'Consultar mochila' do
 
     let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::GRANDE)}
-    let(:entrega_repo) { Persistence::Repositories::EntregaRepository.new }
     let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
     let(:pedido) { Pedido.new(12367262, usuario, menu, EstadosPosibles::ACEPTADO) }
     let(:pedido_en_preparacion) { Pedido.new(12367262, usuario, menu, EstadosPosibles::PREPARACION) }

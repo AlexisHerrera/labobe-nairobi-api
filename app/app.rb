@@ -14,7 +14,6 @@ module LaBobe
 
     post '/reset', :provides => [:js] do
       if ENV['ENABLE_RESET'] == 'true'
-        Persistence::Repositories::EntregaRepository.new.delete_all
         Persistence::Repositories::PedidoRepository.new.delete_all
         Persistence::Repositories::RepartidorRepository.new.delete_all
         Persistence::Repositories::UsuarioRepository.new.delete_all
