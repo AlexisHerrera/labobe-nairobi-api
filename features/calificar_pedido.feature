@@ -10,7 +10,6 @@ Antecedentes:
   Dado que hay un repartidor
   Dado tiene un pedido con menu individual asignado
 
-@wip
 Escenario: US10.1 - Calificacion exitosa
    Dado que un pedido del cliente esta entregado
    Cuando quiero calificar un pedido como excelente
@@ -45,7 +44,7 @@ Escenario: US10.6 - Calificacion de un pedido que no esta entregado
    Cuando quiero calificar un pedido como excelente
    Entonces no la calificacion queda registrada
 
-
+@wip
 Escenario: US10.7 - Calificacion de un pedido que no es del cliente que lo pidio
    Dado que un pedido que no es del cliente esta entregado
    Cuando quiero calificar un pedido que no es del cliente como excelente

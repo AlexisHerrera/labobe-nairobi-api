@@ -1,3 +1,7 @@
+Dado('que un pedido del cliente esta entregado') do
+  @id_pedido = @id_pedido_primer_menu_individual
+end
+
 Dado('que un pedido que no es del cliente esta entregado') do
   @id_pedido = @id_pedido_primer_menu_individual
 end
@@ -10,8 +14,6 @@ end
 
 Entonces('la calificacion queda registrada') do
   expect(@response.status).to eq(200)
-  calificacion = JSON.parse(@response.body)['calificacion']
-  expect(calificacion).to eq(5)
 end
 
 Cuando('califico un pedido inexistente') do

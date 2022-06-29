@@ -41,7 +41,7 @@ def entregas_url
 end
 
 def calificar_url
-  "#{BASE_URL}/calificar"
+  "#{BASE_URL}/pedidosCalificados"
 end
 
 def reset_url

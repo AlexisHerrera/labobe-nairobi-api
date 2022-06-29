@@ -59,4 +59,23 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       {error: 'estado pedido'}.to_json
     end
   end
+
+  patch :show, :map => '/pedidosCalificados' do
+    begin
+      pedido_repo = Persistence::Repositories::PedidoRepository.new
+      id = body_params[:id_pedido].to_i
+      pedido = pedido_repo.find(id)
+
+      calificacion = Calificacion.new(body_params[:calificacion].to_i)
+      pedido.calificar(calificacion)
+
+      pedido_repo.save(pedido)
+      status 200
+      logger.info "Se califico con #{pedido.calificacion.descripcion} el pedido: #{pedido.id}"
+    rescue ObjectNotFound
+      status 404
+      logger.info 'No se pudo encontar el pedido.'
+      {error: 'calificacion pedido'}.to_json
+    end
+  end
 end

@@ -61,7 +61,6 @@ module Persistence
 
         repartidor.id
       end
-      
     end
   end
 end

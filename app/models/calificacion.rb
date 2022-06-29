@@ -20,6 +20,6 @@ class CalificacionInexistente
   end
 
   def descripcion
-    "sin calificacion"
+    'sin calificacion'
   end
 end
