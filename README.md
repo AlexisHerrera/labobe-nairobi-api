@@ -91,4 +91,7 @@ este devuelve `It's alive! version: <version_de_la_API>`
 ### FAQ
 - ¿Como loggea hacia SUMOLOGIC?  
 Al levantar Heroku, además de indicarle que use Postgres, también agregamos como seed al link de sumologic, por lo que no hace falta tenerlo como variable de entorno. Ver /scripts/configure_heroku.sh
- 
+- ¿Como iniciar la etapa de test de aceptacion como lo hace Gitlab de manera local?  
+Correr el comando ```./scripts/acceptance_test.sh https://labobe-nairobi-test.herokuapp.com```
+  (Recordar que solo va a servir si la version de la aplicacion esta deployeada.)
+
