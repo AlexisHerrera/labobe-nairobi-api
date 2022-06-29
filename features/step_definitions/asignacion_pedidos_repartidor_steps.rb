@@ -8,6 +8,19 @@ Dado('que hay un repartidor') do
   expect(@response.status).to eq(201)
 end
 
+Dado('hay otro repartidor') do
+  nombre = 'Carlos Solari'
+  dni = '14367888'
+  telefono = '1234567999'
+  request = {nombre: nombre, dni: dni, telefono: telefono}.to_json
+  response = Faraday.post(registrar_repartidor_url, request, header)
+  @id_otro_repartidor = JSON.parse(response.body)['id']
+end
+
+Dado('que no hay un repartidores') do
+  # no hace nada
+end
+
 Dado('no tiene pedidos asignados') do
   true
 end
@@ -102,17 +115,12 @@ Entonces('se le asigna ese repartidor') do
   expect(pedido.repartidor_asignado).to eq(repartidor)
 end
 
-Dado('hay otro repartidor') do
-  nombre = 'Carlos Solari'
-  dni = '14367888'
-  telefono = '1234567999'
-  request = {nombre: nombre, dni: dni, telefono: telefono}.to_json
-  response = Faraday.post(registrar_repartidor_url, request, header)
-  @id_otro_repartidor = JSON.parse(response.body)['id']
-end
-
 Entonces('se le asigna al segundo repartidor') do
   pedido = Persistence::Repositories::PedidoRepository.new.find(@id_pedido)
   repartidor = Persistence::Repositories::RepartidorRepository.new.find(@id_otro_repartidor)
   expect(pedido.repartidor_asignado).to eq(repartidor)
+end
+
+Entonces('no se le asigna repartidor') do
+  pending # Write code here that turns the phrase above into concrete actions
 end
