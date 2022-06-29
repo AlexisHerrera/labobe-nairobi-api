@@ -17,22 +17,33 @@ class Encargado
     # @pedido_repo.save(pedidos_repartidor[0])
   end
 
-  # rubocop:disable Metrics/AbcSize
   def asignar_pedido(pedido)
     # obtengo repartidor
-    repartidores = @repartidor_repo.all
-    repartidores.each do |repartidor|
-      repartidor.pedidos = @pedido_repo.find_by_id_repartidor(repartidor.id)
-    end
-    repartidores.sort_by! { |repartidor| repartidor.pedidos.size }
+    repartidores = obtener_repartidores
+    repartidor = self.class.elegir_repartidor(repartidores, pedido)
     # asigno repartidor
-    pedido.asignar_repartidor(repartidores[0])
-    repartidores[0].asignar(pedido)
+    pedido.asignar_repartidor(repartidor)
+    repartidor.asignar(pedido)
     # actualizo pedido
     @pedido_repo.save(pedido)
 
     # actualizo estado si mochila llena
-    enviar(repartidores[0]) if repartidores[0].mochila_llena?
+    enviar(repartidor) if repartidor.mochila_llena?
   end
-  # rubocop:enable Metrics/AbcSize
+
+  # Si bien puede ser un metodo privado, este debe ser testeado porque tiene logica de negocio
+  def self.elegir_repartidor(repartidores, _pedido)
+    repartidores.sort_by! { |repartidor| repartidor.pedidos.size }
+    repartidores[0]
+  end
+
+  private
+
+  def obtener_repartidores
+    repartidores = @repartidor_repo.all
+    repartidores.each do |repartidor|
+      repartidor.pedidos = @pedido_repo.find_by_id_repartidor(repartidor.id)
+    end
+    repartidores
+  end
 end

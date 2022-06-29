@@ -44,6 +44,22 @@ describe Encargado do
       expect(pedido_familiar.repartidor_asignado).to eq otro_repartidor
     end
   end
+
+  context 'encontrar repartidor' do
+    it 'Si hay un solo repartidor que no tiene nada en la mochila, lo elige' do
+      repartidores = [repartidor]
+
+      # pedidos_repo = instance_double(Persistence::Repositories::PedidoRepository).as_null_object
+      expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq repartidor
+    end
+
+    it 'Si hay 2 repartidores elige al que la tiene vacia' do
+      repartidor.asignar(pedido_individual)
+      repartidores = [repartidor, otro_repartidor]
+      expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq otro_repartidor
+    end
+  end
+
 end
 
 
