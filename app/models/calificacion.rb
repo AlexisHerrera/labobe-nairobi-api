@@ -6,12 +6,20 @@ class Calificacion
   end
 
   def ==(other)
-    puntaje == other.puntaje
+    @puntaje == other.puntaje
+  end
+
+  def descripcion
+    @puntaje.to_s
   end
 end
 
 class CalificacionInexistente
   def ==(other)
     self.class == other.class
+  end
+
+  def descripcion
+    "sin calificacion"
   end
 end
