@@ -26,9 +26,9 @@ describe Encargado do
   end
 
   context 'Asignar pedido' do
-    it 'Deberia asignar un pedido que esta en preparacion a un repartidor' do
+    it 'Deberia asignar un pedido que esta en preparacion al repartidor por orden alfabetico' do
       described_class.new(pedido_repo, repartidor_repo).asignar_pedido(pedido_individual)
-      expect(pedido_individual.repartidor_asignado).to eq repartidor
+      expect(pedido_individual.repartidor_asignado).to eq otro_repartidor
     end
 
     it 'Deberia actualizar estado de repartidor con mochila llena' do
@@ -40,8 +40,8 @@ describe Encargado do
       encargado = described_class.new(pedido_repo, repartidor_repo)
       encargado.asignar_pedido(pedido_individual)
       encargado.asignar_pedido(pedido_familiar)
-      expect(pedido_individual.repartidor_asignado).to eq repartidor
-      expect(pedido_familiar.repartidor_asignado).to eq otro_repartidor
+      expect(pedido_individual.repartidor_asignado).to eq otro_repartidor
+      expect(pedido_familiar.repartidor_asignado).to eq repartidor
     end
   end
 
@@ -56,10 +56,15 @@ describe Encargado do
     it 'Si hay 2 repartidores elige al que la tiene vacia' do
       repartidor.asignar(pedido_individual)
       repartidores = [repartidor, otro_repartidor]
+      expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq repartidor
+    end
+
+    it 'Si hay 2 repartidores elige por orden alfabetico' do
+      repartidores = [repartidor, otro_repartidor]
       expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq otro_repartidor
     end
   end
-
+# hay que cambiar el nombre de las variables de los repartidores para que sea mas claro
 end
 
 

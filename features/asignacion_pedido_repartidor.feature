@@ -90,3 +90,12 @@ Escenario: US9.11 - Dado 1 repartidor disponible, puede repartir 2 menus familia
     Cuando el pedido pasa del estado "En prepracion" a "En camino"
     Entonces se le asigna ese repartidor
     Y el repartidor sale
+@wip
+Escenario: US9.12 - Un repartidor con pedido menu individual y uno sin pedidos, hay un menu pareja, se le asigna al primer reparitdor y este sale
+    Dado que hay un repartidor
+    Y tiene un pedido con menu individual asignado
+    Y hay otro repartidor
+    Y hay un pedido con menu pareja sin asignar
+    Cuando el pedido pasa del estado "En prepracion" a "En camino"
+    Entonces se le asigna al primer repartidor
+    Y ambos pedidos estan entregados

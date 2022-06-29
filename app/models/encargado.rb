@@ -34,8 +34,9 @@ class Encargado
   end
 
   # Si bien puede ser un metodo privado, este debe ser testeado porque tiene logica de negocio
-  def self.elegir_repartidor(repartidores, _pedido)
-    repartidores.sort_by! { |repartidor| repartidor.pedidos.size }
+  def self.elegir_repartidor(repartidores, pedido)
+    repartidores = repartidores.sort
+    repartidores = repartidores.select { |repartidor| repartidor.entra_pedido?(pedido) }
     repartidores[0]
   end
 

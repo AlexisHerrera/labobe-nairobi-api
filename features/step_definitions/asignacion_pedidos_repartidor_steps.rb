@@ -67,8 +67,8 @@ Dado('tiene un pedido con menu individual asignado') do
   request = {id_usuario: '123', id_menu: id_menu}.to_json
   response_pedido = Faraday.post(crear_pedido_url, request, header)
 
-  id_pedido = JSON.parse(response_pedido.body)['id_pedido']
-  request = {'id_pedido' => id_pedido}.to_json
+  @id_pedido_primer_menu_individual = JSON.parse(response_pedido.body)['id_pedido']
+  request = {'id_pedido' => @id_pedido_primer_menu_individual}.to_json
 
   Faraday.patch(crear_pedido_url, request, header)
   Faraday.patch(crear_pedido_url, request, header)
@@ -143,4 +143,24 @@ end
 Entonces('no se le asigna repartidor') do
   pedido = Persistence::Repositories::PedidoRepository.new.find(@id_pedido)
   expect(pedido.repartidor_asignado).to eq(Repartidor.no_repartidor)
+end
+
+Entonces('se le asigna al primer repartidor') do
+  pedido = Persistence::Repositories::PedidoRepository.new.find(@id_pedido)
+  repartidor = Persistence::Repositories::RepartidorRepository.new.find(@id_otro_repartidor)
+  expect(pedido.repartidor_asignado).to eq(repartidor)
+  pedido = Persistence::Repositories::PedidoRepository.new.find(@id_pedido_primer_menu_individual)
+  expect(pedido.repartidor_asignado).to eq(repartidor)
+end
+
+Entonces('ambos pedidos estan entregados') do
+  params = { 'id_pedido' => @id_pedido, 'id_usuario' => 123 }
+  response = Faraday.get(crear_pedido_url, params, header)
+  estado = JSON.parse(response.body)['estado']
+  expect(estado).to eq('Entregado')
+
+  params = { 'id_pedido' => @id_pedido_primer_menu_individual, 'id_usuario' => 123 }
+  response = Faraday.get(crear_pedido_url, params, header)
+  estado = JSON.parse(response.body)['estado']
+  expect(estado).to eq('Entregado')
 end
