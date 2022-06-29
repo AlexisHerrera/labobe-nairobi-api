@@ -40,6 +40,10 @@ def entregas_url
   "#{BASE_URL}/entregas"
 end
 
+def calificar_url
+  "#{BASE_URL}/calificar"
+end
+
 def reset_url
   "#{BASE_URL}/reset"
 end
