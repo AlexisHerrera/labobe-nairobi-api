@@ -2,6 +2,8 @@ class Repartidor
   attr_reader :nombre, :dni, :telefono, :updated_on, :created_on
   attr_accessor :id, :pedidos
 
+  ESPACIO_TOTAL = 3
+
   # TODO: SACAR nil como id, pasarlo a ultimo parametro como opcional o setter
   def initialize(id, nombre, dni, telefono)
     validar_nombre(nombre)
@@ -43,11 +45,15 @@ class Repartidor
   end
 
   def mochila_llena?
+    espacio_restante.zero?
+  end
+
+  def espacio_restante
     peso = 0
     pedidos.each do |pedido|
       peso += pedido.menu.peso
     end
-    peso == 3
+    ESPACIO_TOTAL - peso
   end
 
   def salir

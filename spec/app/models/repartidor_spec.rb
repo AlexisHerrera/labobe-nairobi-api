@@ -86,4 +86,20 @@ describe Repartidor do
     end
     
   end
+
+  context 'Consultar espacio restante' do
+    let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
+    let(:menu_chico) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::CHICO)}
+    let(:menu_mediano) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::MEDIANO)}
+    let(:menu_grande) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::GRANDE)}
+    let(:pedido_chico) { Pedido.new(12367262, usuario, menu_chico, EstadosPosibles::CAMINO) }
+    let(:pedido_mediano) { Pedido.new(12367262, usuario, menu_mediano, EstadosPosibles::CAMINO) }
+    let(:pedido_grande) { Pedido.new(12367262, usuario, menu_grande, EstadosPosibles::CAMINO) }
+    let(:repartidor) {described_class.new(1, "nombre", "41199980", "1144449999")}
+
+    it 'repartidor con pedido chico tiene lugar para pedido pareja' do
+      repartidor.asignar(pedido_chico)
+      expect(repartidor.espacio_restante).to eq(2)
+    end
+  end
 end
