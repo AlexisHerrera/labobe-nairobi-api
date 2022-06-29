@@ -30,6 +30,25 @@ Dado('hay un pedido con menu familiar sin asignar') do
   @response_pedido = Faraday.post(crear_pedido_url, @request, header)
 end
 
+Dado('tiene dos pedidos con menu individual asignados') do
+  id_menu = 1
+  request = {id_usuario: '123', id_menu: id_menu}.to_json
+  response_pedido1 = Faraday.post(crear_pedido_url, request, header)
+  response_pedido2 = Faraday.post(crear_pedido_url, request, header)
+
+  id_pedido1 = JSON.parse(response_pedido1.body)['id_pedido']
+  request = {'id_pedido' => id_pedido1}.to_json
+
+  Faraday.patch(crear_pedido_url, request, header)
+  Faraday.patch(crear_pedido_url, request, header)
+
+  id_pedido2 = JSON.parse(response_pedido2.body)['id_pedido']
+  request = {'id_pedido' => id_pedido2}.to_json
+
+  Faraday.patch(crear_pedido_url, request, header)
+  Faraday.patch(crear_pedido_url, request, header)
+end
+
 Cuando('el pedido pasa del estado {string} a {string}') do |_string, _string2|
   @id_pedido = JSON.parse(@response_pedido.body)['id_pedido']
   request = {'id_pedido' => @id_pedido}.to_json

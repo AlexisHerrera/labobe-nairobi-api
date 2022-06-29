@@ -20,6 +20,7 @@ class Encargado
   def asignar_pedido(pedido)
     # obtengo repartidor
     repartidor = @repartidor_repo.all[0]
+    repartidor.pedidos = @pedido_repo.find_by_id_repartidor(repartidor.id)
     # asigno repartidor
     pedido.asignar_repartidor(repartidor)
     repartidor.asignar(pedido)

@@ -23,7 +23,6 @@ Escenario: US9.2 - Asignar repartidor sin pedidos un pedido con menu pareja
     Cuando el pedido pasa del estado "En prepracion" a "En camino"
     Entonces se le asigna ese repartidor
 
-
 Escenario: US9.3 - Asignar repartidor sin pedidos un pedido con menu familiar
     Dado que hay un repartidor
     Y no tiene pedidos asignados
@@ -32,7 +31,6 @@ Escenario: US9.3 - Asignar repartidor sin pedidos un pedido con menu familiar
     Entonces se le asigna ese repartidor
     Y el repartidor sale
 
-@wip
 Escenario: US9.4 - Asignar repartidor con dos pedidos con menu individual un pedido con menu individual
     Dado que hay un repartidor
     Y tiene dos pedidos con menu individual asignados
