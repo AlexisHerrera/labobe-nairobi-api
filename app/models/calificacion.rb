@@ -37,7 +37,7 @@ end
 
 class CalificacionInexistente < Calificacion
   def initialize(_puntaje = -1)
-    super(5)
+    super(3)
   end
 
   def descripcion

@@ -81,6 +81,12 @@ describe Pedido do
       expect(pedido.calificacion).to eq Calificacion.new(5)
     end
 
+    it 'tiene calificacion si no se califica pedido' do
+      estado = EstadosPosibles::ENTREGADO
+      pedido = described_class.new(id, usuario, menu, estado)
+      expect(pedido.calificacion).to eq CalificacionInexistente.new
+    end
+
     it 'no deberia guardar calificacion si se le pasa un usuario que no hizo el pedido' do
       otro_usuario = Usuario.new('maria', '1234511190', 'Paseo Colon 606', '345')
       pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::ENTREGADO)
