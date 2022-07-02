@@ -10,6 +10,7 @@ Antecedentes:
   Dado que el usuario ya esta registrado
   Dado que hay un repartidor
 
+@local
 Escenario: 11.1 - Comisión para un repartidor sobre un menú Individual con calificación mala
   Dado que un repartidor repartió un menú Individual y fue calificado con calificación "mala"
   Cuando calculo su comisión
@@ -26,7 +27,7 @@ Escenario: 11.3 - Comisión para un repartidor sobre un menú Familiar con calif
   Cuando calculo su comisión
   Entonces esta será del 3% del valor del pedido familiar
 
-@wip
+@local
 Escenario: 11.4 - Comisión para un repartidor sobre un menú Individual con calificación buena
   Dado que un repartidor repartió un menú Individual y fue calificado con calificación "buena"
   Cuando calculo su comisión

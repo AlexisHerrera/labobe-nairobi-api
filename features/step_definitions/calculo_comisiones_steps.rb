@@ -2,9 +2,9 @@ Dado('que un repartidor repartió un menú Individual y fue calificado con calif
   puntaje = case calificacion
             when 'mala'
               1
-            when 'Buena'
+            when 'buena'
               3
-            else
+            when 'excelente'
               5
             end
 
