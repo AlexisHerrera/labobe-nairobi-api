@@ -38,4 +38,8 @@ class BackOffice
   def crear_usuario(nombre, telefono, direccion, id_telegram)
     CreadorDeUsuarios.new(@usuario_repo).crear_usuario(nombre, telefono, direccion, id_telegram)
   end
+
+  def crear_repartidor(nombre, dni, telefono)
+    CreadorDeRepartidores.new(@repartidor_repo).crear_repartidor(nombre, dni, telefono)
+  end
 end

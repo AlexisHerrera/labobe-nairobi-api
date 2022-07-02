@@ -1,8 +1,9 @@
 LaBobe::App.controllers :repartidores, :provides => [:json] do
+  backoffice = BackOffice.new
+
   post :create, :map => '/repartidores' do
     begin
-      repartidor_repo = Persistence::Repositories::RepartidorRepository.new
-      nuevo_repartidor = CreadorDeRepartidores.new(repartidor_repo).crear_repartidor(body_params[:nombre], body_params[:dni], body_params[:telefono])
+      nuevo_repartidor = backoffice.crear_repartidor(body_params[:nombre], body_params[:dni], body_params[:telefono])
       status 201
       logger.info "Repartidor #{repartidor_to_hash(nuevo_repartidor)} creado exitosamente"
       repartidor_to_json nuevo_repartidor

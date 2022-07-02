@@ -73,4 +73,12 @@ describe BackOffice do
     usuario_creado = @backoffice.crear_usuario(nombre, telefono, direccion, id_telegram)
     expect(usuario_creado).not_to be nil
   end
+
+  it 'Crea un repartidor' do
+    nombre = 'pipita'
+    telefono = '1234512126'
+    dni = '23456789'
+    repartidor_nuevo = @backoffice.crear_repartidor(nombre, dni, telefono)
+    expect(repartidor_nuevo).not_to be nil
+  end
 end
