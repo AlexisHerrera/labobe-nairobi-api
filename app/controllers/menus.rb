@@ -1,8 +1,8 @@
 LaBobe::App.controllers :menus, :provides => [:json] do
-  backoffice = BackOffice.new
+  restaurante = Restaurante.new
 
   get :show, :map => '/menus' do
-    menus = backoffice.consultar_menus
+    menus = restaurante.consultar_menus
     status 200
     logger.info "Se informa menu: #{menus}"
     menus_to_json menus

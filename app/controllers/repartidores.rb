@@ -1,9 +1,9 @@
 LaBobe::App.controllers :repartidores, :provides => [:json] do
-  backoffice = BackOffice.new
+  restaurante = Restaurante.new
 
   post :create, :map => '/repartidores' do
     begin
-      nuevo_repartidor = backoffice.crear_repartidor(body_params[:nombre], body_params[:dni], body_params[:telefono])
+      nuevo_repartidor = restaurante.crear_repartidor(body_params[:nombre], body_params[:dni], body_params[:telefono])
       status 201
       logger.info "Repartidor #{repartidor_to_hash(nuevo_repartidor)} creado exitosamente"
       repartidor_to_json nuevo_repartidor
@@ -21,7 +21,7 @@ LaBobe::App.controllers :repartidores, :provides => [:json] do
   get :show, :map => '/repartidores' do
     dni_repartidor = params[:dni_repartidor]
 
-    comision = backoffice.calcular_comision(dni_repartidor)
+    comision = restaurante.calcular_comision(dni_repartidor)
     status 200
     {'comision' => comision}.to_json
   end

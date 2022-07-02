@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe BackOffice do
+describe Restaurante do
   let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::GRANDE)}
   let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
   let(:repartidor) { Repartidor.new(nil, 'Carlos Solari', '14367888', '1234567999') }
 
   before :each do
-    @backoffice = BackOffice.new
+    @restaurante = Restaurante.new
     Persistence::Repositories::UsuarioRepository.new.save(usuario)
     Persistence::Repositories::RepartidorRepository.new.save(repartidor)
   end
@@ -15,7 +15,7 @@ describe BackOffice do
     it 'Debería crear un pedido con un usuario y un menu determinado' do
       id_usuario = '123'
       id_menu = 1
-      pedido = @backoffice.crear_pedido(id_usuario, id_menu)
+      pedido = @restaurante.crear_pedido(id_usuario, id_menu)
       expect(pedido).not_to be nil
     end
   end
@@ -23,32 +23,32 @@ describe BackOffice do
   it 'Debería devolver un pedido al consultar uno' do
     id_usuario = '123'
     id_menu = 1
-    pedido = @backoffice.crear_pedido(id_usuario, id_menu)
+    pedido = @restaurante.crear_pedido(id_usuario, id_menu)
     id_pedido = pedido.id
-    pedido_consultado = @backoffice.consultar_pedido(id_pedido, id_usuario)
+    pedido_consultado = @restaurante.consultar_pedido(id_pedido, id_usuario)
     expect(pedido_consultado.id).to eq id_pedido
   end
 
   it 'Cambia estado pedido' do
     id_usuario = '123'
     id_menu = 1
-    pedido = @backoffice.crear_pedido(id_usuario, id_menu)
+    pedido = @restaurante.crear_pedido(id_usuario, id_menu)
     id_pedido = pedido.id
-    @backoffice.cambiar_estado_pedido(id_pedido)
-    pedido_consultado = @backoffice.consultar_pedido(id_pedido, id_usuario)
+    @restaurante.cambiar_estado_pedido(id_pedido)
+    pedido_consultado = @restaurante.consultar_pedido(id_pedido, id_usuario)
     expect(pedido_consultado.estado).to eq EstadoEnPreparacion.new
   end
 
   it 'Califica pedido' do
     id_usuario = '123'
     id_menu = 3
-    pedido = @backoffice.crear_pedido(id_usuario, id_menu)
+    pedido = @restaurante.crear_pedido(id_usuario, id_menu)
     id_pedido = pedido.id
-    @backoffice.cambiar_estado_pedido(id_pedido)
-    @backoffice.cambiar_estado_pedido(id_pedido)
-    @backoffice.cambiar_estado_pedido(id_pedido)
+    @restaurante.cambiar_estado_pedido(id_pedido)
+    @restaurante.cambiar_estado_pedido(id_pedido)
+    @restaurante.cambiar_estado_pedido(id_pedido)
     puntaje = 5
-    pedido_calificado = @backoffice.calificar_pedido(id_pedido, id_usuario, puntaje)
+    pedido_calificado = @restaurante.calificar_pedido(id_pedido, id_usuario, puntaje)
     expect(pedido_calificado.calificacion.puntaje).to eq puntaje
   end
 
@@ -61,7 +61,7 @@ describe BackOffice do
     menu_repo.save(menu_individual)
     # Persistence::Repositories::MenuRepository.new.save(menu_pareja)
     menu_repo.save(menu_familiar)
-    menus = @backoffice.consultar_menus
+    menus = @restaurante.consultar_menus
     expect(menus.length).to eq 2
   end
 
@@ -70,7 +70,7 @@ describe BackOffice do
     telefono = '1234512122'
     direccion = 'Brandsen 805'
     id_telegram = '124'
-    usuario_creado = @backoffice.crear_usuario(nombre, telefono, direccion, id_telegram)
+    usuario_creado = @restaurante.crear_usuario(nombre, telefono, direccion, id_telegram)
     expect(usuario_creado).not_to be nil
   end
 
@@ -78,11 +78,11 @@ describe BackOffice do
     nombre = 'pipita'
     telefono = '1234512126'
     dni = '23456789'
-    repartidor_nuevo = @backoffice.crear_repartidor(nombre, dni, telefono)
+    repartidor_nuevo = @restaurante.crear_repartidor(nombre, dni, telefono)
     expect(repartidor_nuevo).not_to be nil
   end
 
   it 'Calcula comisiones' do
-    expect(@backoffice.calcular_comision(repartidor.dni)).to eq 0
+    expect(@restaurante.calcular_comision(repartidor.dni)).to eq 0
   end
 end

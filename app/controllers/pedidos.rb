@@ -1,11 +1,11 @@
 LaBobe::App.controllers :pedidos, :provides => [:json] do
-  backoffice = BackOffice.new
+  restaurante = Restaurante.new
 
   post :create, :map => '/pedidos' do
     # TODO: Ver si vale la pena diferenciar el tipo de error
     # Se puede hacer catcheando desde el metodo de CreadorDe.. y raiseando el correcto
     begin
-      nuevo_pedido = backoffice.crear_pedido(body_params[:id_usuario], body_params[:id_menu])
+      nuevo_pedido = restaurante.crear_pedido(body_params[:id_usuario], body_params[:id_menu])
       status 201
       logger.info "Nuevo pedido: Id pedido: #{nuevo_pedido.id}, Id_usuario: #{nuevo_pedido.usuario.id}, Id_menu: #{nuevo_pedido.menu.id}"
       pedido_to_json nuevo_pedido
@@ -20,7 +20,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     begin
       id_pedido = params[:id_pedido]
       id_usuario = params[:id_usuario]
-      pedido = backoffice.consultar_pedido(id_pedido, id_usuario)
+      pedido = restaurante.consultar_pedido(id_pedido, id_usuario)
       status 200
       logger.info "Se informa el estado del pedido: #{pedido.id}"
       pedido_to_json pedido
@@ -39,7 +39,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
   patch :show, :map => '/pedidos' do
     begin
       id = body_params[:id_pedido].to_i
-      pedido = backoffice.cambiar_estado_pedido(id)
+      pedido = restaurante.cambiar_estado_pedido(id)
       status 204
       logger.info "Se modifico el estado del pedido: #{pedido.id} "
     rescue NoHayRepartidores
@@ -59,7 +59,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       id_usuario = body_params[:id_usuario]
       calificacion = body_params[:calificacion]
 
-      pedido = backoffice.calificar_pedido(id_pedido, id_usuario, calificacion)
+      pedido = restaurante.calificar_pedido(id_pedido, id_usuario, calificacion)
       status 200
       logger.info "Se califico con #{pedido.calificacion.descripcion} el pedido: #{id_pedido}"
     rescue UsuarioInvalido

@@ -1,4 +1,4 @@
-class BackOffice
+class Restaurante
   def initialize
     @pedidos_repo = Persistence::Repositories::PedidoRepository.new
     @usuario_repo = Persistence::Repositories::UsuarioRepository.new
