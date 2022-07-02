@@ -18,7 +18,7 @@ module Persistence
         usuario = Persistence::Repositories::UsuarioRepository.new.find(a_hash[:id_usuario].to_s)
 
         pedido = Pedido.new(a_hash[:id], usuario, menu, a_hash[:estado].to_sym)
-        calificacion = CalificacionFactory.new.crear(a_hash[:calificacion])
+        calificacion = CalificacionFactory.new.crear(a_hash[:calificacion].to_sym)
         pedido.calificar(usuario, calificacion)
 
         begin
@@ -36,7 +36,7 @@ module Persistence
           id_menu: pedido.menu.id,
           estado: detectar_estado(pedido.estado),
           id_repartidor: serializar_repartidor(pedido.repartidor_asignado),
-          calificacion: pedido.calificacion.descripcion
+          calificacion: detectar_calificacion(pedido.calificacion)
         }
       end
 
@@ -52,6 +52,21 @@ module Persistence
           EstadosPosibles::ENTREGADO.to_s
         else
           raise EstadoInvalido
+        end
+      end
+
+      def detectar_calificacion(calificacion)
+        case calificacion
+        when CalificacionMala.new
+          CalificacionPosibles::MALA.to_s
+        when CalificacionBuena.new
+          CalificacionPosibles::BUENA.to_s
+        when CalificacionExcelente.new
+          CalificacionPosibles::EXCELENTE.to_s
+        when CalificacionInexistente.new
+          CalificacionPosibles::INEXISTENTE.to_s
+        else
+          raise CalificacionInvalida
         end
       end
 

@@ -85,7 +85,7 @@ describe Persistence::Repositories::PedidoRepository do
 
   it 'deberia guardar calificacion si tiene una calificacion' do
     pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::ENTREGADO)
-    pedido.calificar(usuario, Calificacion.new(5))
+    pedido.calificar(usuario, CalificacionFactory.new.crear(5))
 
     pedido_guardado = pedido_repo.save(pedido)
 

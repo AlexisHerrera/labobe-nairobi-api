@@ -8,8 +8,7 @@ class Calificacion
   end
 
   def ==(other)
-    self.class == other.class &&
-      @puntaje == other.puntaje
+    self.class == other.class
   end
 
   def descripcion
@@ -24,19 +23,41 @@ class Calificacion
   end
 end
 
+class CalificacionPosibles
+  MALA = :Mala
+  BUENA = :Buena
+  EXCELENTE = :Excelente
+  INEXISTENTE = :Inexistente
+end
+
 class CalificacionFactory
   def crear(puntaje)
     case puntaje
-    when 'sin calificacion'
+    when CalificacionPosibles::INEXISTENTE
       CalificacionInexistente.new
-    when '1'
+    when CalificacionPosibles::MALA
       CalificacionMala.new
-    when '3'
+    when CalificacionPosibles::BUENA
       CalificacionBuena.new
-    when '5'
+    when CalificacionPosibles::EXCELENTE
       CalificacionExcelente.new
     else
-      Calificacion.new(puntaje.to_i)
+      crear(validar_puntaje(puntaje))
+    end
+  end
+
+  private
+
+  def validar_puntaje(puntaje)
+    puntaje = puntaje.to_i
+    if puntaje == 1
+      CalificacionPosibles::MALA
+    elsif puntaje < 5 && puntaje > 1
+      CalificacionPosibles::BUENA
+    elsif puntaje == 5
+      CalificacionPosibles::EXCELENTE
+    else
+      raise CalificacionInvalida
     end
   end
 end
