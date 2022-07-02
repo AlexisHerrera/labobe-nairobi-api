@@ -93,6 +93,15 @@ Cuando('calculo su comisión') do
   @repartidor = Faraday.get(registrar_repartidor_url, params, header)
 end
 
+Cuando('calculo la comisión de un repartidor inexistente') do
+  params = { 'dni_repartidor' => '99999999' }
+  @repartidor = Faraday.get(registrar_repartidor_url, params, header)
+end
+
+Entonces('no tendra comision y lanzara error') do
+  expect(@repartidor.status).to eq(404)
+end
+
 Entonces('esta será del del valor {int}') do |total|
   comision = JSON.parse(@repartidor.body)['comision']
   expect(comision).to eq total

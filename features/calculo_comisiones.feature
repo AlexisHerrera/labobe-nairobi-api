@@ -59,3 +59,7 @@ Escenario: 11.10 - Comisión para un repartidor sobre 3 menus individuales con 3
   Dado que un repartidor repartió 3 menus individuales calificados
   Cuando calculo su comisión
   Entonces esta será del del valor 150
+
+Escenario: 11.11 - Comisión para un repartidor inexistente
+  Cuando calculo la comisión de un repartidor inexistente
+  Entonces no tendra comision y lanzara error
