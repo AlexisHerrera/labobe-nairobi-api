@@ -21,4 +21,13 @@ class BackOffice
     pedido = @pedidos_repo.find(id_pedido)
     @encargado.procesar_pedido(pedido)
   end
+
+  def calificar_pedido(id_pedido, id_usuario, puntaje_calificacion)
+    # debugger
+    pedido = @pedidos_repo.find(id_pedido)
+    usuario = @usuario_repo.find_by_telegram_id(id_usuario)
+    calificacion = CalificacionFactory.new.crear(puntaje_calificacion)
+    pedido.calificar(usuario, calificacion)
+    @pedidos_repo.save(pedido)
+  end
 end

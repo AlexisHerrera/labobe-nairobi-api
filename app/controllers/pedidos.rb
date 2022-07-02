@@ -54,33 +54,26 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     end
   end
 
-  # rubocop: disable Metrics/BlockLength
   patch :show, :map => '/pedidosCalificados' do
     begin
-      pedido_repo = Persistence::Repositories::PedidoRepository.new
-      pedido = pedido_repo.find(body_params[:id_pedido].to_i)
+      id_pedido = body_params[:id_pedido].to_i
+      id_usuario = body_params[:id_usuario]
+      calificacion = body_params[:calificacion]
 
-      usuario_repo = Persistence::Repositories::UsuarioRepository.new
-      usuario = usuario_repo.find_by_telegram_id(body_params[:id_usuario])
-
-      calificacion = CalificacionFactory.new.crear(body_params[:calificacion])
-
-      pedido.calificar(usuario, calificacion)
-      pedido_repo.save(pedido)
-
+      pedido = backoffice.calificar_pedido(id_pedido, id_usuario, calificacion)
       status 200
-      logger.info "Se califico con #{pedido.calificacion.descripcion} el pedido: #{pedido.id}"
+      logger.info "Se califico con #{pedido.calificacion.descripcion} el pedido: #{id_pedido}"
     rescue UsuarioInvalido
       status 409
-      logger.info "Usuario no puede calificar el pedido. La calificacion del pedido: #{pedido.id} es #{pedido.calificacion.descripcion}"
+      logger.info "Usuario no puede calificar el pedido. La calificacion del pedido: #{id_pedido} es #{calificacion}"
       {error: 'calificacion pedido'}.to_json
     rescue CalificacionInvalida
       status 400
-      logger.info "Calificacion invalida. La calificacion del pedido: #{pedido.id} es #{pedido.calificacion.descripcion}"
+      logger.info "Calificacion invalida. La calificacion del pedido: #{id_pedido} es #{calificacion}"
       {error: 'calificacion pedido'}.to_json
     rescue EstadoInvalido
       status 403
-      logger.info "Estado de pedido invalido, no puede calificar el pedido. La calificacion del pedido: #{pedido.id} es #{pedido.calificacion.descripcion}"
+      logger.info "Estado de pedido invalido, no puede calificar el pedido. La calificacion del pedido: #{id_pedido} es #{calificacion}"
       {error: 'calificacion pedido'}.to_json
     rescue ObjectNotFound
       status 404
@@ -88,5 +81,4 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       {error: 'calificacion pedido'}.to_json
     end
   end
-  # rubocop: enable Metrics/BlockLength
 end
