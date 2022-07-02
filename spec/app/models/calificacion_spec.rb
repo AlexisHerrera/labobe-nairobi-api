@@ -1,21 +1,9 @@
 require 'spec_helper'
 
-describe Calificacion do
-  context 'cuando es creado' do
-    it 'deberia ser valido cuando se crea con puntaje 5' do
-      puntaje = 5
-      expect(described_class.new(puntaje).puntaje).to eq puntaje
-    end
+describe CalificacionBuena do
+  let(:menu_individual) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
 
-    it 'deberia ser invalido cuando se crea con puntaje 0' do
-      puntaje = 0
-      expect{described_class.new(puntaje).puntaje}.to raise_error(CalificacionInvalida)
+    it 'Comision de menu individual es 50' do
+      expect(described_class.new.comision(menu_individual)).to eq 50 
     end
-
-    it 'deberia ser invalido cuando se crea con puntaje 10' do
-      puntaje = 0
-      expect{described_class.new(puntaje).puntaje}.to raise_error(CalificacionInvalida)
-    end
-
-  end
 end

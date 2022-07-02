@@ -78,8 +78,8 @@ describe Pedido do
     it 'tiene calificacion si se califica pedido' do
       estado = EstadosPosibles::ENTREGADO
       pedido = described_class.new(id, usuario, menu, estado)
-      pedido.calificar(usuario, Calificacion.new(5))
-      expect(pedido.calificacion).to eq Calificacion.new(5)
+      pedido.calificar(usuario, CalificacionFactory.new.crear(5))
+      expect(pedido.calificacion).to eq CalificacionExcelente.new
     end
 
     it 'tiene calificacion si no se califica pedido' do
@@ -92,7 +92,7 @@ describe Pedido do
       otro_usuario = Usuario.new('maria', '1234511190', 'Paseo Colon 606', '345')
       pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::ENTREGADO)
   
-      expect{pedido.calificar(otro_usuario, Calificacion.new(5))}.to raise_error(UsuarioInvalido)
+      expect{pedido.calificar(otro_usuario, CalificacionFactory.new.crear(5))}.to raise_error(UsuarioInvalido)
     end
   end
 

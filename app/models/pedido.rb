@@ -27,10 +27,7 @@ class Pedido
   end
 
   def comision
-    # TODO: refactorizar para que tenga polimorfismo
-    return (menu.precio * 0.03).to_i if @calificacion.puntaje == 1
-    return (menu.precio * 0.05).to_i if @calificacion.puntaje < 5 && @calificacion.puntaje > 1
-    return (menu.precio * 0.07).to_i if @calificacion.puntaje == 5
+    @calificacion.comision(menu)
   end
 
   def siguiente_estado

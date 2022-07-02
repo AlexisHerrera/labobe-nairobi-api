@@ -59,9 +59,9 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
       id_usuario = body_params[:id_usuario]
       calificacion = body_params[:calificacion]
 
-      pedido = restaurante.calificar_pedido(id_pedido, id_usuario, calificacion)
+      restaurante.calificar_pedido(id_pedido, id_usuario, calificacion)
       status 200
-      logger.info "Se califico con #{pedido.calificacion.descripcion} el pedido: #{id_pedido}"
+      logger.info "Se califico con #{calificacion} el pedido: #{id_pedido}"
     rescue UsuarioInvalido
       status 409
       logger.info "Usuario no puede calificar el pedido. La calificacion del pedido: #{id_pedido} es #{calificacion}"

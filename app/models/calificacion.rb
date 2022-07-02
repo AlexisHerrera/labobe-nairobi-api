@@ -1,28 +1,3 @@
-class Calificacion
-  attr_reader :puntaje
-
-  def initialize(puntaje)
-    validar_puntaje(puntaje)
-
-    @puntaje = puntaje
-  end
-
-  def ==(other)
-    self.class == other.class
-  end
-
-  def descripcion
-    @puntaje.to_s
-  end
-
-  protected
-
-  def validar_puntaje(puntaje)
-    raise CalificacionInvalida if puntaje > 5 || puntaje < 1
-    raise CalificacionInvalida unless puntaje.is_a?(Integer)
-  end
-end
-
 class CalificacionPosibles
   MALA = :Mala
   BUENA = :Buena
@@ -62,30 +37,50 @@ class CalificacionFactory
   end
 end
 
-class CalificacionInexistente < Calificacion
-  def initialize(_puntaje = -1)
-    super(3)
+class CalificacionInexistente
+  def initialize; end
+
+  def ==(other)
+    self.class == other.class
   end
 
-  def descripcion
-    'sin calificacion'
-  end
-end
-
-class CalificacionBuena < Calificacion
-  def initialize(puntaje = 3)
-    super(puntaje)
+  def comision(menu)
+    (menu.precio * 0.05).to_i
   end
 end
 
-class CalificacionMala < Calificacion
-  def initialize(puntaje = 1)
-    super(puntaje)
+class CalificacionBuena
+  def initialize; end
+
+  def ==(other)
+    self.class == other.class
+  end
+
+  def comision(menu)
+    (menu.precio * 0.05).to_i
   end
 end
 
-class CalificacionExcelente < Calificacion
-  def initialize(puntaje = 5)
-    super(puntaje)
+class CalificacionMala
+  def initialize; end
+
+  def ==(other)
+    self.class == other.class
+  end
+
+  def comision(menu)
+    (menu.precio * 0.03).to_i
+  end
+end
+
+class CalificacionExcelente
+  def initialize; end
+
+  def ==(other)
+    self.class == other.class
+  end
+
+  def comision(menu)
+    (menu.precio * 0.07).to_i
   end
 end
