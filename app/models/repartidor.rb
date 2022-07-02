@@ -45,11 +45,11 @@ class Repartidor
   end
 
   def comision
-    # comision = 0
-    # @pedidos_entregados.each do |pedido|
-    #   comision += pedido.comision
-    # end
-    50
+    comision = 0
+    @pedidos_entregados.each do |pedido|
+      comision += pedido.comision
+    end
+    comision
   end
 
   def asignar(pedido)

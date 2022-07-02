@@ -136,7 +136,7 @@ describe Repartidor do
 
     it 'repartidor con pedido chico y calificacion buena calcula 50 de comision' do
       pedido_chico.calificar(usuario, CalificacionFactory.new.crear(3))
-      repartidor.asignar(pedido_chico)
+      repartidor.pedidos_entregados.push(pedido_chico)
       expect(repartidor.comision).to eq(50)
     end
   end

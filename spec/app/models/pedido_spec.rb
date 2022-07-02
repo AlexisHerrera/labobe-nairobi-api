@@ -92,9 +92,15 @@ describe Pedido do
       pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::ENTREGADO)
   
       expect{pedido.calificar(otro_usuario, Calificacion.new(5))}.to raise_error(UsuarioInvalido)
-  
     end
-
   end
 
+  context 'calcular comision' do
+    it 'comision de un pedido con menu individual con calificacion buena' do
+      estado = EstadosPosibles::ENTREGADO
+      pedido = described_class.new(id, usuario, menu, estado)
+      pedido.calificar(usuario, CalificacionFactory.new.crear(3))
+      expect(pedido.comision).to eq 50
+    end
+  end
 end

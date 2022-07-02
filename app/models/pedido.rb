@@ -26,6 +26,10 @@ class Pedido
     @calificacion = calificacion
   end
 
+  def comision
+    50
+  end
+
   def siguiente_estado
     @estado = @estado.siguiente_estado
   end
