@@ -21,5 +21,4 @@ LaBobe::App.controllers :repartidores, :provides => [:json] do
     status 200
     {'comision' => 50}.to_json
   end
-
 end
