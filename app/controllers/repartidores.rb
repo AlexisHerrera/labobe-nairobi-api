@@ -16,4 +16,10 @@ LaBobe::App.controllers :repartidores, :provides => [:json] do
       {error: 'Argumentos invalidos al crear repartidor'}.to_json
     end
   end
+
+  get :show, :map => '/repartidores' do
+    status 200
+    {'comision' => 50}.to_json
+  end
+
 end
