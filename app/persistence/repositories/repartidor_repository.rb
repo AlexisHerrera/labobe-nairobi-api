@@ -9,6 +9,13 @@ module Persistence
         !found_record.nil?
       end
 
+      def find_by_dni(dni)
+        found_record = dataset.first(Sequel[self.class.table_name][:dni] => dni)
+        raise ObjectNotFound.new(self.class.model_class, dni) if found_record.nil?
+
+        load_object dataset.first(found_record)
+      end
+
       protected
 
       # De la DB al objeto Repartidor

@@ -100,7 +100,7 @@ describe Encargado do
       pedido_individual.asignar_repartidor(repartidor)
       pedido_individual.calificar(usuario, CalificacionFactory.new.crear(3))
       pedido_repo.save(pedido_individual)
-      expect(described_class.calcular_comision('14367888')).to eq 50
+      expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888')).to eq 50
     end
   end
 end

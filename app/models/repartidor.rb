@@ -44,6 +44,10 @@ class Repartidor
     raise RepartidorInvalido if telefono.length != 10
   end
 
+  def comision
+    50
+  end
+
   def asignar(pedido)
     pedido.asignar_repartidor(self)
     pedido.siguiente_estado

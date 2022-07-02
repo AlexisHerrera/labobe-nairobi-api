@@ -21,8 +21,8 @@ class Encargado
     repartidores[0]
   end
 
-  def self.calcular_comision(_dni_repartidor)
-    50
+  def calcular_comision(dni_repartidor)
+    obtener_repartidor(dni_repartidor).comision
   end
 
   private
@@ -32,14 +32,24 @@ class Encargado
     raise NoHayRepartidores if repartidores.length.zero?
 
     repartidores.each do |repartidor|
-      pedidos_repartidor = @pedido_repo.find_by_id_repartidor(repartidor.id)
-
-      pedidos_actuales = pedidos_repartidor.select { |pedido| pedido.estado == EstadosFactory.new.crear(EstadosPosibles::CAMINO) }
-      repartidor.pedidos = pedidos_actuales
-      pedidos_realizados = pedidos_repartidor.select { |pedido| pedido.estado == EstadosFactory.new.crear(EstadosPosibles::ENTREGADO) }
-      repartidor.pedidos_realizados = pedidos_realizados.size
+      asignar_pedidos(repartidor)
     end
     repartidores
+  end
+
+  def obtener_repartidor(dni_repartidor)
+    repartidor = @repartidor_repo.find_by_dni(dni_repartidor)
+    asignar_pedidos(repartidor)
+    repartidor
+  end
+
+  def asignar_pedidos(repartidor)
+    pedidos_repartidor = @pedido_repo.find_by_id_repartidor(repartidor.id)
+
+    pedidos_actuales = pedidos_repartidor.select { |pedido| pedido.estado == EstadosFactory.new.crear(EstadosPosibles::CAMINO) }
+    repartidor.pedidos = pedidos_actuales
+    pedidos_realizados = pedidos_repartidor.select { |pedido| pedido.estado == EstadosFactory.new.crear(EstadosPosibles::ENTREGADO) }
+    repartidor.pedidos_realizados = pedidos_realizados.size
   end
 
   def enviar(repartidor)
