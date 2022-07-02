@@ -29,6 +29,12 @@ class CalificacionFactory
     case puntaje
     when 'sin calificacion'
       CalificacionInexistente.new
+    when '1'
+      CalificacionMala.new
+    when '3'
+      CalificacionBuena.new
+    when '5'
+      CalificacionExcelente.new
     else
       Calificacion.new(puntaje.to_i)
     end
@@ -42,5 +48,23 @@ class CalificacionInexistente < Calificacion
 
   def descripcion
     'sin calificacion'
+  end
+end
+
+class CalificacionBuena < Calificacion
+  def initialize(puntaje = 3)
+    super(puntaje)
+  end
+end
+
+class CalificacionMala < Calificacion
+  def initialize(puntaje = 1)
+    super(puntaje)
+  end
+end
+
+class CalificacionExcelente < Calificacion
+  def initialize(puntaje = 5)
+    super(puntaje)
   end
 end

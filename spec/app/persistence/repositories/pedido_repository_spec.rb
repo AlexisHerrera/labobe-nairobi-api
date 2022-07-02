@@ -91,6 +91,6 @@ describe Persistence::Repositories::PedidoRepository do
 
     pedidos_encontrado = pedido_repo.find(pedido_guardado.id)
 
-    expect(pedidos_encontrado.calificacion).to eq(Calificacion.new(5))
+    expect(pedidos_encontrado.calificacion).to eq(CalificacionExcelente.new)
   end
 end
