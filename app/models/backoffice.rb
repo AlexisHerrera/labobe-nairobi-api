@@ -4,6 +4,7 @@ class BackOffice
     @usuario_repo = Persistence::Repositories::UsuarioRepository.new
     @repartidor_repo = Persistence::Repositories::RepartidorRepository.new
     @encargado = Encargado.new(@pedidos_repo, @repartidor_repo)
+    @menu_repo = Persistence::Repositories::MenuRepository.new
   end
 
   def crear_pedido(id_usuario, id_menu)
@@ -23,11 +24,14 @@ class BackOffice
   end
 
   def calificar_pedido(id_pedido, id_usuario, puntaje_calificacion)
-    # debugger
     pedido = @pedidos_repo.find(id_pedido)
     usuario = @usuario_repo.find_by_telegram_id(id_usuario)
     calificacion = CalificacionFactory.new.crear(puntaje_calificacion)
     pedido.calificar(usuario, calificacion)
     @pedidos_repo.save(pedido)
+  end
+
+  def consultar_menus
+    @menu_repo.all
   end
 end

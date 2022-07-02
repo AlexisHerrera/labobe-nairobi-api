@@ -1,8 +1,10 @@
 LaBobe::App.controllers :menus, :provides => [:json] do
+  backoffice = BackOffice.new
+
   get :show, :map => '/menus' do
+    menus = backoffice.consultar_menus
     status 200
-    menu_repo = Persistence::Repositories::MenuRepository.new
-    logger.info "Se informa menu: #{menu_repo.all}"
-    menus_to_json menu_repo.all
+    logger.info "Se informa menu: #{menus}"
+    menus_to_json menus
   end
 end

@@ -51,4 +51,17 @@ describe BackOffice do
     pedido_calificado = @backoffice.calificar_pedido(id_pedido, id_usuario, puntaje)
     expect(pedido_calificado.calificacion.puntaje).to eq puntaje
   end
+
+  it 'Devuelve los menues disponibles' do
+    menu_repo = Persistence::Repositories::MenuRepository.new
+    menu_repo.delete_all
+    menu_individual = MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)
+    # menu_pareja = MenuFactory.new.crear(2, "Menu pareja", 1500, MenusPosibles::MEDIANO)
+    menu_familiar = MenuFactory.new.crear(3, "Menu familiar", 2000, MenusPosibles::GRANDE)
+    menu_repo.save(menu_individual)
+    # Persistence::Repositories::MenuRepository.new.save(menu_pareja)
+    menu_repo.save(menu_familiar)
+    menus = @backoffice.consultar_menus
+    expect(menus.length).to eq 2
+  end
 end

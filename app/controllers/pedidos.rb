@@ -18,7 +18,6 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
 
   get :show, :map => '/pedidos' do
     begin
-      # Todo esto se puede meter en un una interfaz del repositorio (similar al creador_de), hay muchos repositorys
       id_pedido = params[:id_pedido]
       id_usuario = params[:id_usuario]
       pedido = backoffice.consultar_pedido(id_pedido, id_usuario)
