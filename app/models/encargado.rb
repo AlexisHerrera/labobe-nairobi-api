@@ -47,14 +47,14 @@ class Encargado
     pedidos_repartidor = @pedido_repo.find_by_id_repartidor(repartidor.id)
 
     pedidos_actuales = pedidos_repartidor.select { |pedido| pedido.estado == EstadosFactory.new.crear(EstadosPosibles::CAMINO) }
-    repartidor.pedidos = pedidos_actuales
-    pedidos_realizados = pedidos_repartidor.select { |pedido| pedido.estado == EstadosFactory.new.crear(EstadosPosibles::ENTREGADO) }
-    repartidor.pedidos_realizados = pedidos_realizados.size
+    repartidor.pedidos_en_camino = pedidos_actuales
+    pedidos_entregados = pedidos_repartidor.select { |pedido| pedido.estado == EstadosFactory.new.crear(EstadosPosibles::ENTREGADO) }
+    repartidor.pedidos_entregados = pedidos_entregados
   end
 
   def enviar(repartidor)
     repartidor.salir
-    pedidos = repartidor.pedidos
+    pedidos = repartidor.pedidos_en_camino
     pedidos.each do |pedido|
       @pedido_repo.save(pedido)
     end

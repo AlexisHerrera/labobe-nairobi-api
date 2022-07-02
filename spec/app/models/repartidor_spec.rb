@@ -78,7 +78,7 @@ describe Repartidor do
       repartidor = described_class.new(id, nombre, dni, telefono)
       repartidor.asignar(pedido_en_preparacion)
       repartidor.salir
-      pedidos = repartidor.pedidos
+      pedidos = repartidor.pedidos_entregados
       pedidos.each do |pedido|
         expect(pedido.estado).to eq EstadosFactory.new.crear(EstadosPosibles::ENTREGADO)
       end

@@ -66,7 +66,7 @@ describe Encargado do
 
     it 'Si hay 2 repartidores, un con 1 pedido realizado. elige al que tiene menor cantidad de pedidos realizados' do
       repartidores = [repartidor, otro_repartidor]
-      repartidor.pedidos_realizados = 1
+      repartidor.pedidos_entregados = [1]
       expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq otro_repartidor
     end
   end

@@ -1,6 +1,6 @@
 class Repartidor
   attr_reader :nombre, :dni, :telefono, :updated_on, :created_on
-  attr_accessor :id, :pedidos, :pedidos_realizados
+  attr_accessor :id, :pedidos_en_camino, :pedidos_entregados
 
   ESPACIO_TOTAL = 3
 
@@ -12,8 +12,8 @@ class Repartidor
     @nombre = nombre
     @dni = dni
     @telefono = telefono
-    @pedidos_realizados = 0
-    @pedidos = []
+    @pedidos_entregados = []
+    @pedidos_en_camino = []
   end
 
   def ==(other)
@@ -25,9 +25,9 @@ class Repartidor
 
   def <=>(other)
     if espacio_restante == other.espacio_restante
-      return @nombre <=> other.nombre if pedidos_realizados == other.pedidos_realizados
+      return @nombre <=> other.nombre if @pedidos_entregados.size == other.pedidos_entregados.size
 
-      return pedidos_realizados <=> other.pedidos_realizados
+      return @pedidos_entregados.size <=> other.pedidos_entregados.size
     end
     espacio_restante <=> other.espacio_restante
   end
@@ -45,17 +45,21 @@ class Repartidor
   end
 
   def comision
+    # comision = 0
+    # @pedidos_entregados.each do |pedido|
+    #   comision += pedido.comision
+    # end
     50
   end
 
   def asignar(pedido)
     pedido.asignar_repartidor(self)
     pedido.siguiente_estado
-    @pedidos.push(pedido)
+    @pedidos_en_camino.push(pedido)
   end
 
   def tiene_pedidos?
-    @pedidos.size.zero?
+    @pedidos_en_camino.size.zero?
   end
 
   def mochila_llena?
@@ -68,14 +72,14 @@ class Repartidor
 
   def espacio_restante
     peso = 0
-    pedidos.each do |pedido|
+    @pedidos_en_camino.each do |pedido|
       peso += pedido.menu.peso
     end
     ESPACIO_TOTAL - peso
   end
 
   def salir
-    pedidos.each(&:siguiente_estado)
+    @pedidos_en_camino.each(&:siguiente_estado)
   end
 
   # Ver ejercicio 4 - clase Aula (entrega de la catedra)
