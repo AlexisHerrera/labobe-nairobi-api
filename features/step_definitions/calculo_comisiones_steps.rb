@@ -8,25 +8,12 @@ Dado('que un repartidor repartió un menú Individual y fue calificado con calif
               5
             end
 
-  id_menu = 1
-
-  request = {'id_usuario' => '123', 'id_menu' => id_menu}.to_json
-  @pedido = JSON.parse(Faraday.post(crear_pedido_url, request, header).body)
-
-  request = {'id_pedido' => @pedido['id_pedido']}.to_json
-  Faraday.patch(crear_pedido_url, request, header)
-  Faraday.patch(crear_pedido_url, request, header)
-
-  request = {'id_usuario' => '123', 'id_menu' => 2}.to_json
-  pedido = JSON.parse(Faraday.post(crear_pedido_url, request, header).body)
-
-  request = {'id_pedido' => pedido['id_pedido']}.to_json
-  Faraday.patch(crear_pedido_url, request, header)
-  Faraday.patch(crear_pedido_url, request, header)
-
-  request = {'id_pedido' => @pedido['id_pedido'], 'id_usuario' => '123', 'calificacion' => puntaje}.to_json
-
-  Faraday.patch(calificar_url, request, header)
+  usuario = Persistence::Repositories::UsuarioRepository.new.find_by_telegram_id('123')
+  pedido = Pedido.new(1234, usuario, MenuChico.new(1, 'descripcion', 1000), EstadosPosibles::ENTREGADO)
+  repartidor = Persistence::Repositories::RepartidorRepository.new.find_by_dni('44455666')
+  pedido.asignar_repartidor(repartidor)
+  pedido.calificar(usuario, Calificacion.new(puntaje))
+  Persistence::Repositories::PedidoRepository.new.save(pedido)
 end
 
 Dado('que un repartidor repartió un menú Familiar y fue calificado con calificación {string}') do |calificacion|

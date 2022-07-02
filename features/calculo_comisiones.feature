@@ -10,7 +10,6 @@ Antecedentes:
   Dado que el usuario ya esta registrado
   Dado que hay un repartidor
 
-@wip
 Escenario: 11.1 - Comisión para un repartidor sobre un menú Individual con calificación mala
   Dado que un repartidor repartió un menú Individual y fue calificado con calificación "mala"
   Cuando calculo su comisión
