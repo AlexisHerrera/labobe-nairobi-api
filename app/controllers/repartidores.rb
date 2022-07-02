@@ -21,10 +21,7 @@ LaBobe::App.controllers :repartidores, :provides => [:json] do
   get :show, :map => '/repartidores' do
     dni_repartidor = params[:dni_repartidor]
 
-    pedido_repo = Persistence::Repositories::PedidoRepository.new
-    repartidor_repo = Persistence::Repositories::RepartidorRepository.new
-    encargado = Encargado.new(pedido_repo, repartidor_repo)
-    comision = encargado.calcular_comision(dni_repartidor)
+    comision = backoffice.calcular_comision(dni_repartidor)
     status 200
     {'comision' => comision}.to_json
   end

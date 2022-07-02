@@ -81,4 +81,8 @@ describe BackOffice do
     repartidor_nuevo = @backoffice.crear_repartidor(nombre, dni, telefono)
     expect(repartidor_nuevo).not_to be nil
   end
+
+  it 'Calcula comisiones' do
+    expect(@backoffice.calcular_comision(repartidor.dni)).to eq 0
+  end
 end

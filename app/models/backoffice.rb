@@ -42,4 +42,8 @@ class BackOffice
   def crear_repartidor(nombre, dni, telefono)
     CreadorDeRepartidores.new(@repartidor_repo).crear_repartidor(nombre, dni, telefono)
   end
+
+  def calcular_comision(dni_repartidor)
+    @encargado.calcular_comision(dni_repartidor)
+  end
 end
