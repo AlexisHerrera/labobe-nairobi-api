@@ -110,5 +110,12 @@ describe Pedido do
       pedido.calificar(usuario, CalificacionFactory.new.crear(5))
       expect(pedido.comision).to eq 175
     end
+
+    it 'comision de un pedido con menu familiar con calificacion mala' do
+      estado = EstadosPosibles::ENTREGADO
+      pedido = described_class.new(id, usuario, menu_grande, estado)
+      pedido.calificar(usuario, CalificacionFactory.new.crear(1))
+      expect(pedido.comision).to eq 75
+    end
   end
 end
