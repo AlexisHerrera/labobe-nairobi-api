@@ -1,8 +1,9 @@
 LaBobe::App.controllers :usuarios, :provides => [:json] do
+  backoffice = BackOffice.new
+
   post :create, :map => '/usuarios' do
     begin
-      user_repo = Persistence::Repositories::UsuarioRepository.new
-      nuevo_usuario = CreadorDeUsuarios.new(user_repo).crear_usuario(body_params[:nombre], body_params[:telefono], body_params[:direccion], body_params[:id_telegram])
+      nuevo_usuario = backoffice.crear_usuario(body_params[:nombre], body_params[:telefono], body_params[:direccion], body_params[:id_telegram])
       status 201
       logger.info "Usuario #{nuevo_usuario.telefono} creado exitosamente"
       usuario_to_json nuevo_usuario

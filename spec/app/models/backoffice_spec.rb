@@ -64,4 +64,13 @@ describe BackOffice do
     menus = @backoffice.consultar_menus
     expect(menus.length).to eq 2
   end
+
+  it 'Crea un usuario' do
+    nombre = 'Alexis'
+    telefono = '1234512122'
+    direccion = 'Brandsen 805'
+    id_telegram = '124'
+    usuario_creado = @backoffice.crear_usuario(nombre, telefono, direccion, id_telegram)
+    expect(usuario_creado).not_to be nil
+  end
 end

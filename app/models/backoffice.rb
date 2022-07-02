@@ -34,4 +34,8 @@ class BackOffice
   def consultar_menus
     @menu_repo.all
   end
+
+  def crear_usuario(nombre, telefono, direccion, id_telegram)
+    CreadorDeUsuarios.new(@usuario_repo).crear_usuario(nombre, telefono, direccion, id_telegram)
+  end
 end
