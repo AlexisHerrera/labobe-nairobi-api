@@ -1,9 +1,11 @@
 LaBobe::App.controllers :pedidos, :provides => [:json] do
+  backoffice = BackOffice.new
+
   post :create, :map => '/pedidos' do
     # TODO: Ver si vale la pena diferenciar el tipo de error
     # Se puede hacer catcheando desde el metodo de CreadorDe.. y raiseando el correcto
     begin
-      nuevo_pedido = BackOffice.new.crear_pedido(body_params[:id_usuario], body_params[:id_menu])
+      nuevo_pedido = backoffice.crear_pedido(body_params[:id_usuario], body_params[:id_menu])
       status 201
       logger.info "Nuevo pedido: Id pedido: #{nuevo_pedido.id}, Id_usuario: #{nuevo_pedido.usuario.id}, Id_menu: #{nuevo_pedido.menu.id}"
       pedido_to_json nuevo_pedido
@@ -18,9 +20,8 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     begin
       # Todo esto se puede meter en un una interfaz del repositorio (similar al creador_de), hay muchos repositorys
       id_pedido = params[:id_pedido]
-      pedido = Persistence::Repositories::PedidoRepository.new.find(id_pedido)
-      usuario = Persistence::Repositories::UsuarioRepository.new.find_by_telegram_id(params[:id_usuario])
-      pedido.consultar(usuario.id_telegram)
+      id_usuario = params[:id_usuario]
+      pedido = backoffice.consultar_pedido(id_pedido, id_usuario)
       status 200
       logger.info "Se informa el estado del pedido: #{pedido.id}"
       pedido_to_json pedido
