@@ -74,3 +74,33 @@ describe Encargado do
 end
 
 
+describe Encargado do
+  let(:menu_individual) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
+  let(:menu_familiar) {MenuFactory.new.crear(3, "Menu familiar", 2500, MenusPosibles::GRANDE)}
+  let(:repartidor_repo) { Persistence::Repositories::RepartidorRepository.new }
+  let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
+  let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
+  let(:pedido_individual) { Pedido.new(12367262, usuario, menu_individual, EstadosPosibles::ENTREGADO) }
+  let(:pedido_familiar) { Pedido.new(12367262, usuario, menu_familiar, EstadosPosibles::ENTREGADO) }
+
+  let(:repartidor) { Repartidor.new(nil, 'Carlos Solari', '14367888', '1234567999') }
+
+  before :each do
+    Persistence::Repositories::UsuarioRepository.new.save(usuario)
+
+    Persistence::Repositories::MenuRepository.new.save(menu_individual)
+    Persistence::Repositories::MenuRepository.new.save(menu_familiar)
+
+
+    Persistence::Repositories::RepartidorRepository.new.save(repartidor)
+  end
+
+  context 'calcular comision' do
+    it 'comision de un pedido individual con calificacion buena' do
+      pedido_individual.asignar_repartidor(repartidor)
+      pedido_individual.calificar(usuario, CalificacionFactory.new.crear(3))
+      pedido_repo.save(pedido_individual)
+      expect(described_class.calcular_comision('14367888')).to eq 50
+    end
+  end
+end

@@ -21,6 +21,10 @@ class Encargado
     repartidores[0]
   end
 
+  def self.calcular_comision(_dni_repartidor)
+    50
+  end
+
   private
 
   def obtener_repartidores
