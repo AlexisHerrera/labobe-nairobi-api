@@ -16,6 +16,24 @@ Dado('que un repartidor repartió un menú Individual y fue calificado con calif
   Persistence::Repositories::PedidoRepository.new.save(pedido)
 end
 
+Dado('que un repartidor repartió un menú Pareja y fue calificado con calificación {string}') do |calificacion|
+  puntaje = case calificacion
+            when 'mala'
+              1
+            when 'buena'
+              3
+            when 'excelente'
+              5
+            end
+
+  usuario = Persistence::Repositories::UsuarioRepository.new.find_by_telegram_id('123')
+  pedido = Pedido.new(1234, usuario, MenuMediano.new(2, 'descripcion', 1500), EstadosPosibles::ENTREGADO)
+  repartidor = Persistence::Repositories::RepartidorRepository.new.find_by_dni('44455666')
+  pedido.asignar_repartidor(repartidor)
+  pedido.calificar(usuario, Calificacion.new(puntaje))
+  Persistence::Repositories::PedidoRepository.new.save(pedido)
+end
+
 Dado('que un repartidor repartió un menú Familiar y fue calificado con calificación {string}') do |calificacion|
   puntaje = case calificacion
             when 'mala'
@@ -47,6 +65,12 @@ end
 Entonces('esta será del {int}% del valor del pedido familiar') do |porcentaje|
   comision = JSON.parse(@repartidor.body)['comision']
   expect(comision).to eq(2500 * porcentaje * 0.01)
+  expect(@repartidor.status).to eq(200)
+end
+
+Entonces('esta será del {int}% del valor del pedido pareja') do |porcentaje|
+  comision = JSON.parse(@repartidor.body)['comision']
+  expect(comision).to eq(1500 * porcentaje * 0.01)
   expect(@repartidor.status).to eq(200)
 end
 
