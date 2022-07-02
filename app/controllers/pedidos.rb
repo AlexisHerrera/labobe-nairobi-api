@@ -3,8 +3,7 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
     # TODO: Ver si vale la pena diferenciar el tipo de error
     # Se puede hacer catcheando desde el metodo de CreadorDe.. y raiseando el correcto
     begin
-      pedido_repo = Persistence::Repositories::PedidoRepository.new
-      nuevo_pedido = CreadorDePedidos.new(pedido_repo).crear(body_params[:id_usuario], body_params[:id_menu])
+      nuevo_pedido = BackOffice.new.crear_pedido(body_params[:id_usuario], body_params[:id_menu])
       status 201
       logger.info "Nuevo pedido: Id pedido: #{nuevo_pedido.id}, Id_usuario: #{nuevo_pedido.usuario.id}, Id_menu: #{nuevo_pedido.menu.id}"
       pedido_to_json nuevo_pedido
