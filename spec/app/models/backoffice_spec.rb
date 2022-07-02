@@ -27,4 +27,14 @@ describe BackOffice do
     pedido_consultado = @backoffice.consultar_pedido(id_pedido, id_usuario)
     expect(pedido_consultado.id).to eq id_pedido
   end
+
+  it 'Cambia estado pedido' do
+    id_usuario = '123'
+    id_menu = 1
+    pedido = @backoffice.crear_pedido(id_usuario, id_menu)
+    id_pedido = pedido.id
+    @backoffice.cambiar_estado_pedido(id_pedido)
+    pedido_consultado = @backoffice.consultar_pedido(id_pedido, id_usuario)
+    expect(pedido_consultado.estado).to eq EstadoEnPreparacion.new
+  end
 end

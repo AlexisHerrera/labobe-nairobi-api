@@ -39,14 +39,8 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
 
   patch :show, :map => '/pedidos' do
     begin
-      pedido_repo = Persistence::Repositories::PedidoRepository.new
       id = body_params[:id_pedido].to_i
-      pedido = pedido_repo.find(id)
-
-      # Esto deberia ir a algun otro lado
-      pedido_repo = Persistence::Repositories::PedidoRepository.new
-      repartidor_repo = Persistence::Repositories::RepartidorRepository.new
-      Encargado.new(pedido_repo, repartidor_repo).procesar_pedido(pedido)
+      pedido = backoffice.cambiar_estado_pedido(id)
       status 204
       logger.info "Se modifico el estado del pedido: #{pedido.id} "
     rescue NoHayRepartidores
