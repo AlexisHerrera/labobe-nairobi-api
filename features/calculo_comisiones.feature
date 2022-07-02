@@ -54,3 +54,8 @@ Escenario: 11.9 - Comisión para un repartidor sobre un menú Familiar con calif
   Dado que un repartidor repartió un menú Familiar y fue calificado con calificación "excelente"
   Cuando calculo su comisión
   Entonces esta será del 7% del valor del pedido familiar
+
+Escenario: 11.10 - Comisión para un repartidor sobre 3 menus individuales con 3 calificaciones diferentes
+  Dado que un repartidor repartió 3 menus individuales calificados
+  Cuando calculo su comisión
+  Entonces esta será del del valor 150
