@@ -20,7 +20,6 @@ describe BackOffice do
   end
 
   it 'Debería devolver un pedido al consultar uno' do
-    # debugger
     id_usuario = '123'
     id_menu = 1
     pedido = @backoffice.crear_pedido(id_usuario, id_menu)

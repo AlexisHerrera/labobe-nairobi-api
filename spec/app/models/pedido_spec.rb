@@ -42,8 +42,8 @@ describe Pedido do
     it 'cuando se consulta el estado de un pedido con un id_usuario diferente lanza excepcion' do
       estado = EstadosPosibles::ENTREGADO
       pedido = described_class.new(id, usuario, menu, estado)
-      id_usuario_diferente = '9999'
-      expect { pedido.consultar(id_usuario_diferente) }.to raise_error(UsuarioInvalido)
+      usuario_diferente = Usuario.new('roberto', '1234567000', 'Brandsen 805', '9999')
+      expect { pedido.verificar_propietario(usuario_diferente) }.to raise_error(UsuarioInvalido)
     end
 
     it 'cuando se consulta si el estado es "en preparacion" y es "en preparacion" devuelve true' do

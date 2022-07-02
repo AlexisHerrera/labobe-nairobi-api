@@ -11,7 +11,7 @@ class BackOffice
   def consultar_pedido(id_pedido, id_usuario)
     pedido = @pedidos_repo.find(id_pedido)
     usuario = @usuario_repo.find_by_telegram_id(id_usuario)
-    pedido.consultar(usuario.id_telegram)
+    pedido.verificar_propietario(usuario)
     pedido
   end
 end

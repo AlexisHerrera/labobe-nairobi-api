@@ -15,8 +15,8 @@ class Pedido
     @calificacion = CalificacionInexistente.new
   end
 
-  def consultar(id_telegram)
-    raise UsuarioInvalido if id_telegram != @usuario.id_telegram
+  def verificar_propietario(usuario)
+    raise UsuarioInvalido if usuario != @usuario
   end
 
   def calificar(usuario, calificacion)
