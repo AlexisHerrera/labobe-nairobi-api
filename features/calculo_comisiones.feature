@@ -12,9 +12,9 @@ Antecedentes:
 
 @wip
 Escenario: 11.1 - Comisión para un repartidor sobre un menú Individual con calificación mala
-  Dado que un repartidor repartió un menú "Individual" y fue calificado con calificación "mala"
+  Dado que un repartidor repartió un menú Individual y fue calificado con calificación "mala"
   Cuando calculo su comisión
-  Entonces esta será del 3% del valor del pedido
+  Entonces esta será del 3% del valor del pedido individual
 
 @wip
 Escenario: 11.2 - Comisión para un repartidor sobre un menú Pareja con calificación mala
@@ -27,21 +27,23 @@ Escenario: 11.3 - Comisión para un repartidor sobre un menú Familiar con calif
   Cuando calculo su comisión
   Entonces esta será del 3% del valor del pedido
 
+@wip
 Escenario: 11.4 - Comisión para un repartidor sobre un menú Individual con calificación buena
   Dado que un repartidor repartió un menú Individual y fue calificado con calificación "buena"
   Cuando calculo su comisión
-  Entonces esta será del 5% del valor del pedido
+  Entonces esta será del 5% del valor del pedido individual
 
 @wip
 Escenario: 11.5 - Comisión para un repartidor sobre un menú Pareja con calificación buena
   Dado que un repartidor repartió un menú "Pareja" y fue calificado con calificación "buena"
   Cuando calculo su comisión
   Entonces esta será del 5% del valor del pedido
-@wip
+
 Escenario: 11.6 - Comisión para un repartidor sobre un menú Familiar con calificación buena
-  Dado que un repartidor repartió un menú "Familiar" y fue calificado con calificación "buena"
+  Dado que un repartidor repartió un menú Familiar y fue calificado con calificación "buena"
   Cuando calculo su comisión
-  Entonces esta será del 5% del valor del pedido
+  Entonces esta será del 5% del valor del pedido familiar
+
 @wip
 Escenario: 11.8 - Comisión para un repartidor sobre un menú Pareja con calificación excelente
   Dado que un repartidor repartió un menú "Pareja" y fue calificado con calificación "excelente"
