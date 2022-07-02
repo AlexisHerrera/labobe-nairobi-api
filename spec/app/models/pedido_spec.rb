@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Pedido do
   let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
+  let(:menu_grande) {MenuFactory.new.crear(2, "Menu individual", 2500, MenusPosibles::GRANDE)}
   let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
   let(:id) { 12367262 }
   # Todo: sacar id pedido (ponerlo ultimo con nil opcional o hacerle un setter)
@@ -101,6 +102,13 @@ describe Pedido do
       pedido = described_class.new(id, usuario, menu, estado)
       pedido.calificar(usuario, CalificacionFactory.new.crear(3))
       expect(pedido.comision).to eq 50
+    end
+
+    it 'comision de un pedido con menu familiar con calificacion excelente' do
+      estado = EstadosPosibles::ENTREGADO
+      pedido = described_class.new(id, usuario, menu_grande, estado)
+      pedido.calificar(usuario, CalificacionFactory.new.crear(5))
+      expect(pedido.comision).to eq 175
     end
   end
 end

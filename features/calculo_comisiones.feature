@@ -49,8 +49,8 @@ Escenario: 11.8 - Comisión para un repartidor sobre un menú Pareja con calific
   Dado que un repartidor repartió un menú "Pareja" y fue calificado con calificación "excelente"
   Cuando calculo su comisión
   Entonces esta será del 7% del valor del pedido
-@wip
+
 Escenario: 11.9 - Comisión para un repartidor sobre un menú Familiar con calificación excelente
-  Dado que un repartidor repartió un menú "Familiar" y fue calificado con calificación "excelente"
+  Dado que un repartidor repartió un menú Familiar y fue calificado con calificación "excelente"
   Cuando calculo su comisión
-  Entonces esta será del 7% del valor del pedido
+  Entonces esta será del 7% del valor del pedido familiar
