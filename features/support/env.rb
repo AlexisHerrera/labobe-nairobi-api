@@ -4,6 +4,7 @@ ENV['ENABLE_RESET'] = 'true'
 
 require File.expand_path("#{File.dirname(__FILE__)}/../../config/boot")
 
+require 'webmock/cucumber'
 require 'rspec/expectations'
 
 if ENV['BASE_URL']

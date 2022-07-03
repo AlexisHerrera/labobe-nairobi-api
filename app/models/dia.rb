@@ -9,3 +9,15 @@ class DiaSinLluvia
     false
   end
 end
+
+class DiaFactory
+  def initialize(api_clima)
+    @api_clima = api_clima
+  end
+
+  def obtener_dia
+    return DiaLluvioso.new if @api_clima.esta_lloviendo?
+
+    DiaSinLluvia.new
+  end
+end

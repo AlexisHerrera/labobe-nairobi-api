@@ -1,7 +1,9 @@
 class Encargado
-  def initialize(pedido_repo, repartidor_repo)
+  def initialize(pedido_repo, repartidor_repo, token = 'fake_token')
     @pedido_repo = pedido_repo
     @repartidor_repo = repartidor_repo
+    # TODO: Cargar el token del environment
+    @token = token
   end
 
   def procesar_pedido(pedido)
@@ -21,19 +23,14 @@ class Encargado
     repartidores[0]
   end
 
-  def calcular_comision(dni_repartidor, fecha)
-    # TODO: aca hay que pegarle a la API con la fecha y nos va a decir si esta lloviendo o no. Se parsea
-    # a dia lluvioso o sin lluvia segun el caso
-    tipo_dia = DiaSinLluvia.new
-    tipo_dia = DiaLluvioso.new if es_lluvioso(fecha)
+  def calcular_comision(dni_repartidor)
+    # TODO: mover la api para adentro del dia factory?
+    api_clima = APIClima.new(@token)
+    tipo_dia = DiaFactory.new(api_clima).obtener_dia
     obtener_repartidor(dni_repartidor).comision(tipo_dia)
   end
 
   private
-
-  def es_lluvioso(fecha)
-    fecha.year == 2022 and fecha.month == 7 and fecha.day == 2
-  end
 
   def obtener_repartidores
     repartidores = @repartidor_repo.all

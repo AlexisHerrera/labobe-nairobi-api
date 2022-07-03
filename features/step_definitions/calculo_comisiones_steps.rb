@@ -89,8 +89,9 @@ Dado('que un repartidor repartió 3 menus individuales calificados') do
 end
 
 Dado('llovió durante la entrega del pedido') do
-  @fecha_lluvia = DateTime.new(2022, 7, 2)
-  Timecop.freeze(@fecha_lluvia)
+  # @fecha_lluvia = DateTime.new(2022, 7, 2)
+  # Timecop.freeze(@fecha_lluvia)
+  true
 end
 
 Cuando('calculo su comisión') do

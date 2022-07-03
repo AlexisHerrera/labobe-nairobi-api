@@ -5,7 +5,6 @@ Característica: Calculo de comisiones
   Quiero que el sistema me devuelva las comisiones de un repartidor
   Para poder pagarele
 
-
 Antecedentes:
   Dado que el usuario ya esta registrado
   Dado que hay un repartidor

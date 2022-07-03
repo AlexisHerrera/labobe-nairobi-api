@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative 'api_configuracion_steps'
 
 describe Encargado do
   let(:menu_individual) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
@@ -73,7 +74,6 @@ describe Encargado do
 # hay que cambiar el nombre de las variables de los repartidores para que sea mas claro
 end
 
-
 describe Encargado do
   let(:menu_individual) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
   let(:menu_familiar) {MenuFactory.new.crear(3, "Menu familiar", 2500, MenusPosibles::GRANDE)}
@@ -96,22 +96,23 @@ describe Encargado do
   end
 
   context 'calcular comision' do
-    let(:fecha_que_no_llueve) {DateTime.new(2022, 7, 3)}
 
     it 'comision de un pedido individual con calificacion buena' do
       pedido_individual.asignar_repartidor(repartidor)
       pedido_individual.calificar(usuario, CalificacionFactory.new.crear(3))
       pedido_repo.save(pedido_individual)
-      expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888', fecha_que_no_llueve)).to eq 50
+
+      configurar_api_dia_sin_lluvia('fake_token')
+      expect(described_class.new(pedido_repo, repartidor_repo, 'fake_token').calcular_comision('14367888')).to eq 50
     end
 
-    let(:fecha_que_llueve) {DateTime.new(2022, 7, 2)}
     it 'comision de un pedido individual con calificacion mala en una fecha que llovio' do
       pedido_individual.asignar_repartidor(repartidor)
       pedido_individual.calificar(usuario, CalificacionFactory.new.crear(1))
       pedido_repo.save(pedido_individual)
 
-      expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888', fecha_que_llueve)).to eq 40
+      configurar_api_dia_lluvioso('fake_token')
+      expect(described_class.new(pedido_repo, repartidor_repo, 'fake_token').calcular_comision('14367888')).to eq 40
     end
   end
 end

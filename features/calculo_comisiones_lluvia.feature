@@ -9,7 +9,7 @@ Característica: Asignación de pedidos a repartidores
     Dado que el usuario ya esta registrado
     Dado que hay un repartidor
 
-  @local
+  @wip
   Escenario: 12.1 - Comisión para un repartidor sobre un menú Individual con calificación mala y con lluvia
     Dado que un repartidor repartió un menú Individual y fue calificado con calificación "mala"
     Y llovió durante la entrega del pedido
