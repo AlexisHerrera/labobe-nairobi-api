@@ -119,8 +119,8 @@ describe Repartidor do
   context 'Calcular comision repartidor' do
     let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
     let(:menu_chico) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::CHICO)}
-    let(:menu_mediano) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::MEDIANO)}
-    let(:menu_grande) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::GRANDE)}
+    let(:menu_mediano) {MenuFactory.new.crear(1, "Menu", 1500, MenusPosibles::MEDIANO)}
+    let(:menu_grande) {MenuFactory.new.crear(1, "Menu", 2000, MenusPosibles::GRANDE)}
     let(:pedido_chico) { Pedido.new(usuario, menu_chico, EstadosPosibles::ENTREGADO) }
     let(:pedido_mediano) { Pedido.new(usuario, menu_mediano, EstadosPosibles::ENTREGADO) }
     let(:pedido_grande) { Pedido.new(usuario, menu_grande, EstadosPosibles::ENTREGADO) }
@@ -138,5 +138,21 @@ describe Repartidor do
       comision_esperada = menu_chico.precio * 0.04
       expect(repartidor.comision(DiaLluvioso.new)).to eq(comision_esperada)
     end
+
+    it 'repartidor con pedido mediano y calificacion buena con lluvia obtiene el 6%' do
+      pedido_mediano.calificar(usuario, CalificacionFactory.new.crear(3))
+      repartidor.pedidos_entregados.push(pedido_mediano)
+      comision_esperada = menu_mediano.precio * 0.06
+      expect(repartidor.comision(DiaLluvioso.new)).to eq(comision_esperada)
+    end
+
+    it 'repartidor con pedido grande y calificacion excelente con lluvia obtiene el 8%' do
+      pedido_grande.calificar(usuario, CalificacionFactory.new.crear(5))
+      repartidor.pedidos_entregados.push(pedido_grande)
+      comision_esperada = menu_grande.precio * 0.08
+      expect(repartidor.comision(DiaLluvioso.new)).to eq(comision_esperada)
+    end
+
+    # Nota: mas test del mismo estilo son innecesarios, debido a que la logica es sencilla
   end
 end
