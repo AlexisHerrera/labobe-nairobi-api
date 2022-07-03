@@ -17,7 +17,7 @@ module Persistence
         menu = Persistence::Repositories::MenuRepository.new.find(a_hash[:id_menu].to_i)
         usuario = Persistence::Repositories::UsuarioRepository.new.find(a_hash[:id_usuario].to_s)
 
-        pedido = Pedido.new(a_hash[:id], usuario, menu, a_hash[:estado].to_sym)
+        pedido = Pedido.new(usuario, menu, a_hash[:estado].to_sym, a_hash[:id])
         calificacion = CalificacionFactory.new.crear(a_hash[:calificacion].to_sym)
         pedido.calificar(usuario, calificacion)
 

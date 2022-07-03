@@ -4,7 +4,7 @@ describe Persistence::Repositories::PedidoRepository do
   let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
   let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
-  let(:un_pedido) { Pedido.new(nil, usuario, menu, EstadosPosibles::ACEPTADO) }
+  let(:un_pedido) { Pedido.new(usuario, menu, EstadosPosibles::ACEPTADO) }
   let(:repartidor_repo) { Persistence::Repositories::RepartidorRepository.new }
   before :each do
     Persistence::Repositories::UsuarioRepository.new.save(usuario)
@@ -53,7 +53,7 @@ describe Persistence::Repositories::PedidoRepository do
   end
 
   it 'deberia guardar un pedido con su repartidor si es que tiene uno asignado' do
-    pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::PREPARACION)
+    pedido = Pedido.new(usuario, menu, EstadosPosibles::PREPARACION)
     repartidor = Repartidor.new('Ying Hu', '41199980', '1144449999')
     repartidor_repo.save(repartidor)
 
@@ -66,7 +66,7 @@ describe Persistence::Repositories::PedidoRepository do
   end
 
   it 'deberia guardar un pedido con su repartidor si es que tiene uno asignado' do
-    pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::PREPARACION)
+    pedido = Pedido.new(usuario, menu, EstadosPosibles::PREPARACION)
 
 
     repartidor = Repartidor.new('Ying Hu', '41199980', '1144449999')
@@ -84,7 +84,7 @@ describe Persistence::Repositories::PedidoRepository do
   end
 
   it 'deberia guardar calificacion si tiene una calificacion' do
-    pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::ENTREGADO)
+    pedido = Pedido.new(usuario, menu, EstadosPosibles::ENTREGADO)
     pedido.calificar(usuario, CalificacionFactory.new.crear(5))
 
     pedido_guardado = pedido_repo.save(pedido)

@@ -6,8 +6,8 @@ describe Encargado do
   let(:repartidor_repo) { Persistence::Repositories::RepartidorRepository.new }
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
   let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
-  let(:pedido_individual) { Pedido.new(12367262, usuario, menu_individual, EstadosPosibles::PREPARACION) }
-  let(:pedido_familiar) { Pedido.new(12367262, usuario, menu_familiar, EstadosPosibles::PREPARACION) }
+  let(:pedido_individual) { Pedido.new(usuario, menu_individual, EstadosPosibles::PREPARACION) }
+  let(:pedido_familiar) { Pedido.new(usuario, menu_familiar, EstadosPosibles::PREPARACION) }
 
   let(:repartidor) { Repartidor.new('Ying Hu', '41199980', '1144449999') }
   let(:otro_repartidor) { Repartidor.new('Carlos Solari', '14367888', '1234567999') }
@@ -80,8 +80,8 @@ describe Encargado do
   let(:repartidor_repo) { Persistence::Repositories::RepartidorRepository.new }
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
   let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
-  let(:pedido_individual) { Pedido.new(12367262, usuario, menu_individual, EstadosPosibles::ENTREGADO) }
-  let(:pedido_familiar) { Pedido.new(12367262, usuario, menu_familiar, EstadosPosibles::ENTREGADO) }
+  let(:pedido_individual) { Pedido.new(usuario, menu_individual, EstadosPosibles::ENTREGADO) }
+  let(:pedido_familiar) { Pedido.new(usuario, menu_familiar, EstadosPosibles::ENTREGADO) }
 
   let(:repartidor) { Repartidor.new('Carlos Solari', '14367888', '1234567999') }
 

@@ -9,7 +9,7 @@ Dado('que un repartidor repartió un menú Individual y fue calificado con calif
             end
 
   usuario = Persistence::Repositories::UsuarioRepository.new.find_by_telegram_id('123')
-  pedido = Pedido.new(1234, usuario, MenuChico.new(1, 'descripcion', 1000), EstadosPosibles::ENTREGADO)
+  pedido = Pedido.new(usuario, MenuChico.new(1, 'descripcion', 1000), EstadosPosibles::ENTREGADO)
   repartidor = Persistence::Repositories::RepartidorRepository.new.find_by_dni('44455666')
   pedido.asignar_repartidor(repartidor)
   pedido.calificar(usuario, CalificacionFactory.new.crear(puntaje))
@@ -27,7 +27,7 @@ Dado('que un repartidor repartió un menú Pareja y fue calificado con calificac
             end
 
   usuario = Persistence::Repositories::UsuarioRepository.new.find_by_telegram_id('123')
-  pedido = Pedido.new(1234, usuario, MenuMediano.new(2, 'descripcion', 1500), EstadosPosibles::ENTREGADO)
+  pedido = Pedido.new(usuario, MenuMediano.new(2, 'descripcion', 1500), EstadosPosibles::ENTREGADO)
   repartidor = Persistence::Repositories::RepartidorRepository.new.find_by_dni('44455666')
   pedido.asignar_repartidor(repartidor)
   pedido.calificar(usuario, CalificacionFactory.new.crear(puntaje))

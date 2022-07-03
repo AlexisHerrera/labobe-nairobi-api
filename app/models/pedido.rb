@@ -5,8 +5,7 @@ class Pedido
 
   attr_accessor :id, :usuario, :menu, :estado, :calificacion
 
-  # TODO: sacar nils
-  def initialize(id, usuario, menu, estado)
+  def initialize(usuario, menu, estado, id = nil)
     @id = id # = numero de pedido
     @usuario = usuario
     @menu = menu

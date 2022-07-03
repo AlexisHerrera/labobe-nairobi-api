@@ -44,8 +44,8 @@ describe Repartidor do
 
     let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::GRANDE)}
     let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
-    let(:pedido) { Pedido.new(12367262, usuario, menu, EstadosPosibles::ACEPTADO) }
-    let(:pedido_en_preparacion) { Pedido.new(12367262, usuario, menu, EstadosPosibles::PREPARACION) }
+    let(:pedido) { Pedido.new(usuario, menu, EstadosPosibles::ACEPTADO) }
+    let(:pedido_en_preparacion) { Pedido.new(usuario, menu, EstadosPosibles::PREPARACION) }
     
     it 'si un repartidor no tiene ningun pedido, esta vacia' do
       nombre = 'Ying Hu'
@@ -83,9 +83,9 @@ describe Repartidor do
     let(:menu_chico) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::CHICO)}
     let(:menu_mediano) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::MEDIANO)}
     let(:menu_grande) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::GRANDE)}
-    let(:pedido_chico) { Pedido.new(12367262, usuario, menu_chico, EstadosPosibles::CAMINO) }
-    let(:pedido_mediano) { Pedido.new(12367262, usuario, menu_mediano, EstadosPosibles::CAMINO) }
-    let(:pedido_grande) { Pedido.new(12367262, usuario, menu_grande, EstadosPosibles::CAMINO) }
+    let(:pedido_chico) { Pedido.new(usuario, menu_chico, EstadosPosibles::CAMINO) }
+    let(:pedido_mediano) { Pedido.new(usuario, menu_mediano, EstadosPosibles::CAMINO) }
+    let(:pedido_grande) { Pedido.new(usuario, menu_grande, EstadosPosibles::CAMINO) }
     let(:repartidor) {described_class.new("nombre", "41199980", "1144449999")}
 
     it 'repartidor con pedido chico tiene espacio para menu mediano' do
@@ -121,9 +121,9 @@ describe Repartidor do
     let(:menu_chico) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::CHICO)}
     let(:menu_mediano) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::MEDIANO)}
     let(:menu_grande) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::GRANDE)}
-    let(:pedido_chico) { Pedido.new(12367262, usuario, menu_chico, EstadosPosibles::ENTREGADO) }
-    let(:pedido_mediano) { Pedido.new(12367262, usuario, menu_mediano, EstadosPosibles::ENTREGADO) }
-    let(:pedido_grande) { Pedido.new(12367262, usuario, menu_grande, EstadosPosibles::ENTREGADO) }
+    let(:pedido_chico) { Pedido.new(usuario, menu_chico, EstadosPosibles::ENTREGADO) }
+    let(:pedido_mediano) { Pedido.new(usuario, menu_mediano, EstadosPosibles::ENTREGADO) }
+    let(:pedido_grande) { Pedido.new(usuario, menu_grande, EstadosPosibles::ENTREGADO) }
     let(:repartidor) {described_class.new("nombre", "41199980", "1144449999")}
 
     it 'repartidor con pedido chico y calificacion buena calcula 50 de comision' do
