@@ -43,10 +43,10 @@ class Repartidor
     raise RepartidorInvalido if telefono.length != 10
   end
 
-  def comision
+  def comision(dia)
     comision = 0
     @pedidos_entregados.each do |pedido|
-      comision += pedido.comision
+      comision += pedido.comision_base + pedido.comision_extra(dia)
     end
     comision
   end

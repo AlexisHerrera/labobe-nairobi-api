@@ -25,8 +25,14 @@ class Pedido
     @calificacion = calificacion
   end
 
-  def comision
+  def comision_base
     @calificacion.comision(menu)
+  end
+
+  def comision_extra(dia)
+    return menu.precio * 0.01 if dia.llueve?
+
+    0
   end
 
   def siguiente_estado

@@ -116,7 +116,7 @@ describe Repartidor do
     end
   end
 
-  context 'Consultar espacio restante' do
+  context 'Calcular comision repartidor' do
     let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
     let(:menu_chico) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::CHICO)}
     let(:menu_mediano) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::MEDIANO)}
@@ -126,10 +126,17 @@ describe Repartidor do
     let(:pedido_grande) { Pedido.new(usuario, menu_grande, EstadosPosibles::ENTREGADO) }
     let(:repartidor) {described_class.new("nombre", "41199980", "1144449999")}
 
-    it 'repartidor con pedido chico y calificacion buena calcula 50 de comision' do
+    it 'repartidor con pedido chico y calificacion buena calcula 50 de comision sin lluvia' do
       pedido_chico.calificar(usuario, CalificacionFactory.new.crear(3))
       repartidor.pedidos_entregados.push(pedido_chico)
-      expect(repartidor.comision).to eq(50)
+      expect(repartidor.comision(DiaSinLluvia.new)).to eq(50)
+    end
+
+    it 'repartidor con pedido chico y calificacion mala con lluvia obtiene el 4%' do
+      pedido_chico.calificar(usuario, CalificacionFactory.new.crear(1))
+      repartidor.pedidos_entregados.push(pedido_chico)
+      comision_esperada = menu_chico.precio * 0.04
+      expect(repartidor.comision(DiaLluvioso.new)).to eq(comision_esperada)
     end
   end
 end

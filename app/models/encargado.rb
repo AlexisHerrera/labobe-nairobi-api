@@ -22,7 +22,7 @@ class Encargado
   end
 
   def calcular_comision(dni_repartidor)
-    obtener_repartidor(dni_repartidor).comision
+    obtener_repartidor(dni_repartidor).comision(DiaSinLluvia.new)
   end
 
   private
