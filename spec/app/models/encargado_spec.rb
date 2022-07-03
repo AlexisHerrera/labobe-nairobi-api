@@ -103,7 +103,7 @@ describe Encargado do
       pedido_repo.save(pedido_individual)
 
       configurar_api_dia_sin_lluvia('fake_token')
-      expect(described_class.new(pedido_repo, repartidor_repo, 'fake_token').calcular_comision('14367888')).to eq 50
+      expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888')).to eq 50
     end
 
     it 'comision de un pedido individual con calificacion mala en una fecha que llovio' do
@@ -112,7 +112,7 @@ describe Encargado do
       pedido_repo.save(pedido_individual)
 
       configurar_api_dia_lluvioso('fake_token')
-      expect(described_class.new(pedido_repo, repartidor_repo, 'fake_token').calcular_comision('14367888')).to eq 40
+      expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888')).to eq 40
     end
   end
 end

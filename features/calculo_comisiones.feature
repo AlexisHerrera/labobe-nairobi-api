@@ -8,6 +8,7 @@ Característica: Calculo de comisiones
 Antecedentes:
   Dado que el usuario ya esta registrado
   Dado que hay un repartidor
+  Dado que no llueve
 
 @local
 Escenario: 11.1 - Comisión para un repartidor sobre un menú Individual con calificación mala

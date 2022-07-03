@@ -1,9 +1,7 @@
 class Encargado
-  def initialize(pedido_repo, repartidor_repo, token = 'fake_token')
+  def initialize(pedido_repo, repartidor_repo)
     @pedido_repo = pedido_repo
     @repartidor_repo = repartidor_repo
-    # TODO: Cargar el token del environment
-    @token = token
   end
 
   def procesar_pedido(pedido)
@@ -24,9 +22,7 @@ class Encargado
   end
 
   def calcular_comision(dni_repartidor)
-    # TODO: mover la api para adentro del dia factory?
-    api_clima = APIClima.new(@token)
-    tipo_dia = DiaFactory.new(api_clima).obtener_dia
+    tipo_dia = DiaFactory.new.obtener_dia
     obtener_repartidor(dni_repartidor).comision(tipo_dia)
   end
 

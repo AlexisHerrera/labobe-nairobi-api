@@ -94,6 +94,32 @@ Dado('llovió durante la entrega del pedido') do
   true
 end
 
+Dado('que configuro el sistema para que crea que esta lloviendo') do
+  @request = {'clima' => 'lluvia'}.to_json
+  @response = Faraday.post(mock_clima_url, @request, header)
+  expect(@response.status).to eq(200)
+end
+
+Dado('que no llueve') do
+  @request = {'clima' => 'sin_lluvia'}.to_json
+  @response = Faraday.post(mock_clima_url, @request, header)
+  expect(@response.status).to eq(200)
+end
+
+Dado('que llueve') do
+  @request = {'clima' => 'lluvia'}.to_json
+  @response = Faraday.post(mock_clima_url, @request, header)
+  expect(@response.status).to eq(200)
+end
+Cuando('consulto el clima') do
+  @clima = Faraday.get(obtener_clima_url)
+end
+
+Entonces('el sistema cree que esta lloviendo') do
+  estado_clima = JSON.parse(@clima.body)['estado']
+  expect(estado_clima).to eq 'Lluvia'
+end
+
 Cuando('calculo su comisión') do
   params = { 'dni_repartidor' => '44455666' }
   @repartidor = Faraday.get(comision_url, params, header)

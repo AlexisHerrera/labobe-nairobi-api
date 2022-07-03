@@ -4,7 +4,6 @@ ENV['ENABLE_RESET'] = 'true'
 
 require File.expand_path("#{File.dirname(__FILE__)}/../../config/boot")
 
-require 'webmock/cucumber'
 require 'rspec/expectations'
 
 if ENV['BASE_URL']
@@ -51,6 +50,14 @@ end
 
 def reset_url
   "#{BASE_URL}/reset"
+end
+
+def mock_clima_url
+  "#{BASE_URL}/mock_lluvia"
+end
+
+def obtener_clima_url
+  "#{BASE_URL}/clima"
 end
 
 After do |_scenario|
