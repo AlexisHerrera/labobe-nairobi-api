@@ -36,6 +36,10 @@ def registrar_repartidor_url
   "#{BASE_URL}/repartidores"
 end
 
+def comision_url
+  "#{BASE_URL}/comision"
+end
+
 def entregas_url
   "#{BASE_URL}/entregas"
 end

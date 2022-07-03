@@ -18,13 +18,13 @@ LaBobe::App.controllers :repartidores, :provides => [:json] do
     end
   end
 
-  get :show, :map => '/repartidores' do
+  get :show, :map => '/comision' do
     begin
       dni_repartidor = params[:dni_repartidor]
 
       comision = restaurante.calcular_comision(dni_repartidor)
       status 200
-      {'comision' => comision}.to_json
+      { 'dni' => dni_repartidor, 'comision' => comision}.to_json
     rescue ObjectNotFound
       status 404
       logger.info 'No se pudo encontar el repartidor.'

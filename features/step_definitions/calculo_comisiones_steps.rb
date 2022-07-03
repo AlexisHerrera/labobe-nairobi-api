@@ -90,12 +90,12 @@ end
 
 Cuando('calculo su comisión') do
   params = { 'dni_repartidor' => '44455666' }
-  @repartidor = Faraday.get(registrar_repartidor_url, params, header)
+  @repartidor = Faraday.get(comision_url, params, header)
 end
 
 Cuando('calculo la comisión de un repartidor inexistente') do
   params = { 'dni_repartidor' => '99999999' }
-  @repartidor = Faraday.get(registrar_repartidor_url, params, header)
+  @repartidor = Faraday.get(comision_url, params, header)
 end
 
 Entonces('no tendra comision y lanzara error') do
