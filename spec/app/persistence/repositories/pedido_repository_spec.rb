@@ -54,7 +54,7 @@ describe Persistence::Repositories::PedidoRepository do
 
   it 'deberia guardar un pedido con su repartidor si es que tiene uno asignado' do
     pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::PREPARACION)
-    repartidor = Repartidor.new(nil, 'Ying Hu', '41199980', '1144449999')
+    repartidor = Repartidor.new('Ying Hu', '41199980', '1144449999')
     repartidor_repo.save(repartidor)
 
     pedido.asignar_repartidor(repartidor)
@@ -69,7 +69,7 @@ describe Persistence::Repositories::PedidoRepository do
     pedido = Pedido.new(nil, usuario, menu, EstadosPosibles::PREPARACION)
 
 
-    repartidor = Repartidor.new(nil, 'Ying Hu', '41199980', '1144449999')
+    repartidor = Repartidor.new('Ying Hu', '41199980', '1144449999')
     repartidor_nuevo = repartidor_repo.save(repartidor)
 
     pedido.asignar_repartidor(repartidor)

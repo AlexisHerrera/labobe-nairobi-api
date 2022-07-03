@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Restaurante do
   let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::GRANDE)}
   let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
-  let(:repartidor) { Repartidor.new(nil, 'Carlos Solari', '14367888', '1234567999') }
+  let(:repartidor) { Repartidor.new('Carlos Solari', '14367888', '1234567999') }
 
   before :each do
     @restaurante = Restaurante.new

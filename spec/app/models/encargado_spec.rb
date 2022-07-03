@@ -9,8 +9,8 @@ describe Encargado do
   let(:pedido_individual) { Pedido.new(12367262, usuario, menu_individual, EstadosPosibles::PREPARACION) }
   let(:pedido_familiar) { Pedido.new(12367262, usuario, menu_familiar, EstadosPosibles::PREPARACION) }
 
-  let(:repartidor) { Repartidor.new(nil, 'Ying Hu', '41199980', '1144449999') }
-  let(:otro_repartidor) { Repartidor.new(nil, 'Carlos Solari', '14367888', '1234567999') }
+  let(:repartidor) { Repartidor.new('Ying Hu', '41199980', '1144449999') }
+  let(:otro_repartidor) { Repartidor.new('Carlos Solari', '14367888', '1234567999') }
 
   before :each do
     Persistence::Repositories::UsuarioRepository.new.save(usuario)
@@ -83,7 +83,7 @@ describe Encargado do
   let(:pedido_individual) { Pedido.new(12367262, usuario, menu_individual, EstadosPosibles::ENTREGADO) }
   let(:pedido_familiar) { Pedido.new(12367262, usuario, menu_familiar, EstadosPosibles::ENTREGADO) }
 
-  let(:repartidor) { Repartidor.new(nil, 'Carlos Solari', '14367888', '1234567999') }
+  let(:repartidor) { Repartidor.new('Carlos Solari', '14367888', '1234567999') }
 
   before :each do
     Persistence::Repositories::UsuarioRepository.new.save(usuario)

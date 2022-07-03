@@ -63,7 +63,7 @@ describe Pedido do
     it 'tiene un repartidor si se le asigna uno' do
       estado = EstadosPosibles::PREPARACION
       pedido = described_class.new(id, usuario, menu, estado)
-      repartidor = Repartidor.new(nil, 'Ying Hu', '41199980', '1144449999')
+      repartidor = Repartidor.new('Ying Hu', '41199980', '1144449999')
       pedido.asignar_repartidor(repartidor)
       expect(pedido.repartidor_asignado).to eq repartidor
     end

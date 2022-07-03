@@ -4,8 +4,7 @@ class Repartidor
 
   ESPACIO_TOTAL = 3
 
-  # TODO: SACAR nil como id, pasarlo a ultimo parametro como opcional o setter
-  def initialize(id, nombre, dni, telefono)
+  def initialize(nombre, dni, telefono, id = nil)
     validar_nombre(nombre)
     validar_telefono(telefono)
     @id = id
@@ -87,5 +86,5 @@ class Repartidor
     attr_reader :no_repartidor # rubocop:disable: Style/TrivialAccessors:
   end
 
-  @no_repartidor = new(nil, 'No name', '10000000', '1123456789')
+  @no_repartidor = new('No name', '10000000', '1123456789')
 end

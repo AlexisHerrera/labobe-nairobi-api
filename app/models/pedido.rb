@@ -5,7 +5,7 @@ class Pedido
 
   attr_accessor :id, :usuario, :menu, :estado, :calificacion
 
-  # TODO: SACAR nil como id, pasarlo a ultimo parametro como opcional o setter
+  # TODO: sacar nils
   def initialize(id, usuario, menu, estado)
     @id = id # = numero de pedido
     @usuario = usuario

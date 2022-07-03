@@ -2,8 +2,6 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
   restaurante = Restaurante.new
 
   post :create, :map => '/pedidos' do
-    # TODO: Ver si vale la pena diferenciar el tipo de error
-    # Se puede hacer catcheando desde el metodo de CreadorDe.. y raiseando el correcto
     begin
       nuevo_pedido = restaurante.crear_pedido(body_params[:id_usuario], body_params[:id_menu])
       status 201
@@ -54,6 +52,8 @@ LaBobe::App.controllers :pedidos, :provides => [:json] do
   end
 
   patch :show, :map => '/pedidosCalificados' do
+    # TODO: Ver si vale la pena diferenciar el tipo de error
+    # Se puede hacer catcheando desde el metodo de CreadorDe.. y raiseando el correcto
     begin
       id_pedido = body_params[:id_pedido].to_i
       id_usuario = body_params[:id_usuario]

@@ -20,7 +20,7 @@ module Persistence
 
       # De la DB al objeto Repartidor
       def load_object(a_hash)
-        Repartidor.new(a_hash[:id], a_hash[:nombre], a_hash[:dni], a_hash[:telefono])
+        Repartidor.new(a_hash[:nombre], a_hash[:dni], a_hash[:telefono], a_hash[:id])
       end
 
       # Del objeto Repartidor a la DB
