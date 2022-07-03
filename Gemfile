@@ -47,4 +47,5 @@ group :development, :test do
   gem 'rubocop-rspec', require: false
   gem 'ruby-debug-ide'
   gem 'simplecov'
+  gem 'timecop', '0.9.5'
 end

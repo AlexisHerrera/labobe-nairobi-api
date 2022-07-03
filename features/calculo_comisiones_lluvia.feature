@@ -4,12 +4,17 @@ Característica: Asignación de pedidos a repartidores
   Como encargado del backoffice
   Quiero que el sistema asigne un repartidor al pedido
   Para que el pedido llegue al domicilio del cliente
-  @wip
+
+  Antecedentes:
+    Dado que el usuario ya esta registrado
+    Dado que hay un repartidor
+
+  @local
   Escenario: 12.1 - Comisión para un repartidor sobre un menú Individual con calificación mala y con lluvia
-    Dado que un repartidor repartió un menú "Individual" y fue calificado con calificación "mala"
+    Dado que un repartidor repartió un menú Individual y fue calificado con calificación "mala"
     Y llovió durante la entrega del pedido
     Cuando calculo su comisión
-    Entonces esta será del 4% del valor del pedido
+    Entonces esta será del 4% del valor del pedido individual
   @wip
   Escenario: 12.2 - Comisión para un repartidor sobre un menú Pareja con calificación mala y con lluvia
     Dado que un repartidor repartió un menú "Pareja" y fue calificado con calificación "mala"

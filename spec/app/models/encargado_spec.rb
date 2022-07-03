@@ -96,11 +96,22 @@ describe Encargado do
   end
 
   context 'calcular comision' do
+    let(:fecha_que_no_llueve) {DateTime.new(2022, 7, 3)}
+
     it 'comision de un pedido individual con calificacion buena' do
       pedido_individual.asignar_repartidor(repartidor)
       pedido_individual.calificar(usuario, CalificacionFactory.new.crear(3))
       pedido_repo.save(pedido_individual)
-      expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888')).to eq 50
+      expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888', fecha_que_no_llueve)).to eq 50
+    end
+
+    let(:fecha_que_llueve) {DateTime.new(2022, 7, 2)}
+    it 'comision de un pedido individual con calificacion mala en una fecha que llovio' do
+      pedido_individual.asignar_repartidor(repartidor)
+      pedido_individual.calificar(usuario, CalificacionFactory.new.crear(1))
+      pedido_repo.save(pedido_individual)
+
+      expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888', fecha_que_llueve)).to eq 40
     end
   end
 end

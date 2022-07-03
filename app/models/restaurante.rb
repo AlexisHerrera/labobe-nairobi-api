@@ -44,6 +44,6 @@ class Restaurante
   end
 
   def calcular_comision(dni_repartidor)
-    @encargado.calcular_comision(dni_repartidor)
+    @encargado.calcular_comision(dni_repartidor, DateTime.now)
   end
 end

@@ -150,8 +150,6 @@ GEM
       rake (>= 0.8.1)
     ruby-progressbar (1.10.1)
     ruby2_keywords (0.0.5)
-    semantic_logger (4.7.4)
-      concurrent-ruby (~> 1.0)
     sequel (5.39.0)
     simplecov (0.20.0)
       docile (~> 1.1)
@@ -169,6 +167,7 @@ GEM
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    timecop (0.9.5)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
@@ -192,9 +191,9 @@ DEPENDENCIES
   rubocop
   rubocop-rspec
   ruby-debug-ide
-  semantic_logger
   sequel
   simplecov
+  timecop (= 0.9.5)
 
 BUNDLED WITH
-   2.2.32
+   2.3.16

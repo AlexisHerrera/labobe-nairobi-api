@@ -21,11 +21,19 @@ class Encargado
     repartidores[0]
   end
 
-  def calcular_comision(dni_repartidor)
-    obtener_repartidor(dni_repartidor).comision(DiaSinLluvia.new)
+  def calcular_comision(dni_repartidor, fecha)
+    # TODO: aca hay que pegarle a la API con la fecha y nos va a decir si esta lloviendo o no. Se parsea
+    # a dia lluvioso o sin lluvia segun el caso
+    tipo_dia = DiaSinLluvia.new
+    tipo_dia = DiaLluvioso.new if es_lluvioso(fecha)
+    obtener_repartidor(dni_repartidor).comision(tipo_dia)
   end
 
   private
+
+  def es_lluvioso(fecha)
+    fecha.year == 2022 and fecha.month == 7 and fecha.day == 2
+  end
 
   def obtener_repartidores
     repartidores = @repartidor_repo.all
