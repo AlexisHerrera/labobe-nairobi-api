@@ -26,7 +26,7 @@ class MockAPIClimaLluvia
   def initialize; end
 
   def esta_lloviendo?
-    logger.info "MockAPIClimaLluvia: indica que esta lloviendo"
+    logger.info 'MockAPIClimaLluvia: indica que esta lloviendo'
     true
   end
 end
@@ -35,7 +35,7 @@ class MockAPIClimaSinLluvia
   def initialize; end
 
   def esta_lloviendo?
-    logger.info "MockAPISinLluvia: indica que no esta lloviendo"
+    logger.info 'MockAPISinLluvia: indica que no esta lloviendo'
     false
   end
 end
