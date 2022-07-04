@@ -2,8 +2,7 @@ module LaBobe
   class App < Padrino::Application
     register Padrino::Helpers
 
-    Padrino.configure :development, :test do
-      # TODO: Averiguar que pasa en produccion, en que momento se le setea el token en el ENV
+    Padrino.configure :test do
       ENV['TOKEN_API_CLIMA'] = 'fake_token'
     end
 

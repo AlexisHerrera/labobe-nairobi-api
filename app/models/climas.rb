@@ -28,7 +28,7 @@ class DiaFactory
 
   def obtener_proveedor_clima
     return MockAPIClimaLluvia.new if ENV['MOCK_CLIMA'] == DiasPosibles::LLUVIA.to_s
-    return MockAPIClimaSinLLuvia.new if ENV['MOCK_CLIMA'] == DiasPosibles::SIN_LLUVIA.to_s
+    return MockAPIClimaSinLluvia.new if ENV['MOCK_CLIMA'] == DiasPosibles::SIN_LLUVIA.to_s
 
     APIClima.new(ENV['TOKEN_API_CLIMA'])
   end

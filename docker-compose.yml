@@ -28,6 +28,7 @@ services:
         RACK_ENV: "development"
         TEST_DB_URL: "postgres://postgres:example@test_db:5432/postgres"
         DEV_DB_URL: "postgres://postgres:example@dev_db:5432/postgres"
+        TOKEN_API_CLIMA: "${TOKEN_API_CLIMA}"
 
     depends_on:
       - test_db

@@ -3,7 +3,7 @@ LaBobe::App.controllers :mock_clima, :provides => [:json] do
     # TODO: no permitir mockear siempre la lluvia si estoy en produccion
     configurar_clima(body_params[:clima])
     status 200
-    {message: 'Hoy esta lloviendo'}.to_json
+    {estado: body_params[:clima]}.to_json
   end
 
   get :show, :map => '/clima' do
