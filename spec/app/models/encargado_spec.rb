@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative 'api_configuracion_steps'
+require_relative 'api_clima_spec'
 
 describe Encargado do
   let(:menu_individual) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}

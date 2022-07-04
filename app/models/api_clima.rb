@@ -5,9 +5,7 @@ class APIClima
   end
 
   def esta_lloviendo?
-    request = Faraday.get("https://api.openweathermap.org/data/2.5/weather?lat=-34.36&lon=-58.26&appid=#{@token}")
-    body = request.body
-    esta_lloviendo = parsear_clima(body) == 'Rain'
+    esta_lloviendo = obtener_clima == 'Rain'
     logger.info 'La API indica que esta lloviendo' if esta_lloviendo
     logger.info 'La API indica que no esta lloviendo'
     esta_lloviendo
@@ -15,8 +13,14 @@ class APIClima
 
   private
 
-  def parsear_clima(body)
-    climas = JSON.parse(body).symbolize_keys[:weather]
+  def obtener_clima
+    request = Faraday.get("https://api.openweathermap.org/data/2.5/weather?lat=-34.36&lon=-58.26&appid=#{@token}")
+    if request.status != 200
+      logger.error "No se pudo obtener el clima de la API: #{request}"
+      # TODO: refactorizar a algo mejor que devolver 'Clouds' (tal vez una lanzar una excepcion?)
+      return 'Clouds'
+    end
+    climas = JSON.parse(request.body).symbolize_keys[:weather]
     logger.info "API CLIMAS: #{climas}"
     climas.first['main']
   end

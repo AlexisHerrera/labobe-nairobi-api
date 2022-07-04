@@ -118,3 +118,15 @@ def configurar_api_dia_sin_lluvia(token)
     .to_return(status: 200, body: body.to_json, headers: {})
 end
 # rubocop:enable Metrics/MethodLength
+
+describe MockAPIClimaLluvia do
+  it 'devuelve true cuando le preguntan si esta lloviendo' do
+    expect(described_class.new.esta_lloviendo?).to eq true
+  end
+end
+
+describe MockAPIClimaSinLluvia do
+  it 'devuelve false cuando le preguntan si esta lloviendo' do
+    expect(described_class.new.esta_lloviendo?).to eq false
+  end
+end

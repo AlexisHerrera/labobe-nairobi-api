@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 # TODO: Prescindir de este require_relative para que no dependa del webmock
-require_relative 'api_configuracion_steps'
+require_relative 'api_clima_spec'
 
 describe Restaurante do
   let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::GRANDE)}
