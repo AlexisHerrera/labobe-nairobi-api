@@ -1,3 +1,5 @@
+require 'faraday'
+
 class APIClima
   def initialize(token)
     @token = token
