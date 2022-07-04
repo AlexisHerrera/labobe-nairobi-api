@@ -102,7 +102,7 @@ describe Encargado do
       pedido_individual.calificar(usuario, CalificacionFactory.new.crear(3))
       pedido_repo.save(pedido_individual)
 
-      configurar_api_dia_sin_lluvia('fake_token')
+      configurar_api_dia_sin_lluvia
       expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888')).to eq 50
     end
 
@@ -111,7 +111,7 @@ describe Encargado do
       pedido_individual.calificar(usuario, CalificacionFactory.new.crear(1))
       pedido_repo.save(pedido_individual)
 
-      configurar_api_dia_lluvioso('fake_token')
+      configurar_api_dia_lluvioso
       expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888')).to eq 40
     end
   end

@@ -2,5 +2,6 @@
 "LOG_LEVEL":"debug",
 "LOG_STREAM":"stdout",
 "ENABLE_RESET": "true",
-"ENABLE_MOCK": "true"
+"ENABLE_MOCK": "true",
+"URL_API_CLIMA": "https://api.openweathermap.org/data/2.5/weather?lat=-34.36&lon=-58.26&appid=7aabd273a7494679d985aaae4f8f1dac"
 }

@@ -84,7 +84,7 @@ describe Restaurante do
   end
 
   it 'Calcula comisiones' do
-    configurar_api_dia_sin_lluvia('fake_token')
+    configurar_api_dia_sin_lluvia
     expect(@restaurante.calcular_comision(repartidor.dni)).to eq 0
   end
 end

@@ -30,6 +30,6 @@ class DiaFactory
     return MockAPIClimaLluvia.new if ENV['MOCK_CLIMA'] == DiasPosibles::LLUVIA.to_s
     return MockAPIClimaSinLluvia.new if ENV['MOCK_CLIMA'] == DiasPosibles::SIN_LLUVIA.to_s
 
-    APIClima.new(ENV['TOKEN_API_CLIMA'])
+    APIClima.new(ENV['URL_API_CLIMA'])
   end
 end

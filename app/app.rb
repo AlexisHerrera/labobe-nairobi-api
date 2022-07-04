@@ -3,7 +3,7 @@ module LaBobe
     register Padrino::Helpers
 
     Padrino.configure :test do
-      ENV['TOKEN_API_CLIMA'] = 'fake_token'
+      ENV['URL_API_CLIMA'] = 'https://fake.clima.api'
       ENV['ENABLE_MOCK'] = 'true'
     end
 

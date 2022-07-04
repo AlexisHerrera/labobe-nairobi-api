@@ -18,7 +18,7 @@ services:
         PORT: "3000"
         RACK_ENV: "production"
         DATABASE_URL: "postgres://postgres:example@db:5432/postgres"
-        TOKEN_API_CLIMA: "${TOKEN_API_CLIMA}"
+        URL_API_CLIMA: "${URL_API_CLIMA}"
 
     depends_on:
       - db

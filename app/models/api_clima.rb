@@ -1,13 +1,21 @@
 require 'faraday'
 
 class APIClima
-  def initialize(token)
-    @token = token
-    logger.info "Se utiliza el token #{token}"
+  attr_reader :url
+
+  def initialize(url)
+    @url = url
+    logger.info "Se utiliza la url #{url}"
   end
 
   def esta_lloviendo?
-    esta_lloviendo = obtener_clima == 'Rain'
+    begin
+      esta_lloviendo = obtener_clima == 'Rain'
+    rescue APIError
+      # Por disenio si el sistema de clima no funciona, se asume que no esta lloviendo.
+      return false
+    end
+
     logger.info 'La API indica que esta lloviendo' if esta_lloviendo
     logger.info 'La API indica que no esta lloviendo'
     esta_lloviendo
@@ -16,11 +24,10 @@ class APIClima
   private
 
   def obtener_clima
-    request = Faraday.get("https://api.openweathermap.org/data/2.5/weather?lat=-34.36&lon=-58.26&appid=#{@token}")
+    request = Faraday.get(url)
     if request.status != 200
       logger.error "No se pudo obtener el clima de la API: #{request}"
-      # TODO: refactorizar a algo mejor que devolver 'Clouds' (tal vez una lanzar una excepcion?)
-      return 'Clouds'
+      raise APIError
     end
     climas = JSON.parse(request.body).symbolize_keys[:weather]
     logger.info "API CLIMAS: #{climas}"

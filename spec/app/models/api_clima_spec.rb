@@ -1,5 +1,5 @@
 # rubocop:disable Metrics/MethodLength
-def configurar_api_dia_lluvioso(token)
+def configurar_api_dia_lluvioso
   # TODO: eliminar codigo repetido
   body = {
     "coord": {
@@ -48,7 +48,7 @@ def configurar_api_dia_lluvioso(token)
     "cod": 200
   }
 
-  stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=#{token}&lat=-34.36&lon=-58.26")
+  stub_request(:get, "https://fake.clima.api")
     .with(
       headers: {
         'Accept' => '*/*',
@@ -59,7 +59,7 @@ def configurar_api_dia_lluvioso(token)
     .to_return(status: 200, body: body.to_json, headers: {})
 end
 
-def configurar_api_dia_sin_lluvia(token)
+def configurar_api_dia_sin_lluvia
   body = {
     "coord": {
       "lon": -58.26,
@@ -107,7 +107,7 @@ def configurar_api_dia_sin_lluvia(token)
     "cod": 200
   }
 
-  stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=#{token}&lat=-34.36&lon=-58.26")
+  stub_request(:get, "https://fake.clima.api")
     .with(
       headers: {
         'Accept' => '*/*',
