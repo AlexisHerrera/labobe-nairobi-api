@@ -1,5 +1,7 @@
 {
 "LOG_LEVEL":"info",
 "LOG_STREAM":"stdout",
-"ENABLE_RESET": "false"
+"ENABLE_RESET": "false",
+"ENABLE_MOCK": "false",
+"TOKEN_API_CLIMA": "${HEROKU_TOKEN}"
 }

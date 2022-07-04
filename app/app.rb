@@ -4,6 +4,7 @@ module LaBobe
 
     Padrino.configure :test do
       ENV['TOKEN_API_CLIMA'] = 'fake_token'
+      ENV['ENABLE_MOCK'] = 'true'
     end
 
     Padrino.configure do
