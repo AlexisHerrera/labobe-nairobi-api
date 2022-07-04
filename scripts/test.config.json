@@ -2,6 +2,5 @@
 "LOG_LEVEL":"debug",
 "LOG_STREAM":"stdout",
 "ENABLE_RESET": "true",
-"ENABLE_MOCK": "true",
-"TOKEN_API_CLIMA": "${HEROKU_TOKEN}"
+"ENABLE_MOCK": "true"
 }
