@@ -11,9 +11,13 @@ describe Pedido do
       expect(described_class.new(usuario, menu_chico, id).id).to eq id
     end
 
-    it 'cuando se modifica el estado de un pedido recien creado, el estado es 1' do
+    it 'cuando recien se crea tiene estado Aceptado' do
+      expect(described_class.new(usuario, menu_chico, id).estado).to eq EstadoAceptado.new
+    end
+
+    xit 'cuando se modifica el estado de un pedido recien creado, el estado es En Preparacion' do
       estado = EstadosPosibles::ACEPTADO
-      pedido = described_class.new(usuario, menu_chico, estado)
+      pedido = described_class.new(usuario, menu_chico, id)
       pedido.siguiente_estado
       expect(pedido.estado).to eq EstadoEnPreparacion.new
     end
