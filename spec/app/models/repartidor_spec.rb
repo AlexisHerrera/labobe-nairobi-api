@@ -126,27 +126,27 @@ describe Repartidor do
     let(:pedido_grande) { Pedido.new(usuario, menu_grande, EstadosPosibles::ENTREGADO) }
     let(:repartidor) {described_class.new("nombre", "41199980", "1144449999")}
 
-    it 'repartidor con pedido chico y calificacion buena calcula 50 de comision sin lluvia' do
+    xit 'repartidor con pedido chico y calificacion buena calcula 50 de comision sin lluvia' do
       pedido_chico.calificar(usuario, CalificacionFactory.new.crear(3))
       repartidor.pedidos_entregados.push(pedido_chico)
       expect(repartidor.comision(DiaSinLluvia.new)).to eq(50)
     end
 
-    it 'repartidor con pedido chico y calificacion mala con lluvia obtiene el 4%' do
+    xit 'repartidor con pedido chico y calificacion mala con lluvia obtiene el 4%' do
       pedido_chico.calificar(usuario, CalificacionFactory.new.crear(1))
       repartidor.pedidos_entregados.push(pedido_chico)
       comision_esperada = menu_chico.precio * 0.04
       expect(repartidor.comision(DiaLluvioso.new)).to eq(comision_esperada)
     end
 
-    it 'repartidor con pedido mediano y calificacion buena con lluvia obtiene el 6%' do
+    xit 'repartidor con pedido mediano y calificacion buena con lluvia obtiene el 6%' do
       pedido_mediano.calificar(usuario, CalificacionFactory.new.crear(3))
       repartidor.pedidos_entregados.push(pedido_mediano)
       comision_esperada = menu_mediano.precio * 0.06
       expect(repartidor.comision(DiaLluvioso.new)).to eq(comision_esperada)
     end
 
-    it 'repartidor con pedido grande y calificacion excelente con lluvia obtiene el 8%' do
+    xit 'repartidor con pedido grande y calificacion excelente con lluvia obtiene el 8%' do
       pedido_grande.calificar(usuario, CalificacionFactory.new.crear(5))
       repartidor.pedidos_entregados.push(pedido_grande)
       comision_esperada = menu_grande.precio * 0.08

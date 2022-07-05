@@ -5,11 +5,11 @@ class Pedido
 
   attr_accessor :id, :usuario, :menu, :estado, :calificacion
 
-  def initialize(usuario, menu, estado, id = nil)
+  def initialize(usuario, menu, id = nil)
     @id = id # = numero de pedido
     @usuario = usuario
     @menu = menu
-    @estado = EstadosFactory.new.crear(estado)
+    @estado = EstadosFactory.new.crear(EstadosPosibles::ACEPTADO)
     @repartidor_asignado = Repartidor.no_repartidor
     @calificacion = CalificacionInexistente.new
   end

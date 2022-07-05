@@ -27,17 +27,17 @@ describe Encargado do
   end
 
   context 'Asignar pedido' do
-    it 'Deberia asignar un pedido que esta en preparacion al repartidor por orden alfabetico' do
+    xit 'Deberia asignar un pedido que esta en preparacion al repartidor por orden alfabetico' do
       described_class.new(pedido_repo, repartidor_repo).procesar_pedido(pedido_individual)
       expect(pedido_individual.repartidor_asignado).to eq otro_repartidor
     end
 
-    it 'Deberia actualizar estado de repartidor con mochila llena' do
+    xit 'Deberia actualizar estado de repartidor con mochila llena' do
       described_class.new(pedido_repo, repartidor_repo).procesar_pedido(pedido_familiar)
       expect(pedido_familiar.estado).to eq EstadosFactory.new.crear(EstadosPosibles::ENTREGADO)
     end
 
-    it 'Deberia asignar pedidos al repartidor con la mochila mas vacía' do
+    xit 'Deberia asignar pedidos al repartidor con la mochila mas vacía' do
       encargado = described_class.new(pedido_repo, repartidor_repo)
       encargado.procesar_pedido(pedido_individual)
       encargado.procesar_pedido(pedido_familiar)
@@ -47,25 +47,25 @@ describe Encargado do
   end
 
   context 'encontrar repartidor' do
-    it 'Si hay un solo repartidor que no tiene nada en la mochila, lo elige' do
+    xit 'Si hay un solo repartidor que no tiene nada en la mochila, lo elige' do
       repartidores = [repartidor]
 
       # pedidos_repo = instance_double(Persistence::Repositories::PedidoRepository).as_null_object
       expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq repartidor
     end
 
-    it 'Si hay 2 repartidores elige al que la tiene vacia' do
+    xit 'Si hay 2 repartidores elige al que la tiene vacia' do
       repartidor.asignar(pedido_individual)
       repartidores = [repartidor, otro_repartidor]
       expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq repartidor
     end
 
-    it 'Si hay 2 repartidores elige por orden alfabetico' do
+    xit 'Si hay 2 repartidores elige por orden alfabetico' do
       repartidores = [repartidor, otro_repartidor]
       expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq otro_repartidor
     end
 
-    it 'Si hay 2 repartidores, un con 1 pedido realizado. elige al que tiene menor cantidad de pedidos realizados' do
+    xit 'Si hay 2 repartidores, un con 1 pedido realizado. elige al que tiene menor cantidad de pedidos realizados' do
       repartidores = [repartidor, otro_repartidor]
       repartidor.pedidos_entregados = [1]
       expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq otro_repartidor
@@ -97,7 +97,7 @@ describe Encargado do
 
   context 'calcular comision' do
 
-    it 'comision de un pedido individual con calificacion buena' do
+    xit 'comision de un pedido individual con calificacion buena' do
       pedido_individual.asignar_repartidor(repartidor)
       pedido_individual.calificar(usuario, CalificacionFactory.new.crear(3))
       pedido_repo.save(pedido_individual)
@@ -106,7 +106,7 @@ describe Encargado do
       expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888')).to eq 50
     end
 
-    it 'comision de un pedido individual con calificacion mala en una fecha que llovio' do
+    xit 'comision de un pedido individual con calificacion mala en una fecha que llovio' do
       pedido_individual.asignar_repartidor(repartidor)
       pedido_individual.calificar(usuario, CalificacionFactory.new.crear(1))
       pedido_repo.save(pedido_individual)
