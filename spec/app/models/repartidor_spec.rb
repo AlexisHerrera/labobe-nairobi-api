@@ -121,12 +121,15 @@ describe Repartidor do
     let(:menu_chico) {MenuFactory.new.crear(1, "Menu", 1000, MenusPosibles::CHICO)}
     let(:menu_mediano) {MenuFactory.new.crear(1, "Menu", 1500, MenusPosibles::MEDIANO)}
     let(:menu_grande) {MenuFactory.new.crear(1, "Menu", 2000, MenusPosibles::GRANDE)}
-    let(:pedido_chico) { Pedido.new(usuario, menu_chico, EstadosPosibles::ENTREGADO) }
+    let(:pedido_chico) { Pedido.new(usuario, menu_chico) }
     let(:pedido_mediano) { Pedido.new(usuario, menu_mediano, EstadosPosibles::ENTREGADO) }
     let(:pedido_grande) { Pedido.new(usuario, menu_grande, EstadosPosibles::ENTREGADO) }
     let(:repartidor) {described_class.new("nombre", "41199980", "1144449999")}
 
-    xit 'repartidor con pedido chico y calificacion buena calcula 50 de comision sin lluvia' do
+    it 'repartidor con pedido chico y calificacion buena calcula 50 de comision sin lluvia' do
+      pedido_chico.siguiente_estado
+      pedido_chico.siguiente_estado
+      pedido_chico.siguiente_estado
       pedido_chico.calificar(usuario, CalificacionFactory.new.crear(3))
       repartidor.pedidos_entregados.push(pedido_chico)
       expect(repartidor.comision(DiaSinLluvia.new)).to eq(50)
