@@ -7,8 +7,8 @@ describe Encargado do
   let(:repartidor_repo) { Persistence::Repositories::RepartidorRepository.new }
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
   let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
-  let(:pedido_individual) { Pedido.new(usuario, menu_individual, EstadosPosibles::PREPARACION) }
-  let(:pedido_familiar) { Pedido.new(usuario, menu_familiar, EstadosPosibles::PREPARACION) }
+  let(:pedido_individual) { Pedido.new(usuario, menu_individual) }
+  let(:pedido_familiar) { Pedido.new(usuario, menu_familiar) }
 
   let(:repartidor) { Repartidor.new('Ying Hu', '41199980', '1144449999') }
   let(:otro_repartidor) { Repartidor.new('Carlos Solari', '14367888', '1234567999') }
@@ -19,7 +19,9 @@ describe Encargado do
     Persistence::Repositories::MenuRepository.new.save(menu_individual)
     Persistence::Repositories::MenuRepository.new.save(menu_familiar)
 
+    pedido_individual.siguiente_estado
     Persistence::Repositories::PedidoRepository.new.save(pedido_individual)
+    pedido_familiar.siguiente_estado
     Persistence::Repositories::PedidoRepository.new.save(pedido_familiar)
 
     Persistence::Repositories::RepartidorRepository.new.save(repartidor)
@@ -27,17 +29,17 @@ describe Encargado do
   end
 
   context 'Asignar pedido' do
-    xit 'Deberia asignar un pedido que esta en preparacion al repartidor por orden alfabetico' do
+    it 'Deberia asignar un pedido que esta en preparacion al repartidor por orden alfabetico' do
       described_class.new(pedido_repo, repartidor_repo).procesar_pedido(pedido_individual)
       expect(pedido_individual.repartidor_asignado).to eq otro_repartidor
     end
 
-    xit 'Deberia actualizar estado de repartidor con mochila llena' do
+    it 'Deberia actualizar estado de repartidor con mochila llena' do
       described_class.new(pedido_repo, repartidor_repo).procesar_pedido(pedido_familiar)
       expect(pedido_familiar.estado).to eq EstadosFactory.new.crear(EstadosPosibles::ENTREGADO)
     end
 
-    xit 'Deberia asignar pedidos al repartidor con la mochila mas vacía' do
+    it 'Deberia asignar pedidos al repartidor con la mochila mas vacía' do
       encargado = described_class.new(pedido_repo, repartidor_repo)
       encargado.procesar_pedido(pedido_individual)
       encargado.procesar_pedido(pedido_familiar)
@@ -47,25 +49,25 @@ describe Encargado do
   end
 
   context 'encontrar repartidor' do
-    xit 'Si hay un solo repartidor que no tiene nada en la mochila, lo elige' do
+    it 'Si hay un solo repartidor que no tiene nada en la mochila, lo elige' do
       repartidores = [repartidor]
 
       # pedidos_repo = instance_double(Persistence::Repositories::PedidoRepository).as_null_object
       expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq repartidor
     end
 
-    xit 'Si hay 2 repartidores elige al que la tiene vacia' do
+    it 'Si hay 2 repartidores elige al que la tiene vacia' do
       repartidor.asignar(pedido_individual)
       repartidores = [repartidor, otro_repartidor]
       expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq repartidor
     end
 
-    xit 'Si hay 2 repartidores elige por orden alfabetico' do
+    it 'Si hay 2 repartidores elige por orden alfabetico' do
       repartidores = [repartidor, otro_repartidor]
       expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq otro_repartidor
     end
 
-    xit 'Si hay 2 repartidores, un con 1 pedido realizado. elige al que tiene menor cantidad de pedidos realizados' do
+    it 'Si hay 2 repartidores, un con 1 pedido realizado. elige al que tiene menor cantidad de pedidos realizados' do
       repartidores = [repartidor, otro_repartidor]
       repartidor.pedidos_entregados = [1]
       expect(described_class.elegir_repartidor(repartidores, pedido_individual)).to eq otro_repartidor
