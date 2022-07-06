@@ -85,8 +85,8 @@ module Persistence
         estados_mapeo = {
           :Aceptado => 0,
           :EnPreparacion => 1,
-          :EnCamino => 2
-          # :Entregado => 3
+          :EnCamino => 2,
+          :Entregado => 3
         }
         estados_pasados = 0
         puts(a_hash[:estado].to_sym)
