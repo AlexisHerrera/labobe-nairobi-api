@@ -135,7 +135,10 @@ describe Repartidor do
       expect(repartidor.comision(DiaSinLluvia.new)).to eq(50)
     end
 
-    xit 'repartidor con pedido chico y calificacion mala con lluvia obtiene el 4%' do
+    it 'repartidor con pedido chico y calificacion mala con lluvia obtiene el 4%' do
+      pedido_chico.siguiente_estado
+      pedido_chico.siguiente_estado
+      pedido_chico.siguiente_estado
       pedido_chico.calificar(usuario, CalificacionFactory.new.crear(1))
       repartidor.pedidos_entregados.push(pedido_chico)
       comision_esperada = menu_chico.precio * 0.04
