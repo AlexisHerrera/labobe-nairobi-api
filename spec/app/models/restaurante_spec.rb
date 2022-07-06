@@ -15,7 +15,7 @@ describe Restaurante do
   end
 
   context 'Crear pedido' do
-    xit 'Debería crear un pedido con un usuario y un menu determinado' do
+    it 'Debería crear un pedido con un usuario y un menu determinado' do
       id_usuario = '123'
       id_menu = 1
       pedido = @restaurante.crear_pedido(id_usuario, id_menu)
