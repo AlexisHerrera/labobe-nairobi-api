@@ -82,8 +82,8 @@ describe Encargado do
   let(:repartidor_repo) { Persistence::Repositories::RepartidorRepository.new }
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
   let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
-  let(:pedido_individual) { Pedido.new(usuario, menu_individual, EstadosPosibles::ENTREGADO) }
-  let(:pedido_familiar) { Pedido.new(usuario, menu_familiar, EstadosPosibles::ENTREGADO) }
+  let(:pedido_individual) { Pedido.new(usuario, menu_individual) }
+  let(:pedido_familiar) { Pedido.new(usuario, menu_familiar) }
 
   let(:repartidor) { Repartidor.new('Carlos Solari', '14367888', '1234567999') }
 
@@ -99,7 +99,10 @@ describe Encargado do
 
   context 'calcular comision' do
 
-    xit 'comision de un pedido individual con calificacion buena' do
+    it 'comision de un pedido individual con calificacion buena' do
+      pedido_individual.siguiente_estado
+      pedido_individual.siguiente_estado
+      pedido_individual.siguiente_estado
       pedido_individual.asignar_repartidor(repartidor)
       pedido_individual.calificar(usuario, CalificacionFactory.new.crear(3))
       pedido_repo.save(pedido_individual)
@@ -108,7 +111,10 @@ describe Encargado do
       expect(described_class.new(pedido_repo, repartidor_repo).calcular_comision('14367888')).to eq 50
     end
 
-    xit 'comision de un pedido individual con calificacion mala en una fecha que llovio' do
+    it 'comision de un pedido individual con calificacion mala en una fecha que llovio' do
+      pedido_individual.siguiente_estado
+      pedido_individual.siguiente_estado
+      pedido_individual.siguiente_estado
       pedido_individual.asignar_repartidor(repartidor)
       pedido_individual.calificar(usuario, CalificacionFactory.new.crear(1))
       pedido_repo.save(pedido_individual)
