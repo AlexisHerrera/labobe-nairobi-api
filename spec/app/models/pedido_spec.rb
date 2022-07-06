@@ -54,9 +54,9 @@ describe Pedido do
       expect { pedido.verificar_propietario(usuario_diferente) }.to raise_error(UsuarioInvalido)
     end
 
-    xit 'cuando se consulta si el estado es "en preparacion" y es "en preparacion" devuelve true' do
-      estado = EstadosPosibles::PREPARACION
-      pedido = described_class.new(usuario, menu_chico, estado)
+    it 'cuando se consulta si el estado es "en preparacion" y es "en preparacion" devuelve true' do
+      pedido = described_class.new(usuario, menu_chico, id)
+      pedido.siguiente_estado
       expect(pedido.esta_en_preparacion?).to eq true
     end
   end
@@ -82,9 +82,11 @@ describe Pedido do
       expect(described_class.new(usuario, menu_chico, estado).calificacion).to eq CalificacionInexistente.new
     end
 
-    xit 'tiene calificacion si se califica pedido' do
-      estado = EstadosPosibles::ENTREGADO
-      pedido = described_class.new(usuario, menu_chico, estado)
+    it 'tiene calificacion si se califica pedido' do
+      pedido = described_class.new(usuario, menu_chico, id)
+      pedido.siguiente_estado
+      pedido.siguiente_estado
+      pedido.siguiente_estado
       pedido.calificar(usuario, CalificacionFactory.new.crear(5))
       expect(pedido.calificacion).to eq CalificacionExcelente.new
     end
