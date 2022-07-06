@@ -145,14 +145,20 @@ describe Repartidor do
       expect(repartidor.comision(DiaLluvioso.new)).to eq(comision_esperada)
     end
 
-    xit 'repartidor con pedido mediano y calificacion buena con lluvia obtiene el 6%' do
+    it 'repartidor con pedido mediano y calificacion buena con lluvia obtiene el 6%' do
+      pedido_mediano.siguiente_estado
+      pedido_mediano.siguiente_estado
+      pedido_mediano.siguiente_estado
       pedido_mediano.calificar(usuario, CalificacionFactory.new.crear(3))
       repartidor.pedidos_entregados.push(pedido_mediano)
       comision_esperada = menu_mediano.precio * 0.06
       expect(repartidor.comision(DiaLluvioso.new)).to eq(comision_esperada)
     end
 
-    xit 'repartidor con pedido grande y calificacion excelente con lluvia obtiene el 8%' do
+    it 'repartidor con pedido grande y calificacion excelente con lluvia obtiene el 8%' do
+      pedido_grande.siguiente_estado
+      pedido_grande.siguiente_estado
+      pedido_grande.siguiente_estado
       pedido_grande.calificar(usuario, CalificacionFactory.new.crear(5))
       repartidor.pedidos_entregados.push(pedido_grande)
       comision_esperada = menu_grande.precio * 0.08
