@@ -23,7 +23,7 @@ describe Restaurante do
     end
   end
 
-  xit 'Debería devolver un pedido al consultar uno' do
+  it 'Debería devolver un pedido al consultar uno' do
     id_usuario = '123'
     id_menu = 1
     pedido = @restaurante.crear_pedido(id_usuario, id_menu)
@@ -32,7 +32,7 @@ describe Restaurante do
     expect(pedido_consultado.id).to eq id_pedido
   end
 
-  xit 'Cambia estado pedido' do
+  it 'Cambia estado pedido' do
     id_usuario = '123'
     id_menu = 1
     pedido = @restaurante.crear_pedido(id_usuario, id_menu)
@@ -42,7 +42,7 @@ describe Restaurante do
     expect(pedido_consultado.estado).to eq EstadoEnPreparacion.new
   end
 
-  xit 'Califica pedido' do
+  it 'Califica pedido' do
     id_usuario = '123'
     id_menu = 3
     pedido = @restaurante.crear_pedido(id_usuario, id_menu)
