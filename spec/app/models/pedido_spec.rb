@@ -106,23 +106,29 @@ describe Pedido do
   end
 
   context 'calcular comision sin lluvia' do
-    xit 'comision de un pedido con menu individual con calificacion buena' do
-      estado = EstadosPosibles::ENTREGADO
-      pedido = described_class.new(usuario, menu_chico, estado)
+    it 'comision de un pedido con menu individual con calificacion buena' do
+      pedido = described_class.new(usuario, menu_chico, id)
+      pedido.siguiente_estado
+      pedido.siguiente_estado
+      pedido.siguiente_estado
       pedido.calificar(usuario, CalificacionFactory.new.crear(3))
       expect(pedido.comision_base).to eq 50
     end
 
-    xit 'comision de un pedido con menu familiar con calificacion excelente' do
-      estado = EstadosPosibles::ENTREGADO
-      pedido = described_class.new(usuario, menu_grande, estado)
+    it 'comision de un pedido con menu familiar con calificacion excelente' do
+      pedido = described_class.new(usuario, menu_grande, id)
+      pedido.siguiente_estado
+      pedido.siguiente_estado
+      pedido.siguiente_estado
       pedido.calificar(usuario, CalificacionFactory.new.crear(5))
       expect(pedido.comision_base).to eq 175
     end
 
-    xit 'comision de un pedido con menu familiar con calificacion mala' do
-      estado = EstadosPosibles::ENTREGADO
-      pedido = described_class.new(usuario, menu_grande, estado)
+    it 'comision de un pedido con menu familiar con calificacion mala' do
+      pedido = described_class.new(usuario, menu_grande, id)
+      pedido.siguiente_estado
+      pedido.siguiente_estado
+      pedido.siguiente_estado
       pedido.calificar(usuario, CalificacionFactory.new.crear(1))
       expect(pedido.comision_base).to eq 75
     end
