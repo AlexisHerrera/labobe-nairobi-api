@@ -3,6 +3,9 @@ module Persistence
     class PedidoRepository < AbstractRepository
       self.table_name = :pedidos
       self.model_class = 'Pedido'
+      # @estados_mapeo = {
+      #   :Aceptado => 0
+      # }
 
       def find_by_id_repartidor(id_repartidor)
         pedidos = dataset.where(Sequel[self.class.table_name][:id_repartidor] => id_repartidor)
@@ -17,7 +20,10 @@ module Persistence
         menu = Persistence::Repositories::MenuRepository.new.find(a_hash[:id_menu].to_i)
         usuario = Persistence::Repositories::UsuarioRepository.new.find(a_hash[:id_usuario].to_s)
 
-        pedido = Pedido.new(usuario, menu, a_hash[:estado].to_sym, a_hash[:id])
+        pedido = Pedido.new(usuario, menu, a_hash[:id])
+
+        pasar_estados(a_hash, pedido)
+
         calificacion = CalificacionFactory.new.crear(a_hash[:calificacion].to_sym)
         pedido.calificar(usuario, calificacion)
 
@@ -74,6 +80,18 @@ module Persistence
         return nil if repartidor == Repartidor.no_repartidor
 
         repartidor.id
+      end
+
+      private
+
+      def pasar_estados(a_hash, pedido)
+        estados_mapeo = {
+          :Aceptado => 0
+        }
+        estados_pasados = 0
+        while estados_pasados < estados_mapeo[a_hash[:estado].to_sym]
+          pedido.siguiente_estado
+        end
       end
     end
   end

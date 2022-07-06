@@ -4,14 +4,14 @@ describe Persistence::Repositories::PedidoRepository do
   let(:menu) {MenuFactory.new.crear(1, "Menu individual", 1000, MenusPosibles::CHICO)}
   let(:pedido_repo) { Persistence::Repositories::PedidoRepository.new }
   let(:usuario) { Usuario.new('john', '1234567890', 'Paseo Colon 606', '123')}
-  let(:un_pedido) { Pedido.new(usuario, menu, EstadosPosibles::ACEPTADO) }
+  let(:un_pedido) { Pedido.new(usuario, menu) }
   let(:repartidor_repo) { Persistence::Repositories::RepartidorRepository.new }
   before :each do
     Persistence::Repositories::UsuarioRepository.new.save(usuario)
     Persistence::Repositories::MenuRepository.new.save(menu)
   end
 
-  xit 'deberia guardar un nuevo pedido' do
+  it 'deberia guardar un nuevo pedido' do
     pedido_repo.delete_all
     pedido_repo.save(un_pedido)
     expect(pedido_repo.all.count).to eq(1)
