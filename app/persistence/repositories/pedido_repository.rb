@@ -89,9 +89,7 @@ module Persistence
           :Aceptado => 0
         }
         estados_pasados = 0
-        while estados_pasados < estados_mapeo[a_hash[:estado].to_sym]
-          pedido.siguiente_estado
-        end
+        pedido.siguiente_estado while estados_pasados < estados_mapeo[a_hash[:estado].to_sym]
       end
     end
   end
