@@ -21,17 +21,20 @@ class APIClima
     esta_lloviendo
   end
 
-  private
-
   def obtener_clima
+    request = obtener_respuesta
+    climas = JSON.parse(request.body).symbolize_keys[:weather]
+    logger.info "API CLIMAS: #{climas}"
+    climas.first['main']
+  end
+
+  def obtener_respuesta
     request = Faraday.get(url)
     if request.status != 200
       logger.error "No se pudo obtener el clima de la API: #{request}"
       raise APIError
     end
-    climas = JSON.parse(request.body).symbolize_keys[:weather]
-    logger.info "API CLIMAS: #{climas}"
-    climas.first['main']
+    request
   end
 end
 

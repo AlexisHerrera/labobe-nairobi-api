@@ -26,7 +26,7 @@ module Persistence
 
         begin
           repartidor = Persistence::Repositories::RepartidorRepository.new.find(a_hash[:id_repartidor])
-        rescue ObjectNotFound # TODO: Esto esta mega feo, buscar refactor
+        rescue ObjectNotFound # TODO: no hay una forma mas elegante?
           return pedido
         end
         pedido.asignar_repartidor(repartidor)
