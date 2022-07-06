@@ -3,9 +3,6 @@ module Persistence
     class PedidoRepository < AbstractRepository
       self.table_name = :pedidos
       self.model_class = 'Pedido'
-      # @estados_mapeo = {
-      #   :Aceptado => 0
-      # }
 
       def find_by_id_repartidor(id_repartidor)
         pedidos = dataset.where(Sequel[self.class.table_name][:id_repartidor] => id_repartidor)
@@ -87,15 +84,16 @@ module Persistence
       def pasar_estados(a_hash, pedido)
         estados_mapeo = {
           :Aceptado => 0,
-          :EnPreparacion => 1
+          :EnPreparacion => 1,
+          :EnCamino => 2
+          # :Entregado => 3
         }
         estados_pasados = 0
-
+        puts(a_hash[:estado].to_sym)
         while estados_pasados < estados_mapeo[a_hash[:estado].to_sym]
           pedido.siguiente_estado
           estados_pasados += 1
         end
-        # pedido.siguiente_estado while estados_pasados < estados_mapeo[a_hash[:estado].to_sym]
       end
     end
   end

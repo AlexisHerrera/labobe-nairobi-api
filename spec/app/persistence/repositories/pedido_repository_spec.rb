@@ -66,9 +66,9 @@ describe Persistence::Repositories::PedidoRepository do
     expect(pedido_encontrado.repartidor_asignado).to eq(repartidor)
   end
 
-  xit 'deberia guardar un pedido con su repartidor si es que tiene uno asignado' do
-    pedido = Pedido.new(usuario, menu, EstadosPosibles::PREPARACION)
-
+  it 'deberia guardar un pedido con su repartidor si es que tiene uno asignado' do
+    pedido = Pedido.new(usuario, menu)
+    pedido.siguiente_estado
 
     repartidor = Repartidor.new('Ying Hu', '41199980', '1144449999')
     repartidor_nuevo = repartidor_repo.save(repartidor)
