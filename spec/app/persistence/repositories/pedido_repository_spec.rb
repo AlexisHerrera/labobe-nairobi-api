@@ -17,12 +17,12 @@ describe Persistence::Repositories::PedidoRepository do
     expect(pedido_repo.all.count).to eq(1)
   end
 
-  xit 'el nuevo pedido deberia tener un id de usuario' do
+  it 'el nuevo pedido deberia tener un id de usuario' do
     pedido = pedido_repo.save(un_pedido)
     expect(pedido.usuario).to be_present
   end
 
-  xit 'el nuevo pedido deberia tener un id de menu' do
+  it 'el nuevo pedido deberia tener un id de menu' do
     pedido = pedido_repo.save(un_pedido)
     expect(pedido.menu).to be_present
   end
@@ -33,13 +33,13 @@ describe Persistence::Repositories::PedidoRepository do
       @pedido_id = @nuevo_pedido.id
     end
 
-    xit 'deberia borrar todos los pedidos' do
+    it 'deberia borrar todos los pedidos' do
       pedido_repo.delete_all
 
       expect(pedido_repo.all.count).to eq(0)
     end
 
-    xit 'deberia encontrar el pedido por id' do
+    it 'deberia encontrar el pedido por id' do
       pedido = pedido_repo.find(@pedido_id)
       
       expect(pedido.id).to eq(@nuevo_pedido.id)
