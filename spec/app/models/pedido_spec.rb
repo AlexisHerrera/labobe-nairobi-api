@@ -15,31 +15,35 @@ describe Pedido do
       expect(described_class.new(usuario, menu_chico, id).estado).to eq EstadoAceptado.new
     end
 
-    xit 'cuando se modifica el estado de un pedido recien creado, el estado es En Preparacion' do
-      estado = EstadosPosibles::ACEPTADO
+    it 'cuando se modifica el estado de un pedido recien creado, el estado es En Preparacion' do
       pedido = described_class.new(usuario, menu_chico, id)
       pedido.siguiente_estado
       expect(pedido.estado).to eq EstadoEnPreparacion.new
     end
 
-    xit 'cuando se modifica el estado de un pedido con estado 1, el estado es 2' do
-      estado = EstadosPosibles::PREPARACION
-      pedido = described_class.new(usuario, menu_chico, estado)
-      pedido.siguiente_estado
+    it 'cuando se modifica el estado de un pedido con estado En Preparacion, el estado es En Camino' do
+      pedido = described_class.new(usuario, menu_chico, id)
+      pedido.siguiente_estado # paso a En Preparacion
+      pedido.siguiente_estado # paso a En Camino
       expect(pedido.estado).to eq EstadoEnCamino.new
     end
 
-    xit 'cuando se modifica el estado de un pedido con estado 2, el estado es 3' do
-      estado = EstadosPosibles::CAMINO
-      pedido = described_class.new(usuario, menu_chico, estado)
-      pedido.siguiente_estado
+    it 'cuando se modifica el estado de un pedido con estado En Camino, el estado es Entregado' do
+      pedido = described_class.new(usuario, menu_chico, id)
+      pedido.siguiente_estado # paso a En Preparacion
+      pedido.siguiente_estado # paso a En Camino
+      pedido.siguiente_estado # paso a Entregado
       expect(pedido.estado).to eq EstadoEntregado.new
     end
 
-    xit 'cuando se modifica el estado de un pedido con estado 3, el estado es 3' do
-      estado = EstadosPosibles::ENTREGADO
-      pedido = described_class.new(usuario, menu_chico, estado)
-      pedido.siguiente_estado
+    it 'cuando se modifica el estado de un pedido con estado Entregado, queda en Entregado' do
+      pedido = described_class.new(usuario, menu_chico, id)
+      pedido.siguiente_estado # paso a En Preparacion
+      pedido.siguiente_estado # paso a En Camino
+      pedido.siguiente_estado # paso a Entregado
+
+      pedido.siguiente_estado # queda en Entregado
+
       expect(pedido.estado).to eq EstadoEntregado.new
     end
 
