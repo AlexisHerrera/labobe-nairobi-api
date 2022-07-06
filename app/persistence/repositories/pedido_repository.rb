@@ -86,10 +86,16 @@ module Persistence
 
       def pasar_estados(a_hash, pedido)
         estados_mapeo = {
-          :Aceptado => 0
+          :Aceptado => 0,
+          :EnPreparacion => 1
         }
         estados_pasados = 0
-        pedido.siguiente_estado while estados_pasados < estados_mapeo[a_hash[:estado].to_sym]
+
+        while estados_pasados < estados_mapeo[a_hash[:estado].to_sym]
+          pedido.siguiente_estado
+          estados_pasados += 1
+        end
+        # pedido.siguiente_estado while estados_pasados < estados_mapeo[a_hash[:estado].to_sym]
       end
     end
   end

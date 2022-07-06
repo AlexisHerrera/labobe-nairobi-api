@@ -52,8 +52,9 @@ describe Persistence::Repositories::PedidoRepository do
     end.to raise_error(ObjectNotFound)
   end
 
-  xit 'deberia guardar un pedido con su repartidor si es que tiene uno asignado' do
-    pedido = Pedido.new(usuario, menu, EstadosPosibles::PREPARACION)
+  it 'deberia guardar un pedido con su repartidor si es que tiene uno asignado' do
+    pedido = Pedido.new(usuario, menu)
+    pedido.siguiente_estado #lo pongo En Preparacion
     repartidor = Repartidor.new('Ying Hu', '41199980', '1144449999')
     repartidor_repo.save(repartidor)
 
